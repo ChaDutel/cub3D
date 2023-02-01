@@ -22,6 +22,19 @@
 
 # include "../libft/includes/libft.h"
 
+// MACRO
+
+//coordinates
+# define NO 0
+# define SO 1
+# define EA 2
+# define WE 3
+# define F 4
+# define C 5
+# define NO_COORD -1
+
+// STRUCTURES
+
 typedef struct s_config
 {
 	char	**elems;
@@ -32,10 +45,26 @@ typedef struct s_config
 //    PARSING    //
 //***************//
 
+// PARSING
 int	parsing(char *config_file, t_config *config);
-int	parse_elems(char *config_file);
-int	split_config(char *config_file, t_config *config);
-int	parse_map(t_config *config);
+
+// PRE PARSING
+int	pre_parsing(char *config_file);
+
+// PRE PARSING UTILS
+int	find_coordinate(char *line, int *iter);
+int	mini_check_coordinate(int *iter);
+int	check_nb_coordinate(int *iter);
+int	check_map_elems(char *line);
+
+// SPLIT_CONFIG
+//int	split_config(char *config_file, t_config *config);
+
+// PARSE ELEM
+
+// PARSE MAP
+//int	parse_map(t_config *config);
+
 
 //***************//
 //      EXEC     //
@@ -46,7 +75,8 @@ int	parse_map(t_config *config);
 //***************//
 
 // ERROR HANDLING
-//int	normal_error(char *str);
-//int	fatal_error(char *str);
+int	error_msg(char *msg);
+
+// FREE MEMORY
 
 #endif

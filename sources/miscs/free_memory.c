@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/01 21:26:49 by charline         ###   ########.fr       */
+/*   Created: 2023/02/01 19:59:05 by charline          #+#    #+#             */
+/*   Updated: 2023/02/01 20:04:29 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
-int	main(int argc, char **argv)
+void	free_config(t_config *config)
 {
-	// int			fd;
-	t_config	config;
+	int	i;
 
-	config.elems = NULL;
-	config.map = NULL;
-	if (argc != 2)
+	i = 0;
+	if (config->elems)
 	{
-		ft_putstr_fd("Error\nError : Only one parameter needed\n", 2);
-		return (0);
+		while (config->elems[i])
+		{
+			free(config->elems[i]);
+			i++;
+		}
+		free(config->elems);
 	}
-	if (parsing(argv[1], &config) == -1)
-		return (0);
+	i = 0;
+	if (config->map)
+	{
+		while (config->map[i])
+		{
+			free(config->map[i])
+			i++;
+		}
+		free(config->map);
+	}
 }

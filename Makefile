@@ -6,9 +6,9 @@ CSAN	:=	-fsanitize=address -g3
 
 NAME	:=	cub3D
 CC		:=	gcc
-CFLAGS	:=	-Wall -Wextra -Werror #$(CSAN)
+CFLAGS	:=	-Wall -Wextra -Werror $(CSAN)
 
-ARLIBFT	=	$(D_LIBFT)/libft.a
+AR_LIBFT	=	$(D_LIBFT)libft.a
 
 RM		:=	rm -rf
 
@@ -18,17 +18,19 @@ RM		:=	rm -rf
 
 # files
 
-LST_PARSING		:=		parsing.c
+LST_PARSING		:=		parsing.c			\
+						pre_parsing.c		\
+						pre_parsing_utils.c
 
 LST_EXEC		:=
 
-LST_MISC		:=		free_fct.c
+LST_MISCS		:=		error_handling.c
 
 LST_MAIN		:=		main.c
 
 
 LST_INCS		:=		cub3D.h
-LST_OBJS		:=		$(SRCS:.c=.o)
+LST_OBJS		=		$(SRCS:.c=.o)
 
 # directories
 
@@ -40,14 +42,14 @@ D_OBJS		:=	.objs/
 
 D_PARSING	:=	parsing/
 D_EXEC		:=	exec/
-D_MISC		:=	miscs/
+D_MISCS		:=	miscs/
 
 # full paths
 
-SRCS	=	$(addprefix $(D_SRCS),$(LST_MAIN))
-			$(addprefix $(D_SRCS)$(D_PARSING),$(LST_PARSING))
-			$(addprefix $(D_SRCS)$(EXEC),$(LST_EXEC))
-			$(addprefix $(D_SRCS)$(MISC),$(LST_MISC))
+SRCS	=	$(addprefix $(D_SRCS),$(LST_MAIN))					\
+			$(addprefix $(D_SRCS)$(D_MISCS),$(LST_MISCS))		\
+			$(addprefix $(D_SRCS)$(D_PARSING),$(LST_PARSING))	\
+			$(addprefix $(D_SRCS)$(D_EXEC),$(LST_EXEC))			
 
 INCS	=	$(addprefix $(D_INCS),$(LST_INCS))
 
@@ -67,7 +69,7 @@ $(D_OBJS)%.o	:	$(D_SRCS)%.c $(INCS) $(AR_LIBFT) Makefile | $(D_OBJS)
 
 $(D_OBJS)	:
 			mkdir -p $(D_OBJS)		\
-			$(D_OBJS)$(D_PARSING) $(D_OBJS)$(D_EXEC)
+			$(D_OBJS)$(D_PARSING) $(D_OBJS)$(D_EXEC) $(D_OBJS)$(D_MISCS)
 
 $(AR_LIBFT)	:
 				$(MAKE) -C $(D_LIBFT)
