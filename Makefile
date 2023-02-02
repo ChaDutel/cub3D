@@ -18,13 +18,18 @@ RM		:=	rm -rf
 
 # files
 
-LST_PARSING		:=		parsing.c			\
-						pre_parsing.c		\
-						pre_parsing_utils.c
+LST_PARSING		:=		parsing.c				\
+						pre_parsing.c			\
+						pre_parsing_utils.c		\
+						split_config.c			\
+						split_config_utils.c	\
+						parse_elems.c
 
 LST_EXEC		:=
 
-LST_MISCS		:=		error_handling.c
+LST_MISCS		:=		error_handling.c	\
+						free_memory.c		\
+						libc_ft.c
 
 LST_MAIN		:=		main.c
 

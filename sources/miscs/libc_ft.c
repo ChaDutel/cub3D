@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_memory.c                                      :+:      :+:    :+:   */
+/*   libc_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 19:59:05 by charline          #+#    #+#             */
-/*   Updated: 2023/02/02 20:26:14 by charline         ###   ########.fr       */
+/*   Created: 2023/02/02 22:39:55 by charline          #+#    #+#             */
+/*   Updated: 2023/02/02 22:48:51 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	free_config(t_config *config)
+char    *char_join(char *str, char c)
 {
-	int	i;
+    int     i;
+    char    *line;
 
-	i = 0;
-	if (config->elems)
-	{
-		while (config->elems[i])
-		{
-			free(config->elems[i]);
-			i++;
-		}
-		free(config->elems);
-	}
-	i = 0;
-	if (config->map)
-	{
-		while (config->map[i])
-		{
-			free(config->map[i]);
-			i++;
-		}
-		free(config->map);
-	}
-	config->elems = NULL;
-	config->map = NULL;
+    i = 0;
+    line = malloc(sizeof(char) * (ft_strlen(str) + 2));
+    if (!line)
+        return (NULL);
+    while (str[i])
+    {
+        line[i] = str[i];
+        i++;
+    }
+    line[i++] = c;
+    line[i] = '\0';
+    return (line);
 }

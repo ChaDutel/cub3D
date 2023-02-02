@@ -6,32 +6,11 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/01 20:51:30 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/02 22:51:08 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-static	int	add_coordinate(char *line, int *elem_index, t_config *config)
-{
-	int	i;
-
-	i = 0;
-	if (line[0] != '\n')
-	{
-		while (line[i] && line[i] == ' ')
-			i++;
-		if (line[i])
-		{
-			config->elems[*elem_index] = ft_strdup(&line[i]);
-			if (!(config->elems[*elem_index]))
-				return (-1);
-			*elem_index += 1;
-			config->elems[*elem_index + 1] = NULL;
-		}
-	}
-	return (0);
-}
 
 static	int	fill_elems(int fd, t_config *config)
 {
@@ -58,13 +37,62 @@ static	int	fill_elems(int fd, t_config *config)
 	return (0);
 }
 
-static	int	fill_map(int fd, t_config *config)
+static	int	map_mesurer(int fd, t_config *config)
 {
 	char	*line;
-
+	
 	line = get_next_line(fd);
-	if (line ==)
+	while (line && *line == '\n')
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	config->y = 0;
+	config->x = 0;
+	while (line)
+	{
+		config->y++;
+		if (ft_strlen(line) - 1 > config->x)
+			config->x = ft_strlen(line) - 1;
+		if (config->x * config->y > MAX_AREA)
+		{
+			free(line);
+			close(fd);
+			return (-1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (0);
+}
 
+// BAD ERROR HANDLING ?
+static	int	fill_map(int fd, char *config_file, t_config *config)
+{
+	int		elem_count;
+	char	*line;
+	int		i;
+	
+	fd = open(config_file, O_RDONLY);
+	if (fd == -1 || prepare_map(fd, config) == -1)
+		return (-1);
+	elem_count = 0;
+	line = get_next_line(fd);
+	while (line && (elem_count < 6 || *line == '\n'))
+	{
+		if (*line != '\n' && elem_count != 6)
+			elem_count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	i = 0;
+	while (line)
+	{
+		config->map[i++] = line;
+		line[ft_strlen(line) - 1] = '\0';
+		line = get_next_line(fd);
+	}
+	close(fd);
 	return (0);
 }
 
@@ -77,17 +105,17 @@ int	split_config(char *config_file, t_config *config)
 		return (error_msg("Error : cannot open the config file\n"));
 	if (fill_elems(fd, config) == -1)
 	{
-		free_config(config);
 		close(fd);
 		return (error_msg("Error : malloc failed\n"));
 	}
-	if (fill_map(fd, config) == -1)
-	{
-		free_config(config);
-		close(fd);
-		return (error_msg("Error : malloc failed\n"));
-	}
-	// sort elems => NO SO EA WE F C
+	if (map_mesurer(fd, config) == -1)
+		return (error_msg("Error : bad map size\n"));
 	close(fd);
+	if (config->x < 3 || config->y < 3)
+		return (error_msg("Error : bad map size\n"));
+	if (fill_map(fd, config_file, config) == -1)
+		return (error_msg("Error : malloc failed\n"));
+	trim_elems(config);
+	// sort_elems(config);
 	return (0);
 }
