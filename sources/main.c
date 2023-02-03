@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/02 22:11:37 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:44:51 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@
 // 	}
 // }
 
+// static	void	print_elems(t_config *config)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (config->elems[i])
+// 	{
+// 		ft_putstr(config->elems[i++]);
+// 		ft_putchar('\n');
+// 	}
+// }
+
 int	main(int argc, char **argv)
 {
 	t_config	config;
@@ -48,5 +60,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	// print_map(&config);
+	// print_elems(&config);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/02 22:51:08 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:39:20 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ int	split_config(char *config_file, t_config *config)
 	if (fill_map(fd, config_file, config) == -1)
 		return (error_msg("Error : malloc failed\n"));
 	trim_elems(config);
-	// sort_elems(config);
+	sort_elems(config);
 	return (0);
 }

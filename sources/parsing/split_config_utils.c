@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:44:33 by charline          #+#    #+#             */
-/*   Updated: 2023/02/02 22:54:33 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:36:25 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,31 @@ void	trim_elems(t_config *config)
 	}
 }
 
+static	void	elem_swap(t_config *config, int a, int b)
+{
+	char	*tmp;
 
+	tmp = config->elems[a];
+	config->elems[a] = config->elems[b];
+	config->elems[b] = tmp;
+}
 
-// void	sort_elems(t_config *config)
-// {
-	
-// }
+void	sort_elems(t_config *config)
+{
+	int	i;
+
+	i = 1;
+	while (config->elems[i] && config->elems[0][0] != 'N')
+		elem_swap(config, 0, i++);
+	i = 2;
+	while (config->elems[i] && config->elems[1][0] != 'S')
+		elem_swap(config, 1, i++);
+	i = 3;
+	while (config->elems[i] && config->elems[2][0] != 'E')
+		elem_swap(config, 2, i++);
+	i = 4;
+	while (config->elems[i] && config->elems[3][0] != 'W')
+		elem_swap(config, 3, i++);
+	if (config->elems[4][0] != 'F')
+		elem_swap(config, 4, 5);
+}
