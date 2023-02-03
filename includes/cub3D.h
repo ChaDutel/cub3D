@@ -78,7 +78,7 @@ void	sort_elems(t_config *config);
 int		parse_elems(t_config *config);
 
 // PARSE MAP
-//int	parse_map(t_config *config);
+int		parse_map(t_config *config);
 
 
 //***************//

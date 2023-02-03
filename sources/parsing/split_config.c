@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/03 17:39:20 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2023/02/03 19:58:45 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ static	int	fill_map(int fd, char *config_file, t_config *config)
 	while (line)
 	{
 		config->map[i++] = line;
-		line[ft_strlen(line) - 1] = '\0';
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
 		line = get_next_line(fd);
 	}
 	close(fd);
