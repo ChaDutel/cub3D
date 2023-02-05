@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:32:24 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/03 19:20:43 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 15:51:29 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	parsing(char *config_file, t_config *config)
 		return (-1);
 	if (split_config(config_file, config) == -1)
 		return (-1);
-	// if (parse_elems(config) == -1)
-	// 	return (-1);
+	if (parse_elems(config) == -1)
+		return (-1);
 	if (parse_map(config) == -1)
 		return (-1);
 	return (0);

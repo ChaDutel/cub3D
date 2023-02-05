@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libc_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:39:55 by charline          #+#    #+#             */
-/*   Updated: 2023/02/02 22:48:51 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:36:08 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ char    *char_join(char *str, char c)
     line = malloc(sizeof(char) * (ft_strlen(str) + 2));
     if (!line)
         return (NULL);
-    while (str[i])
+    if (str)
     {
-        line[i] = str[i];
-        i++;
+        while (str[i])
+        {
+            line[i] = str[i];
+            i++;
+        }
     }
     line[i++] = c;
     line[i] = '\0';

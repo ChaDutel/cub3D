@@ -43,7 +43,7 @@ typedef struct s_config
 {
 	char	**elems;
 	char	**map;
-	int		**colors;
+	int		colors[2][3];
 	size_t	x;
 	size_t	y;
 } t_config;

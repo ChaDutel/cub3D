@@ -23,8 +23,8 @@
 
  - pre_parsing :
 
- - split_config :	remplir la structure t_config avec les elements desquels ont enlève les '\n' et que l'on met dans l'ordre: NO SO EA WE F C et copier la map en elevant les '\n'.
+ - split_config :	remplir la structure t_config avec les elements desquels on enlève les '\n' et que l'on met dans l'ordre: NO SO EA WE F C et copier la map en elevant les '\n'.
 
- - parse_elem :
+ - parse_elem : couleurs : verifier nb < 0 et > 255, bien 3 nb separres par des virgules, espaces entre, autre valeurs !!!!espace derniere lettre
 
  - parse_map : check s'il y a exactement 1 player et si la map est bien entourée de murs ('1').
