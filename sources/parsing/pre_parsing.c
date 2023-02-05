@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:01:42 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/01 22:19:31 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:28:28 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_coordinate(int fd, char *line)
 			}
 		}
 		if (mini_check_coordinate(iter) == 0)
-			break;
+			break ;
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -208,5 +208,3 @@ int	pre_parsing(char *config_file)
 		return (-1);
 	return (0);
 } */
-
-

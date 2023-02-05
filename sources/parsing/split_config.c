@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/03 19:58:45 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 12:28:40 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	int	fill_elems(int fd, t_config *config)
 static	int	map_mesurer(int fd, t_config *config)
 {
 	char	*line;
-	
+
 	line = get_next_line(fd);
 	while (line && *line == '\n')
 	{
@@ -72,7 +72,7 @@ static	int	fill_map(int fd, char *config_file, t_config *config)
 	int		elem_count;
 	char	*line;
 	int		i;
-	
+
 	fd = open(config_file, O_RDONLY);
 	if (fd == -1 || prepare_map(fd, config) == -1)
 		return (-1);

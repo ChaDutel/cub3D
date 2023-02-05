@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:23:48 by charline          #+#    #+#             */
-/*   Updated: 2023/02/01 22:17:44 by charline         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:28:09 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_map_elems(char *line)
 	{
 		if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && line[i] != 'W' && line[i] != '0' && line[i] != '1' && line[i] != ' ' && line[i] != '\n')
 			return (error_msg("Error : Wrong map elements\n"));
-        i++;
+		i++;
 	}
 	return (0);
 }
@@ -63,7 +63,7 @@ int	find_coordinate(char *line, int *iter)
 	int	i;
 
 	i = 0;
-    ft_putstr(line);
+	ft_putstr(line);
 	while (line[i] && line[i + 1] && line[i] == ' ')
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O')
