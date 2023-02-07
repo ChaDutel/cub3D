@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:23:48 by charline          #+#    #+#             */
-/*   Updated: 2023/02/05 12:28:09 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 15:28:02 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	find_coordinate(char *line, int *iter)
 	int	i;
 
 	i = 0;
-	ft_putstr(line);
 	while (line[i] && line[i + 1] && line[i] == ' ')
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O')

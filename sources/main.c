@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/07 15:23:07 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 17:01:23 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@
 // 	}
 // }
 
+static void	test_mlx(void)
+{
+	void *mlx = mlx_init();
+	void *win = mlx_new_window(mlx, 3840, 2160, "La promenade des amoureux");
+	mlx_loop(mlx);
+	(void)win;
+}
+
 int	main(int argc, char **argv)
 {
 	t_config	config;
@@ -61,6 +69,7 @@ int	main(int argc, char **argv)
 	}
 	// print_map(&config);
 	// print_elems(&config);
+	test_mlx();
 	free_config(&config);
 	return (0);
 }

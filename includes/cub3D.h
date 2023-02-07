@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
+# include "../mlx_linux/mlx.h"
 # include "../libft/includes/libft.h"
 
 // MACRO

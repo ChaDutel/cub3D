@@ -75,7 +75,7 @@ OBJS	=	$(subst $(D_SRCS),$(D_OBJS),$(LST_OBJS))
 all		:	makelibft $(NAME)
 
 $(NAME)	:	$(OBJS) $(AR_LIBFT) $(INCS) Makefile
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $@
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) $(MORE_LIB) -o $@
 
 $(D_OBJS)%.o	:	$(D_SRCS)%.c $(INCS) $(AR_LIBFT) Makefile | $(D_OBJS)
 					$(CC) $(CFLAGS) -c $< -o $@
