@@ -30,6 +30,7 @@ LST_PARSING		:=		parsing.c				\
 						split_config.c			\
 						split_config_utils.c	\
 						parse_elems.c			\
+						parse_colors.c			\
 						parse_map.c
 
 LST_EXEC		:=

@@ -28,3 +28,5 @@
  - parse_elem : couleurs : verifier nb < 0 et > 255, bien 3 nb separres par des virgules, espaces entre, autre valeurs !!!!espace derniere lettre
 
  - parse_map : check s'il y a exactement 1 player et si la map est bien entourée de murs ('1').
+
+ - LEAKS!!!!!! si la map marche, exemple une ligne [10N11  101], leaks details : (#2 0x563a9a21af31 in fill_map sources/parsing/split_config.c:77 ;  #1 0x563a9a21b680 in prepare_map sources/parsing/split_config_utils.c:40 ; #0 0x7f3706bc65df in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.8+0xc15df)) et (#2 0x563a9a21d8ea in get_next_line (/nfs/homes/cdutel-l/42Cursus/cub3D/cub3D+0x68ea) ; #1 0x563a9a21dafd in ft_strjoin_n (/nfs/homes/cdutel-l/42Cursus/cub3D/cub3D+0x6afd) ; #0 0x7f3706bc65df in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.8+0xc15df))

@@ -2,12 +2,12 @@ NO ./textures/north
 SO ./textures/south
 EA ./textures/east
 WE ./textures/west
-F 220, 100,0
+F 250, 100,0
 C 225,255,0
 
 
 
 111
 101   111
-101   101
+1011  101
 111   111

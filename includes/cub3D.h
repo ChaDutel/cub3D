@@ -77,6 +77,9 @@ void	sort_elems(t_config *config);
 // PARSE ELEM
 int		parse_elems(t_config *config);
 
+// PARSE COLORS
+int	check_colors_values(t_config *config, int i, int j);
+
 // PARSE MAP
 int		parse_map(t_config *config);
 
