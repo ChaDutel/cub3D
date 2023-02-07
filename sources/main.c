@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/07 17:01:23 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 18:33:01 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,38 @@
 
 static void	test_mlx(void)
 {
-	void *mlx = mlx_init();
-	void *win = mlx_new_window(mlx, 3840, 2160, "La promenade des amoureux");
+	void	*img;
+	// char	*relative_path = "./maps/grass_test.xpm";
+	// int		img_width;
+	// int		img_height;
+	void 	*mlx;
+	void	*win;
+	int pixel_bits;
+	int line_bytes;
+	int endian;
+	char *buffer;
+	
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 3840, 2160, "La promenade des amoureux"); //fait la fenetre
+	//img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+	img = mlx_new_image(mlx, 3840, 2160);
+	buffer = mlx_get_data_addr(img, &pixel_bits, &line_bytes, &endian);
+	buffer[12000] = 255;
+	int	y = 0, x;
+	while (y != 2160)
+	{
+		x = 0;
+		while (x != 3840)
+		{
+			buffer[y * line_bytes + x * 4 + 2] = 255;
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(mlx, win, img, 0, 0);
 	mlx_loop(mlx);
 	(void)win;
+	(void)img;
 }
 
 int	main(int argc, char **argv)
