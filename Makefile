@@ -6,7 +6,7 @@ CSAN	:=	-fsanitize=address -g3
 
 NAME	:=	cub3D
 CC		:=	cc
-CFLAGS	:=	-Wall -Wextra -Werror $(CSAN)
+CFLAGS	:=	-Wall -Wextra -Werror #$(CSAN)
 
 AR_LIBFT	=	$(D_LIBFT)libft.a
 

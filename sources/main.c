@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/03 18:44:51 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 15:23:07 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	main(int argc, char **argv)
 	}
 	// print_map(&config);
 	// print_elems(&config);
+	free_config(&config);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/05 12:28:40 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 15:19:55 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
