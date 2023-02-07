@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:32:24 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/05 15:51:29 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 11:58:03 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,12 @@ static	int	check_extension(char *str)
 		return (0);
 }
 
-/* int	first_read(int fd)
-{
-	//6 incrementeurs, boucle check et augmemte
-	i;
-	str = str_cpy(line[i])
-} */
-
 int	parsing(char *config_file, t_config *config)
 {
 	(void)config;
 	if (check_extension(config_file) == -1)
 		return (-1);
-	if (pre_parsing(config_file) == -1) //separate config and map //gnl
+	if (pre_parsing(config_file) == -1)
 		return (-1);
 	if (split_config(config_file, config) == -1)
 		return (-1);
