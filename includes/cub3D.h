@@ -61,7 +61,17 @@ typedef struct s_data
 	t_config	*config;
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_img		*img;
 } t_data;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp; /* bits per pixel */
+	int		line_len;
+	int		endian;
+}	t_img;
 
 
 //***************//

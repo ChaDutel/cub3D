@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:59:05 by charline          #+#    #+#             */
-/*   Updated: 2023/02/12 10:52:11 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/12 17:10:29 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	free_mlx(t_data *data)
 {
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->img && data->img->mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	return (-1);

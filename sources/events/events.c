@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/12 15:48:47 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/12 16:05:04 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,24 @@
 
 int render(t_data *data)
 {
-    (void)data;
+	int	height;
+	int	width;
+
+    if (data->win_ptr != NULL)
+	{
+		height = 0;
+		while(height < WINDOW_HEIGHT)
+		{
+			width = 0;
+			while(width < WINDOW_WIDTH)
+			{
+				mlx_pixel_put(data->mlx_ptr, data->win_ptr, 
+					width, height, 0xFF0000);
+				width++;
+			}
+			height++;
+		}
+	}
     return (0);
 }
 
