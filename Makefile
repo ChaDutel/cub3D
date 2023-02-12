@@ -13,8 +13,7 @@ AR_LIBFT	=	$(D_LIBFT)libft.a
 LIBFT_LIB	=	-L$(D_LIBFT) -lft
 
 MLX_INCS	:=	-Imlx_linux
-MLX_LIB		:=	-Lmlx_linux -lmlx_Linux
-MORE_LIB	:=	-lXext -lX11 -lm -lz
+MLX_LIB		:=	-Lmlx_linux -lmlx_Linux -lXext -lX11 -lm -lz
 
 RM		:=	rm -rf
 
@@ -48,6 +47,7 @@ LST_OBJS		=		$(SRCS:.c=.o)
 # directories
 
 D_LIBFT		:=	libft/
+D_MLX		:=	mlx_linux/
 
 D_SRCS		:=	sources/
 D_INCS		:=	includes/
@@ -72,22 +72,28 @@ OBJS	=	$(subst $(D_SRCS),$(D_OBJS),$(LST_OBJS))
 #        RULES        #
 #######################
 
-all		:	makelibft $(NAME)
+all		:	make_libft make_mlx $(NAME)
 
 $(NAME)	:	$(OBJS) $(AR_LIBFT) $(INCS) Makefile
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) $(MORE_LIB) -o $@
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) -o $@
 
 $(D_OBJS)%.o	:	$(D_SRCS)%.c $(INCS) $(AR_LIBFT) Makefile | $(D_OBJS)
 					$(CC) $(CFLAGS) -c $< -o $@
 
 $(D_OBJS)	:
-			mkdir -p $(D_OBJS) $(D_OBJS)$(D_PARSING) $(D_OBJS)$(D_EXEC) $(D_OBJS)$(D_MISCS)
+			mkdir -p $(D_OBJS)		\
+			$(D_OBJS)$(D_PARSING)	\
+			$(D_OBJS)$(D_EXEC)		\
+			$(D_OBJS)$(D_MISCS)
 
 $(AR_LIBFT)	:
 				$(MAKE) -C $(D_LIBFT)
 
-makelibft	:
+make_libft	:
 			$(MAKE) -C $(D_LIBFT)
+
+make_mlx	:
+			$(MAKE) -C $(D_MLX)
 
 clean	:
 		$(RM) $(OBJS)
@@ -97,6 +103,7 @@ fclean	:
 		$(MAKE) clean
 		$(RM) $(NAME)
 		$(MAKE) fclean -C $(D_LIBFT)
+		$(MAKE) clean -C $(D_MLX)
 
 re	:
 	$(MAKE) fclean
