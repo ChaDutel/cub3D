@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/12 10:59:23 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/12 15:48:29 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ static	int	run_mlx(t_config *config)
 		WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
 	if (!data.win_ptr)
 		return (free_mlx(&data));
-	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
-	mlx_key_hook(data.win_ptr, &handle_input, &data);
+	mlx_loop_hook(data.mlx_ptr, &render, &data);
+	mlx_hook(data.win_ptr, 17, (1L<<2), &close_window, &data);
+	mlx_hook(data.win_ptr, 2, (1L<<0), &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
 	free_mlx(&data);
 	return (0);

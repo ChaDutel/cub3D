@@ -28,3 +28,6 @@
  - parse_elem : couleurs : verifier nb < 0 et > 255, bien 3 nb separres par des virgules, espaces entre, autre valeurs !!!!espace derniere lettre
 
  - parse_map : check s'il y a exactement 1 player et si la map est bien entourée de murs ('1').
+
+
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!PARSING: check si les paths ne sont pas des directory !

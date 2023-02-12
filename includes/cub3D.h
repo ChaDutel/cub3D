@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <X11/X.h>
 # include <X11/keysym.h>
 
 # include "../libft/includes/libft.h"
@@ -92,7 +93,7 @@ void	sort_elems(t_config *config);
 int		parse_elems(t_config *config);
 
 // PARSE COLORS
-int	check_colors_values(t_config *config, int i, int j);
+int		check_colors_values(t_config *config, int i, int j);
 
 // PARSE MAP
 int		parse_map(t_config *config);
@@ -102,8 +103,9 @@ int		parse_map(t_config *config);
 //***************//
 
 // EVENTS
-int	handle_no_event(void *data);
-int	handle_input(int keysym, t_data *data);
+int		render(t_data*data);
+int		close_window(t_data *data);
+int		handle_keypress(int keysym, t_data *data);
 
 //***************//
 //      EXEC     //
