@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/07 18:33:01 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/12 10:59:23 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,66 @@
 // 	}
 // }
 
-static void	test_mlx(void)
-{
-	void	*img;
-	// char	*relative_path = "./maps/grass_test.xpm";
-	// int		img_width;
-	// int		img_height;
-	void 	*mlx;
-	void	*win;
-	int pixel_bits;
-	int line_bytes;
-	int endian;
-	char *buffer;
+// static void	test_mlx(void)
+// {
+// 	void	*img;
+// 	// char	*relative_path = "./maps/grass_test.xpm";
+// 	// int		img_width;
+// 	// int		img_height;
+// 	void 	*mlx;
+// 	void	*win;
+// 	int pixel_bits;
+// 	int line_bytes;
+// 	int endian;
+// 	char *buffer;
 	
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 3840, 2160, "La promenade des amoureux"); //fait la fenetre
-	//img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	img = mlx_new_image(mlx, 3840, 2160);
-	buffer = mlx_get_data_addr(img, &pixel_bits, &line_bytes, &endian);
-	buffer[12000] = 255;
-	int	y = 0, x;
-	while (y != 2160)
-	{
-		x = 0;
-		while (x != 3840)
-		{
-			buffer[y * line_bytes + x * 4 + 2] = 255;
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_loop(mlx);
-	(void)win;
-	(void)img;
+// 	mlx = mlx_init();
+// 	win = mlx_new_window(mlx, 3840, 2160, "La promenade des amoureux"); //fait la fenetre
+// 	//img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+// 	img = mlx_new_image(mlx, 3840, 2160);
+// 	buffer = mlx_get_data_addr(img, &pixel_bits, &line_bytes, &endian);
+// 	buffer[12000] = 255;
+// 	int	y = 0, x;
+// 	while (y != 2160)
+// 	{
+// 		x = 0;
+// 		while (x != 3840)
+// 		{
+// 			buffer[y * line_bytes + x * 4 + 2] = 255;
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	mlx_put_image_to_window(mlx, win, img, 0, 0);
+// 	mlx_loop(mlx);
+// 	(void)win;
+// 	(void)img;
+// }
+
+static	void	init_mini_struct(t_data *data)
+{
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+}
+
+static	int	run_mlx(t_config *config)
+{
+	t_data	data;
+
+	data.config = config;
+	init_mini_struct(&data);
+	data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+		return (-1);
+	data.win_ptr = mlx_new_window(data.mlx_ptr,
+		WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
+	if (!data.win_ptr)
+		return (free_mlx(&data));
+	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
+	mlx_key_hook(data.win_ptr, &handle_input, &data);
+	mlx_loop(data.mlx_ptr);
+	free_mlx(&data);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -97,7 +123,8 @@ int	main(int argc, char **argv)
 	}
 	// print_map(&config);
 	// print_elems(&config);
-	test_mlx();
+	if (run_mlx(&config) == -1)
+		return (error_msg("Error : MLX function failed"));
 	free_config(&config);
 	return (0);
 }

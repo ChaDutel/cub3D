@@ -19,11 +19,16 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <X11/keysym.h>
 
-# include "../mlx_linux/mlx.h"
 # include "../libft/includes/libft.h"
+# include "../mlx_linux/mlx.h"
 
 // MACRO
+
+//window
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 500
 
 //coordinates
 # define NO 0
@@ -48,6 +53,14 @@ typedef struct s_config
 	size_t	x;
 	size_t	y;
 } t_config;
+
+//mlx struct
+typedef struct s_data
+{
+	t_config	*config;
+	void		*mlx_ptr;
+	void		*win_ptr;
+} t_data;
 
 
 //***************//
@@ -84,13 +97,20 @@ int	check_colors_values(t_config *config, int i, int j);
 // PARSE MAP
 int		parse_map(t_config *config);
 
+//***************//
+//    EVENTS     //
+//***************//
+
+// EVENTS
+int	handle_no_event(void *data);
+int	handle_input(int keysym, t_data *data);
 
 //***************//
 //      EXEC     //
 //***************//
 
 //***************//
-//      MISC     //
+//     MISCS     //
 //***************//
 
 // ERROR HANDLING
@@ -98,6 +118,7 @@ int		error_msg(char *msg);
 
 // FREE MEMORY
 void	free_config(t_config *config);
+int		free_mlx(t_data *data);
 
 // LIBC_FT
 char    *char_join(char *str, char c);

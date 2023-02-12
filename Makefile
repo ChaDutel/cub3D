@@ -32,6 +32,8 @@ LST_PARSING		:=		parsing.c				\
 						parse_colors.c			\
 						parse_map.c
 
+LST_EVENTS		:=		events.c
+
 LST_EXEC		:=
 
 LST_MISCS		:=		error_handling.c	\
@@ -54,15 +56,17 @@ D_INCS		:=	includes/
 D_OBJS		:=	.objs/
 
 D_PARSING	:=	parsing/
+D_EVENTS	:=	events/
 D_EXEC		:=	exec/
 D_MISCS		:=	miscs/
 
 # full paths
 
 SRCS	=	$(addprefix $(D_SRCS),$(LST_MAIN))					\
-			$(addprefix $(D_SRCS)$(D_MISCS),$(LST_MISCS))		\
 			$(addprefix $(D_SRCS)$(D_PARSING),$(LST_PARSING))	\
-			$(addprefix $(D_SRCS)$(D_EXEC),$(LST_EXEC))			
+			$(addprefix $(D_SRCS)$(D_EVENTS), $(LST_EVENTS))	\
+			$(addprefix $(D_SRCS)$(D_EXEC),$(LST_EXEC))			\
+			$(addprefix $(D_SRCS)$(D_MISCS),$(LST_MISCS))
 
 INCS	=	$(addprefix $(D_INCS),$(LST_INCS))
 
@@ -83,6 +87,7 @@ $(D_OBJS)%.o	:	$(D_SRCS)%.c $(INCS) $(AR_LIBFT) Makefile | $(D_OBJS)
 $(D_OBJS)	:
 			mkdir -p $(D_OBJS)		\
 			$(D_OBJS)$(D_PARSING)	\
+			$(D_OBJS)$(D_EVENTS)	\
 			$(D_OBJS)$(D_EXEC)		\
 			$(D_OBJS)$(D_MISCS)
 
