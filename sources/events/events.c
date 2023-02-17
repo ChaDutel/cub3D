@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/12 16:05:04 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/17 15:35:06 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/cub3D.h"
+
+void	mlx_img_pixel_put(t_data *data, int width, int height, int color)
+{
+	char    *pixel;
+
+    pixel = data->img->addr + (height * data->img->line_len + width * (data->img->bpp / 8));
+	*(int *)pixel = color;
+}
 
 int render(t_data *data)
 {
@@ -25,13 +33,15 @@ int render(t_data *data)
 			width = 0;
 			while(width < WINDOW_WIDTH)
 			{
-				mlx_pixel_put(data->mlx_ptr, data->win_ptr, 
-					width, height, 0xFF0000);
+				// mlx_pixel_put(data->mlx_ptr, data->win_ptr, 
+				// 	width, height, 0xFF0000);
+				mlx_img_pixel_put(data, width, height, 0xFF0000);
 				width++;
 			}
 			height++;
 		}
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
     return (0);
 }
 
