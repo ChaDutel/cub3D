@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:59:05 by charline          #+#    #+#             */
-/*   Updated: 2023/02/17 15:38:48 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/18 13:10:17 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,12 @@ void	free_config(t_config *config)
 	config->map = NULL;
 }
 
-/*
-		before when mlx_img was in : data.img->mlx_img, but it made leaks
 int	free_mlx(t_data *data)
 {
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (data->img && data->img->mlx_img)
-		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	return (-1);
-} */
-
-int	free_mlx(t_data *data)
-{
-	if (data->win_ptr)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (data->img && data->mlx_img)
-		mlx_destroy_image(data->mlx_ptr, data->mlx_img);
+	if (data->img.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	return (-1);

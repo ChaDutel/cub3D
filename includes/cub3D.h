@@ -57,7 +57,7 @@ typedef struct s_config
 
 typedef struct s_img
 {
-	//void	*mlx_img; made leaks here, so now it's in t_data
+	void	*mlx_img;
 	char	*addr;
 	int		bpp; /* bits per pixel */
 	int		line_len;
@@ -67,11 +67,10 @@ typedef struct s_img
 //mlx struct
 typedef struct s_data
 {
-	void	*mlx_img;
 	t_config	*config;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_img		*img;
+	t_img		img;
 } t_data;
 
 //***************//

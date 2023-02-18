@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/17 15:38:28 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/18 13:10:37 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,12 @@
 // 	(void)img;
 // }
 
-/*
-		before when mlx_img was in : data.img->mlx_img, but it made leaks
 static	void	init_mini_struct(t_data *data, t_config *config)
 {
 	data->config = config;
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
-	data->img->mlx_img = NULL;
+	data->img.mlx_img = NULL;
 }
 
 static	int	run_mlx(t_config *config)
@@ -101,48 +99,14 @@ static	int	run_mlx(t_config *config)
 		WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
 	if (!data.win_ptr)
 		return (free_mlx(&data));
-	data.img->mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!data.mlx_img)
+	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!data.img.mlx_img)
 		return (free_mlx(&data));
-	// data.img->addr = mlx_get_data_addr(data.img->mlx_img, data.img->bpp,
-	// 	data.img->line_len, data.img->endian);
+	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, \
+		&data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, 17, (1L<<2), &close_window, &data);
 	mlx_hook(data.win_ptr, 2, (1L<<0), &handle_keypress, &data);
-	mlx_loop(data.mlx_ptr);
-	free_mlx(&data);
-	return (0);
-} */
-
-static	void	init_mini_struct(t_data *data, t_config *config)
-{
-	data->config = config;
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-	data->mlx_img = NULL;
-}
-
-static	int	run_mlx(t_config *config)
-{
-	t_data	data;
-
-	init_mini_struct(&data, config);
-	data.mlx_ptr = mlx_init();
-	if (!data.mlx_ptr)
-		return (-1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr,
-		WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
-	if (!data.win_ptr)
-		return (free_mlx(&data));
-	data.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!data.mlx_img)
-		return (free_mlx(&data));
-	data.img->addr = mlx_get_data_addr(data.mlx_img, &data.img->bpp, \
-		&data.img->line_len, &data.img->endian);
-	mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_hook(data.win_ptr, 17, (1L<<2), &close_window, &data);
-	mlx_hook(data.win_ptr, 2, (1L<<0), &handle_keypress, &data);
-	//mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.mlx_img, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	free_mlx(&data);
 	return (0);
