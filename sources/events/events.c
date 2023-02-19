@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/19 10:22:28 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 10:34:33 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 static void	image_pixel_put(t_data *data, int width, int height, int color)
 {
+	int		i;
 	char	*pixel;
 
+	i = data->img.bpp - 8;
 	pixel = data->img.addr
 		+ (height * data->img.line_len + width * (data->img.bpp / 8));
-	*(int *)pixel = color;
+	while (i >= 0)
+	{
+		if (data->img.endian != 0)
+			*pixel++ = (color >> i) & 0xFF;
+		else
+			*pixel++ = (color >> (data->img.bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
 }
 
 int	render(t_data *data)
