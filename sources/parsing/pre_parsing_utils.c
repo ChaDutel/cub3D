@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:23:48 by charline          #+#    #+#             */
-/*   Updated: 2023/02/07 15:28:02 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 10:09:36 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	check_map_elems(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && line[i] != 'W' && line[i] != '0' && line[i] != '1' && line[i] != ' ' && line[i] != '\n')
+		if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S'
+			&& line[i] != 'W' && line[i] != '0' && line[i] != '1'
+			&& line[i] != ' ' && line[i] != '\n')
 			return (error_msg("Error : Wrong map elements\n"));
 		i++;
 	}

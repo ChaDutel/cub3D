@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/07 15:19:55 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 10:17:11 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ static	int	map_mesurer(int fd, t_config *config)
 	return (0);
 }
 
-// BAD ERROR HANDLING ?
+static	void	line_copy(char *line, t_config *config, int *i)
+{
+	config->map[*i] = line;
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
+	*i += 1;
+}
+
 static	int	fill_map(int fd, char *config_file, t_config *config)
 {
 	int		elem_count;
@@ -88,9 +95,7 @@ static	int	fill_map(int fd, char *config_file, t_config *config)
 	i = 0;
 	while (line)
 	{
-		config->map[i++] = line;
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
+		line_copy(line, config, &i);
 		line = get_next_line(fd);
 	}
 	close(fd);

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:50:43 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/07 11:51:13 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 10:11:49 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static int	add_tab_colors_values_check_max_min(t_config *config, char *str, int iter, int i)
+static int	add_tab_colors_values_check_max_min(t_config *config
+	, char *str, int iter, int i)
 {
 	int	values;
 
@@ -47,7 +48,8 @@ static char	*create_str_num(t_config *config, int i, int *j)
 	char	*str_tmp;
 
 	str = NULL;
-	while (config->elems[i][*j] && (config->elems[i][*j] >= '0' && config->elems[i][*j] <= '9'))
+	while (config->elems[i][*j] && (config->elems[i][*j] >= '0'
+		&& config->elems[i][*j] <= '9'))
 	{
 		str_tmp = str;
 		str = char_join(str_tmp, config->elems[i][*j]);
@@ -91,7 +93,8 @@ int	check_colors_values(t_config *config, int i, int j)
 		str = create_str_num(config, i, &j);
 		if (str == NULL)
 			return (-1);
-		while (config->elems[i][j] && nb_values != 2 && config->elems[i][j] == ' ')
+		while (config->elems[i][j] && nb_values != 2
+			&& config->elems[i][j] == ' ')
 			j++;
 		if (check_colors_separation(config->elems[i][j], str, nb_values, &j) == -1)
 			return (-1);

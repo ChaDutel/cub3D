@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/18 13:10:37 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 10:25:33 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static	int	run_mlx(t_config *config)
 	if (!data.mlx_ptr)
 		return (-1);
 	data.win_ptr = mlx_new_window(data.mlx_ptr,
-		WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
+			WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
 	if (!data.win_ptr)
 		return (free_mlx(&data));
 	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -105,8 +105,8 @@ static	int	run_mlx(t_config *config)
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, \
 		&data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_hook(data.win_ptr, 17, (1L<<2), &close_window, &data);
-	mlx_hook(data.win_ptr, 2, (1L<<0), &handle_keypress, &data);
+	mlx_hook(data.win_ptr, 17, (1L << 2), &close_window, &data);
+	mlx_hook(data.win_ptr, 2, (1L << 0), &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
 	free_mlx(&data);
 	return (0);

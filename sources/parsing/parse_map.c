@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:08:48 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/03 20:01:47 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 10:08:57 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static	int	check_map_walls(t_config *config)
 			if ((i == 0 || i == config->y - 1 || j == 0 || j == config->x - 1)
 				&& !is_wall(config->map[i][j]))
 				return (-1);
-			else if (!is_wall(config->map[i][j]) && (config->map[i - 1][j] == ' '
-				|| config->map[i][j - 1] == ' ' || config->map[i + 1][j] == ' '
-				|| config->map[i][j + 1] == ' '))
+			else if (!is_wall(config->map[i][j]) && (config->map[i - 1][j]
+				== ' ' || config->map[i][j - 1] == ' ' || config->map[i + 1][j]
+				== ' ' || config->map[i][j + 1] == ' '))
 				return (-1);
 			j++;
 		}
@@ -72,7 +72,8 @@ static	int	check_map_walls(t_config *config)
 int	parse_map(t_config *config)
 {
 	if (check_nb_player(config))
-		return (error_msg("Error : There should be exactly 1 player on the map\n"));
+		return (
+			error_msg("Error : There should be exactly 1 player on the map\n"));
 	if (check_map_walls(config))
 		return (error_msg("Error : The map is not closed\n"));
 	return (0);
