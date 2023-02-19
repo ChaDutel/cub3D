@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -28,8 +29,8 @@
 // MACRO
 
 //window
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 500
+# define WINDOW_WIDTH 2048
+# define WINDOW_HEIGHT 1024
 
 //coordinates
 # define NO 0
@@ -39,6 +40,11 @@
 # define F 4
 # define C 5
 # define NO_COORD -1
+
+//game
+# define PI 3.1415926535
+# define TEXTURE_SIZE 128
+# define FOV 70
 
 //miscs
 # define MAX_AREA 100000
@@ -64,6 +70,14 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+//vector
+typedef	struct s_vector
+{
+	float	x;
+	float	y;
+	float	dir;
+} t_vector;
+
 //mlx struct
 typedef struct s_data
 {
@@ -71,7 +85,10 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img;
+	t_vector	player;
 } t_data;
+
+
 
 //***************//
 //    PARSING    //

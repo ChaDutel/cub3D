@@ -31,3 +31,13 @@
 
 
  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!PARSING: check si les paths ne sont pas des directory !
+
+ # exec
+ - mouvements du personnage
+ - rotation du personnage
+ - collision avec les murs
+ - affichage de la map:
+    1. raycast
+    2. fix fisheye
+    3. afficher le background floor/ceiling
+    3. afficheres les textures pour peindre la map

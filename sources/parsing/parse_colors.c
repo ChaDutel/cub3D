@@ -6,13 +6,13 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:50:43 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/19 10:11:49 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 11:25:42 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static int	add_tab_colors_values_check_max_min(t_config *config
+static int	tab_and_check_max_min(t_config *config
 	, char *str, int iter, int i)
 {
 	int	values;
@@ -26,7 +26,7 @@ static int	add_tab_colors_values_check_max_min(t_config *config
 	return (0);
 }
 
-static int	check_colors_separation(char c, char *str, int nb_values, int *j)
+static int	check_separation(char c, char *str, int nb_values, int *j)
 {
 	if (nb_values != 2 && c != ',')
 	{
@@ -96,9 +96,9 @@ int	check_colors_values(t_config *config, int i, int j)
 		while (config->elems[i][j] && nb_values != 2
 			&& config->elems[i][j] == ' ')
 			j++;
-		if (check_colors_separation(config->elems[i][j], str, nb_values, &j) == -1)
+		if (check_separation(config->elems[i][j], str, nb_values, &j) == -1)
 			return (-1);
-		if (add_tab_colors_values_check_max_min(config, str, nb_values, i - 4) == -1)
+		if (tab_and_check_max_min(config, str, nb_values, i - 4) == -1)
 		{
 			free(str);
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/19 10:25:33 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/19 15:54:09 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,46 @@
 // 	(void)win;
 // 	(void)img;
 // }
+static	void	find_player_direction(t_data *data, t_config *config, int px, int py)
+{
+	if (config->map[py][px] == 'N')
+		data->player.dir = PI / 2;
+	if (config->map[py][px] == 'S')
+		data->player.dir = (3 * PI) / 2;
+	if (config->map[py][px] == 'E')
+		data->player.dir = 2 * PI;
+	if (config->map[py][px] == 'W')
+		data->player.dir = PI;
+}
 
 static	void	init_mini_struct(t_data *data, t_config *config)
 {
+	int	px;
+	int	py;
+
+	px = 0;
+	py = 0;
 	data->config = config;
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->img.mlx_img = NULL;
+	while (config->map[py] && !ft_isalpha(config->map[py][px]))
+	{
+		px = 0;
+		while (config->map[py][px] && !ft_isalpha(config->map[py][px]))
+			px++;
+		if (ft_isalpha(config->map[py][px]))
+			break ;
+		py++;
+	}
+	data->player.x = (float)px * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
+	data->player.y = (float)py * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
+	find_player_direction(data, config, px, py);
 }
 
 static	int	run_mlx(t_config *config)
 {
-	t_data	data;
+	t_data		data;
 
 	init_mini_struct(&data, config);
 	data.mlx_ptr = mlx_init();
