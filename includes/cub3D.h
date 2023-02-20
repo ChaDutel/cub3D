@@ -132,6 +132,8 @@ int		parse_map(t_config *config);
 int		render(t_data*data);
 int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
+void	image_pixel_put(t_data *data, int width, int height, int color);
+void	draw_player_move(t_data *data, int px, int py);
 
 //***************//
 //      EXEC     //

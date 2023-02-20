@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/19 16:43:49 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/20 18:37:46 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 // TEMPORARY FUNCTIONS
-static void	image_pixel_put(t_data *data, int width, int height, int color);
+// static void	image_pixel_put(t_data *data, int width, int height, int color);
 
 static	void	draw_background(t_data *data)
 {
@@ -103,9 +103,34 @@ static	void	draw_player(t_data *data)
 	}
 }
 
+/* static	void	draw_player(t_data *data)
+{
+	float	end_x;
+	float	end_y;
+	float	x;
+	float	y;
+
+	end_x = data->player.x + (TEXTURE_SIZE / 16);
+	end_y = data->player.y + (TEXTURE_SIZE / 16);
+	if (data->win_ptr != NULL)
+	{
+		y = data->player.y - (TEXTURE_SIZE / 16);
+		while (y < end_y)
+		{
+			x = data->player.x - (TEXTURE_SIZE / 16);
+			while (x < end_x)
+			{
+				image_pixel_put(data, x, y, 0xFFFF00);
+				x += 1;
+			}
+			y += 1;
+		}
+	}
+} */
+
 // MAIN FUNCTIONS
 
-static void	image_pixel_put(t_data *data, int width, int height, int color)
+void	image_pixel_put(t_data *data, int width, int height, int color)
 {
 	int		i;
 	char	*pixel;
@@ -144,6 +169,55 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		mlx_loop_end(data->mlx_ptr);
+	else if (keysym == XK_w)
+	{
+		data->player.y -= (TEXTURE_SIZE / 16);
+		if (data->config->map[(int)data->player.y][(int)data->player.x] != '1')
+			draw_player(data);
+	}
+	else if (keysym == XK_a)
+	{
+		data->player.x -= (TEXTURE_SIZE / 16);
+		draw_player(data);
+	}
+	else if (keysym == XK_s)
+	{
+		data->player.y += (TEXTURE_SIZE / 16);
+		draw_player(data);
+	}
+	else if (keysym == XK_d)
+	{
+		data->player.x += (TEXTURE_SIZE / 16);
+		draw_player(data);
+	}
 	
 	return (0);
 }
+
+/* int	handle_keypress(int keysym, t_data *data)
+{
+	if (keysym == XK_Escape)
+		mlx_loop_end(data->mlx_ptr);
+	else if (keysym == XK_w)
+	{
+		data->player.y += 64;
+		draw_player(data, data->player.x, data->player.y);
+	}
+	else if (keysym == XK_a)
+	{
+		data->player.x -= 64;
+		draw_player_move(data, data->player.x, data->player.y);
+	}
+	else if (keysym == XK_s)
+	{
+		data->player.y += 64;
+		draw_player_move(data, data->player.x, data->player.y);
+	}
+	else if (keysym == XK_d)
+	{
+		data->player.x -= 64;
+		draw_player_move(data, data->player.x, data->player.y);
+	}
+	
+	return (0);
+} */

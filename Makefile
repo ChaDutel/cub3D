@@ -32,7 +32,8 @@ LST_PARSING		:=		parsing.c				\
 						parse_colors.c			\
 						parse_map.c
 
-LST_EVENTS		:=		events.c
+LST_EVENTS		:=		events.c				\
+						movement.c
 
 LST_EXEC		:=
 
