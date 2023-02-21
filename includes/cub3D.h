@@ -52,6 +52,12 @@
 
 // STRUCTURES
 
+typedef	struct s_point
+{
+	int	x;
+	int	y;
+} t_point;
+
 //config file
 typedef struct s_config
 {
@@ -159,7 +165,7 @@ void	draw_player_move(t_data *data, int px, int py);
 void	draw_minimap_background(t_data *data);
 void	draw_minimap(t_data *data);
 void	draw_minimap_player(t_data *data);
-//void	draw_ray(t_data *data, t_raymath * rc);
+void	draw_ray(t_data *data, t_raymath * rc);
 
 //***************//
 //      EXEC     //

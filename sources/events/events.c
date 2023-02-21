@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/21 01:28:09 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 02:23:26 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	render(t_data *data)
 {
 	draw_minimap_background(data);
 	draw_minimap(data);
-	draw_minimap_player(data);
 	raycaster(data);
+	draw_minimap_player(data);
 	mlx_put_image_to_window(data->mlx_ptr,
 		data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
