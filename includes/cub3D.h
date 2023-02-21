@@ -44,7 +44,8 @@
 //game
 # define PI 3.1415926535
 # define TEXTURE_SIZE 128
-# define FOV 70
+# define FOV 60
+# define PLAYER_HEIGHT (TEXTURE_SIZE / 2)
 
 //miscs
 # define MAX_AREA 100000
@@ -61,11 +62,12 @@ typedef struct s_config
 	size_t	y;
 } t_config;
 
+//image specs
 typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; /* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_img;
@@ -75,8 +77,22 @@ typedef	struct s_vector
 {
 	float	x;
 	float	y;
-	float	dir;
+	float	angle;
 } t_vector;
+
+//raycaster values
+typedef	struct s_raymath
+{
+	t_vector	ray;
+	int			nb_ray;
+	int			dof_counter;
+	float		aTan;
+	float		y_off;
+	float		x_off;
+	int			elem_x;
+	int			elem_y;
+	int			elem_pos;
+} t_raymath;
 
 //mlx struct
 typedef struct s_data
@@ -136,8 +152,21 @@ void	image_pixel_put(t_data *data, int width, int height, int color);
 void	draw_player_move(t_data *data, int px, int py);
 
 //***************//
+//    DISPLAY    //
+//***************//
+
+// MINIMAP_DRAW
+void	draw_minimap_background(t_data *data);
+void	draw_minimap(t_data *data);
+void	draw_minimap_player(t_data *data);
+//void	draw_ray(t_data *data, t_raymath * rc);
+
+//***************//
 //      EXEC     //
 //***************//
+
+// RAYCAST
+void	raycaster(t_data *data);
 
 //***************//
 //     MISCS     //
@@ -151,6 +180,7 @@ void	free_config(t_config *config);
 int		free_mlx(t_data *data);
 
 // LIBC_FT
+int 	roundint(int value);
 char    *char_join(char *str, char c);
 
 #endif

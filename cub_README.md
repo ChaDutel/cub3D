@@ -31,6 +31,7 @@
 
 
  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!PARSING: check si les paths ne sont pas des directory !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!AFFICHAGE:  check si ce qu'on veut afficher sort de l'ecran
 
  # exec
  - mouvements du personnage

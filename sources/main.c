@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/20 17:18:22 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 00:10:32 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@
 static	void	find_player_direction(t_data *data, t_config *config, int px, int py)
 {
 	if (config->map[py][px] == 'N')
-		data->player.dir = PI / 2;
+		data->player.angle = PI / 2;
 	if (config->map[py][px] == 'S')
-		data->player.dir = (3 * PI) / 2;
+		data->player.angle = (3 * PI) / 2;
 	if (config->map[py][px] == 'E')
-		data->player.dir = 2 * PI;
+		data->player.angle = 2 * PI;
 	if (config->map[py][px] == 'W')
-		data->player.dir = PI;
+		data->player.angle = PI;
 }
 
 static	void	init_mini_struct(t_data *data, t_config *config)

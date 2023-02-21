@@ -13,7 +13,7 @@ AR_LIBFT	=	$(D_LIBFT)libft.a
 LIBFT_LIB	=	-L$(D_LIBFT) -lft
 
 MLX_INCS	:=	-Imlx_linux
-MLX_LIB		:=	-Lmlx_linux -lmlx_Linux -lXext -lX11 -lm -lz
+MLX_LIB		:=	-Lmlx_linux -lmlx_Linux -lXext -lX11 -lm
 
 RM		:=	rm -rf
 
@@ -35,7 +35,9 @@ LST_PARSING		:=		parsing.c				\
 LST_EVENTS		:=		events.c				\
 						movement.c
 
-LST_EXEC		:=
+LST_DISPLAY		:=		minimap_draw.c
+
+LST_EXEC		:=		raycaster.c
 
 LST_MISCS		:=		error_handling.c	\
 						free_memory.c		\
@@ -58,6 +60,7 @@ D_OBJS		:=	.objs/
 
 D_PARSING	:=	parsing/
 D_EVENTS	:=	events/
+D_DISPLAY	:=	display/
 D_EXEC		:=	exec/
 D_MISCS		:=	miscs/
 
@@ -66,6 +69,7 @@ D_MISCS		:=	miscs/
 SRCS	=	$(addprefix $(D_SRCS),$(LST_MAIN))					\
 			$(addprefix $(D_SRCS)$(D_PARSING),$(LST_PARSING))	\
 			$(addprefix $(D_SRCS)$(D_EVENTS), $(LST_EVENTS))	\
+			$(addprefix $(D_SRCS)$(D_DISPLAY), $(LST_DISPLAY))	\
 			$(addprefix $(D_SRCS)$(D_EXEC),$(LST_EXEC))			\
 			$(addprefix $(D_SRCS)$(D_MISCS),$(LST_MISCS))
 
@@ -89,6 +93,7 @@ $(D_OBJS)	:
 			mkdir -p $(D_OBJS)		\
 			$(D_OBJS)$(D_PARSING)	\
 			$(D_OBJS)$(D_EVENTS)	\
+			$(D_OBJS)$(D_DISPLAY)	\
 			$(D_OBJS)$(D_EXEC)		\
 			$(D_OBJS)$(D_MISCS)
 
