@@ -35,7 +35,8 @@ LST_PARSING		:=		parsing.c				\
 LST_EVENTS		:=		events.c				\
 						movement.c
 
-LST_DISPLAY		:=		minimap_draw.c
+LST_DISPLAY		:=		minimap_draw.c			\
+						bresenham_line.c
 
 LST_EXEC		:=		raycaster.c
 

@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:46:24 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/21 02:37:28 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 05:15:46 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,52 +100,4 @@ void	draw_minimap_player(t_data *data)
 			y += 1;
 		}
 	}
-}
-
-void	draw_ray(t_data *data, t_raymath *rc)
-{
-	t_point	delta;
-	t_point	current;
-	int		pk;
-	int		i;
-
-	delta.x = (int)roundf(rc->ray.x - data->player.x);
-	delta.y = (int)roundf(rc->ray.y - data->player.y);
-	current.x = (int)data->player.x;
-	current.y = (int)data->player.y;
-	i = 0;
-	if (abs(delta.x) > abs(delta.y))
-	{
-		pk = (2 * abs(delta.y)) - abs(delta.x);
-		while (i < abs(delta.x))
-		{
-			current.x++;
-			if (pk < 0)
-				pk += (2 * abs(delta.y));
-			else
-			{
-				current.y++;
-				pk += (2 * abs(delta.y)) - (2 * abs(delta.x));
-			}
-			image_pixel_put(data, current.x, current.y, 0x0000FF);
-			i++;
-		}
-	}
-	else
-	{
-		pk = (2 * abs(delta.x)) - abs(delta.y);
-		while (i < abs(delta.y))
-		{
-			current.y++;
-			if (pk < 0)
-				pk += (2 * abs(delta.x));
-			else
-			{
-				current.x++;
-				pk += (2 * abs(delta.x)) - (2 * abs(delta.y));
-			}
-			image_pixel_put(data, current.x, current.y, 0x0000FF);
-			i++;
-		}
-	}	
 }

@@ -43,7 +43,7 @@
 
 //game
 # define PI 3.1415926535
-# define TEXTURE_SIZE 128
+# define TEXTURE_SIZE 64
 # define FOV 60
 # define PLAYER_HEIGHT (TEXTURE_SIZE / 2)
 
@@ -165,7 +165,9 @@ void	draw_player_move(t_data *data, int px, int py);
 void	draw_minimap_background(t_data *data);
 void	draw_minimap(t_data *data);
 void	draw_minimap_player(t_data *data);
-void	draw_ray(t_data *data, t_raymath * rc);
+
+// BRSENHAM_LINE
+void	bresenham_line(t_data *data, t_raymath * rc);
 
 //***************//
 //      EXEC     //

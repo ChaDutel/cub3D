@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/21 01:57:43 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 05:17:56 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	raycaster(t_data *data)
 				rc.dof_counter++;
 			}
 		}
-		draw_ray(data, &rc);
+		bresenham_line(data, &rc);
 		rc.nb_ray++;
 	}
 }
