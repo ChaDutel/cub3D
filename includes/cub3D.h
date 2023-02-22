@@ -85,8 +85,8 @@ typedef	struct s_vector
 	float	x;
 	float	y;
 	float	angle;
-	float	fx;
-	float	fy;
+	float	new_x;
+	float	new_y;
 } t_vector;
 
 //raycaster values
