@@ -33,6 +33,8 @@
  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!PARSING: check si les paths ne sont pas des directory !
  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!AFFICHAGE:  check si ce qu'on veut afficher sort de l'ecran
 
+- fction image_pixel_put segfault avec la methode du tuto "optionnelle", provisoirement remis celle de base
+
  # exec
  - mouvements du personnage
  - rotation du personnage

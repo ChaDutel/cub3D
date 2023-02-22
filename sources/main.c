@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/21 00:10:32 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 14:51:12 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	data->player.x = (float)px * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
 	data->player.y = (float)py * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
 	find_player_direction(data, config, px, py);
+	// data->player.fx = cos(data->player.angle);
+    // data->player.fy = sin(data->player.angle);
+	// data->player.fx = cos(deg_to_rad(data->player.angle));
+	// data->player.fy = -sin(deg_to_rad(data->player.angle)); 
 }
 
 static	int	run_mlx(t_config *config)

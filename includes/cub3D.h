@@ -85,6 +85,8 @@ typedef	struct s_vector
 	float	x;
 	float	y;
 	float	angle;
+	float	fx;
+	float	fy;
 } t_vector;
 
 //raycaster values
@@ -157,6 +159,7 @@ int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 void	image_pixel_put(t_data *data, int width, int height, int color);
 void	draw_player_move(t_data *data, int px, int py);
+float 	deg_to_rad(int angle);
 
 //***************//
 //    DISPLAY    //
