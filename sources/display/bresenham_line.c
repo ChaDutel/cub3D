@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 05:15:50 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/22 05:16:58 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 07:56:55 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static	void	big_slope_draw(t_point current, t_point ray, t_point delta
 			current.y--;
 		if (pk < 0)
 		{
-			image_pixel_put(data, current.y, current.x, 0xFF0000);
+			image_pixel_put(data, current.x, current.y, 0xFF0000);
 			pk = pk + 2 * delta.x;
 		}
 		else
@@ -69,7 +69,7 @@ static	void	big_slope_draw(t_point current, t_point ray, t_point delta
 				current.x++;
 			else
 				current.x--;
-			image_pixel_put(data, current.y, current.x, 0xFF0000);
+			image_pixel_put(data, current.x, current.y, 0xFF0000);
 			pk = pk + 2 * delta.x - 2 * delta.y;
 		}
 		i++;
