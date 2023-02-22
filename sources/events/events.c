@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:27:25 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 18:09:06 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	render(t_data *data)
 {
 	draw_minimap_background(data);
 	draw_minimap(data);
-	//raycaster(data);
+	raycaster(data);
 	draw_minimap_player(data);
 	mlx_put_image_to_window(data->mlx_ptr,
 		data->win_ptr, data->img.mlx_img, 0, 0);

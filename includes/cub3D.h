@@ -101,6 +101,8 @@ typedef	struct s_raymath
 	int			elem_x;
 	int			elem_y;
 	int			elem_pos;
+	float		distH;
+	float		distV;
 } t_raymath;
 
 //mlx struct

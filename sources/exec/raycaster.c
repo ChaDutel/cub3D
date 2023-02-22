@@ -6,15 +6,27 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/22 08:31:51 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 18:06:50 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+float	find_ray_len(t_vector player, t_vector ray)
+{
+	return (sqrt(ray.x - player.x) * (ray.x - player.x)
+		+ (ray.y - player.y) * (ray.y - player.y));
+}
+
 static	void	check_horizontal_line(t_data *data, t_raymath *rc)
 {
-	if (rc->ray.angle < PI)
+	if (rc->ray.angle == 0 || rc->ray.angle == PI)
+	{
+		rc->ray.x = data->player.x;
+		rc->ray.y = data->player.y;
+		rc->dof_counter = data->config->y;
+	}
+	else if (rc->ray.angle < PI)
 	{
 		rc->ray.y = roundint((int)data->player.y) - 0.0001;
 		rc->ray.x = (data->player.y - rc->ray.y) * rc->aTan + data->player.x;
@@ -28,46 +40,135 @@ static	void	check_horizontal_line(t_data *data, t_raymath *rc)
 		rc->y_off = TEXTURE_SIZE;
 		rc->x_off = -1 * rc->y_off * rc->aTan;
 	}
-	else
+}
+
+static	void	check_vertical_line(t_data *data, t_raymath *rc)
+{
+	if (rc->ray.angle == 0 || rc->ray.angle == PI)
 	{
 		rc->ray.x = data->player.x;
 		rc->ray.y = data->player.y;
 		rc->dof_counter = data->config->y;
 	}
+	else if (rc->ray.angle > (PI / 2) && rc->ray.angle < ((3 * PI) / 2))
+	{
+		rc->ray.x = roundint((int)data->player.x) - 0.0001;
+		rc->ray.y = (data->player.x - rc->ray.x) * rc->aTan + data->player.y;
+		rc->x_off = -TEXTURE_SIZE;
+		rc->y_off = -rc->x_off * rc->aTan;
+	}
+	else if (rc->ray.angle < (PI / 2) || rc->ray.angle > ((3 * PI) / 2) )
+	{
+		rc->ray.x = roundint((int)data->player.x) + TEXTURE_SIZE;
+		rc->ray.y = (data->player.x - rc->ray.x) * rc->aTan + data->player.y;
+		rc->x_off = TEXTURE_SIZE;
+		rc->y_off = -rc->x_off * rc->aTan;
+	}
 }
 
-// static	void	check_vertical_line()
-// {
-	
-// }
+static	int	check_ray_limits(t_data *data, t_raymath *rc)
+{
+	if (rc->elem_x < 0)
+		rc->elem_x = 1;
+	else if (rc->elem_x > (int)data->config->x)
+		rc->elem_x = data->config->x - 2;
+	if (rc->elem_y < 0)
+		rc->elem_y = 1;
+	else if (rc->elem_y > (int)data->config->y)
+		rc->elem_y = data->config->y - 2;
+	if (rc->elem_x == 1 || rc->elem_x == (int)data->config->x
+		|| rc->elem_y == 1 || rc->elem_y == (int)data->config->y)
+		return (-1);
+	else
+		return (0);
+}
+
+static	void	horizontal_cast(t_data *data, t_raymath *rc, t_point *h)
+{
+	rc->dof_counter = 0;
+	rc->aTan = -1.0 / tan(rc->ray.angle);
+	check_horizontal_line(data, rc);
+	while (rc->dof_counter < (int)data->config->y && rc->dof_counter < MAX_DOF)
+	{
+		rc->elem_x = (int)rc->ray.x / TEXTURE_SIZE;
+		rc->elem_y = (int)rc->ray.y / TEXTURE_SIZE;
+		if (check_ray_limits(data, rc) == -1)
+			break ;
+		rc->elem_pos = rc->elem_y * data->config->x + rc->elem_x;
+		if (rc->elem_pos > 0 && rc->elem_pos < (int)data->config->x * (int)data->config->y
+			&& data->config->map[rc->elem_y][rc->elem_x] == '1')
+			{
+				h->x = rc->ray.x;
+				h->y = rc->ray.y;
+				rc->distH = find_ray_len(data->player, rc->ray);
+				rc->dof_counter = MAX_DOF;
+			}
+		else
+		{
+			rc->ray.x += rc->x_off;
+			rc->ray.y += rc->y_off;
+			rc->dof_counter++;
+		}
+	}
+}
+
+static	void	vertical_cast(t_data *data, t_raymath *rc, t_point *v)
+{
+	rc->dof_counter = 0;
+	rc->aTan = -tan(rc->ray.angle);
+	check_vertical_line(data, rc);
+	while (rc->dof_counter < (int)data->config->y && rc->dof_counter < MAX_DOF)
+	{
+		rc->elem_x = (int)rc->ray.x / TEXTURE_SIZE;
+		rc->elem_y = (int)rc->ray.y / TEXTURE_SIZE;
+		if (check_ray_limits(data, rc) == -1)
+			break ;
+		rc->elem_pos = rc->elem_y * data->config->x + rc->elem_x;
+		if (rc->elem_pos > 0 && rc->elem_pos < (int)data->config->x * (int)data->config->y
+			&& data->config->map[rc->elem_y][rc->elem_x] == '1')
+			{
+				v->x = rc->ray.x;
+				v->y = rc->ray.y;
+				rc->distV = find_ray_len(data->player, rc->ray);
+				rc->dof_counter = MAX_DOF;
+			}
+		else
+		{
+			rc->ray.x += rc->x_off;
+			rc->ray.y += rc->y_off;
+			rc->dof_counter++;
+		}
+	}
+}
 
 void	raycaster(t_data *data)
 {
 	t_raymath	rc;
+	t_point		h;
+	t_point		v;
 	
+	rc.distH = 1000000;
+	h.x = data->player.x;
+	h.y = data->player.y;
+	rc.distV = 1000000;
+	v.x = data->player.x;
+	v.y = data->player.y;
 	rc.ray.angle = data->player.angle;
 	rc.nb_ray = 0;
-	while (rc.nb_ray < 1) //USE FOV INSTEAD OF ONE for example
+	while (rc.nb_ray < 1) //USE FOV and screen width INSTEAD 
 	{
-		rc.dof_counter = 0;
-		rc.aTan = -1.0 / tan(rc.ray.angle);
-		check_horizontal_line(data, &rc);
-		while (rc.dof_counter < (int)data->config->y && rc.dof_counter < MAX_DOF)
+		horizontal_cast(data, &rc, &h);
+		vertical_cast(data, &rc, &v);
+		if (rc.distH < rc.distV)
 		{
-			rc.elem_x = (int)rc.ray.x / TEXTURE_SIZE;
-			rc.elem_y = (int)rc.ray.y / TEXTURE_SIZE;
-			rc.elem_pos = rc.elem_y * data->config->x + rc.elem_x;
-			if (rc.elem_pos < (int)data->config->x * (int)data->config->y
-				&& data->config->map[rc.elem_y][rc.elem_x] == '1')
-					rc.dof_counter = MAX_DOF;
-			else
-			{
-				rc.ray.x += rc.x_off;
-				rc.ray.y += rc.y_off;
-				rc.dof_counter++;
-			}
+			rc.ray.x = h.x;
+			rc.ray.y = h.y;
 		}
-		// check_vertical_line();
+		else
+		{
+			rc.ray.x = v.x;
+			rc.ray.y = v.y;
+		}
 		bresenham_line(data, &rc);
 		rc.nb_ray++;
 	}
