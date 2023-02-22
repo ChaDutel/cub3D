@@ -29,8 +29,8 @@
 // MACRO
 
 //window
-# define WINDOW_WIDTH 2048
-# define WINDOW_HEIGHT 1024
+# define WINDOW_WIDTH 1024
+# define WINDOW_HEIGHT 512
 
 //coordinates
 # define NO 0
@@ -44,6 +44,7 @@
 //game
 # define PI 3.1415926535
 # define TEXTURE_SIZE 64
+# define MAX_DOF 100
 # define FOV 60
 # define PLAYER_HEIGHT (TEXTURE_SIZE / 2)
 

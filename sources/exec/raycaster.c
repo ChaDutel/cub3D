@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/22 07:57:43 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 08:31:51 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@ static	void	check_horizontal_line(t_data *data, t_raymath *rc)
 	
 // }
 
-// void	test_b(t_data *data)
-// {
-// 	data->player.x = TEXTURE_SIZE;
-// 	data->player.y = TEXTURE_SIZE;
-
-// 	t_raymath rc;
-
-// 	rc.ray.x = TEXTURE_SIZE ;
-// 	rc.ray.y = TEXTURE_SIZE * 2;
-// 	bresenham_line(data, &rc);
-// }
-
 void	raycaster(t_data *data)
 {
 	t_raymath	rc;
@@ -64,14 +52,14 @@ void	raycaster(t_data *data)
 		rc.dof_counter = 0;
 		rc.aTan = -1.0 / tan(rc.ray.angle);
 		check_horizontal_line(data, &rc);
-		while (rc.dof_counter < (int)data->config->y && rc.dof_counter < 100)
+		while (rc.dof_counter < (int)data->config->y && rc.dof_counter < MAX_DOF)
 		{
 			rc.elem_x = (int)rc.ray.x / TEXTURE_SIZE;
 			rc.elem_y = (int)rc.ray.y / TEXTURE_SIZE;
 			rc.elem_pos = rc.elem_y * data->config->x + rc.elem_x;
 			if (rc.elem_pos < (int)data->config->x * (int)data->config->y
-				&& data->config->map[rc.elem_y][rc.elem_y] == '1')
-				rc.dof_counter = 100;
+				&& data->config->map[rc.elem_y][rc.elem_x] == '1')
+					rc.dof_counter = MAX_DOF;
 			else
 			{
 				rc.ray.x += rc.x_off;
@@ -80,7 +68,6 @@ void	raycaster(t_data *data)
 			}
 		}
 		// check_vertical_line();
-		// test_b(data);
 		bresenham_line(data, &rc);
 		rc.nb_ray++;
 	}
