@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:18:41 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 16:54:10 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,96 @@ void	image_pixel_put(t_data *data, int width, int height, int color)
 	// }
 }
 
+/* void draw_big_circle(t_data *data)
+{
+    int x;
+	int	y;
+    int length = 50;
+    float angle = 0.0;
+    float angle_stepsize = 0.1;
+
+    // go through all angles from 0 to 2 * PI radians
+    while (angle < 2 * PI)
+    {
+        // calculate x, y from a vector with known length and angle
+        x = length * cos(angle);
+        y = length * sin(angle);
+
+        // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
+        image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
+        angle += angle_stepsize;
+    }
+} */
+
+void draw_big_circle(t_data *data)
+{
+    int x;
+	int	y;
+    int length = 50;
+    float angle = 0.0;
+    float angle_stepsize = 0.1;
+
+    // go through all angles from 0 to 2 * PI radians
+	x = data->player.x;
+	y = data->player.y;
+    while (angle < 2 * PI)
+    {
+        // calculate x, y from a vector with known length and angle
+        x = length * cos(angle) + data->player.x;
+        y = length * sin(angle) + data->player.y;
+
+        // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
+        // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
+        image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xFFFF00);
+        angle += angle_stepsize;
+    }
+}
+
+void draw_fov_circle(t_data *data)
+{
+    int x;
+	int	y;
+    int length = 60;
+    float angle = data->player.angle;
+    float angle_stepsize = 0.1;
+
+    // go through all angles from 0 to 2 * PI radians
+	x = data->player.x;
+	y = data->player.y;
+    while (angle < 2 * PI)
+    {
+        // calculate x, y from a vector with known length and angle
+        x = length * cos(angle) + data->player.x;
+        y = length * sin(angle) + data->player.y;
+
+        // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
+        // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
+        image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
+        angle += angle_stepsize;
+    }
+}
+
+/* void draw_circle(t_data *data)
+{
+    int x;
+	int	y;
+    int length = 50;
+    float angle = data->player.angle;
+    // float angle = 0.0;
+    float angle_stepsize = 0.1;
+
+    // go through all angles from 0 to 2 * PI radians
+    while (angle < PI / 3)
+    {
+        // calculate x, y from a vector with known length and angle
+        x = length * cos(angle);
+        y = length * sin(angle);
+
+        image_pixel_put(data, x - (TEXTURE_SIZE / 16), y - (TEXTURE_SIZE / 16), 0xFFFF00);
+        // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
+        angle += angle_stepsize;
+    }
+} */
 
 int	render(t_data *data)
 {
@@ -40,6 +130,8 @@ int	render(t_data *data)
 	draw_minimap(data);
 	raycaster(data);
 	draw_minimap_player(data);
+	draw_fov_circle(data);
+	draw_big_circle(data);
 	mlx_put_image_to_window(data->mlx_ptr,
 		data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
@@ -157,14 +249,14 @@ int rotation_key(int keysym, t_data *data)
     if (keysym == XK_Left)
     {
         data->player.angle -= 4 * PI / 180; //10.0f;
-		// data->player.angle = FixAng(data->player.angle);
+		data->player.angle = FixAng(data->player.angle);
 		//new_direction_rotation(data);
         draw_minimap_player(data);
     }
     else if (keysym == XK_Right)
 	{
 		data->player.angle += 4 * PI / 180; //10.0f;
-		// data->player.angle = FixAng(data->player.angle);
+		data->player.angle = FixAng(data->player.angle);
 		//new_direction_rotation(data);
         draw_minimap_player(data);
 	}
