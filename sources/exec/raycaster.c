@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/22 18:06:50 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 13:25:12 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 float	find_ray_len(t_vector player, t_vector ray)
 {
-	return (sqrt(ray.x - player.x) * (ray.x - player.x)
-		+ (ray.y - player.y) * (ray.y - player.y));
+	return (sqrt((ray.x - player.x) * (ray.x - player.x)
+		+ (ray.y - player.y) * (ray.y - player.y)));
 }
 
 static	void	check_horizontal_line(t_data *data, t_raymath *rc)
