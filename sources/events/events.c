@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/23 16:54:10 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 17:08:25 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void draw_fov_circle(t_data *data)
 {
     int x;
 	int	y;
+	int	i;
     int length = 60;
     float angle = data->player.angle;
     float angle_stepsize = 0.1;
@@ -91,13 +92,20 @@ void draw_fov_circle(t_data *data)
 	y = data->player.y;
     while (angle < 2 * PI)
     {
+		i = 0;
         // calculate x, y from a vector with known length and angle
-        x = length * cos(angle) + data->player.x;
-        y = length * sin(angle) + data->player.y;
-
+		while (i != length)
+		{
+			x = i * cos(angle) + data->player.x;
+			y = i * sin(angle) + data->player.y;
+        	image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
+			i++;
+		}
+		// x = length * cos(angle) + data->player.x;
+		// y = length * sin(angle) + data->player.y;
+		// image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
         // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
         // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
-        image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
         angle += angle_stepsize;
     }
 }
