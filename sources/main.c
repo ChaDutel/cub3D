@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/22 14:51:12 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 17:46:00 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,22 @@
 // }
 static	void	find_player_direction(t_data *data, t_config *config, int px, int py)
 {
-	if (config->map[py][px] == 'N')
+    if (config->map[py][px] == 'N')
+        data->player.angle = 90;
+    if (config->map[py][px] == 'S')
+        data->player.angle = 270;
+    if (config->map[py][px] == 'E')
+        data->player.angle = 0;
+    if (config->map[py][px] == 'W')
+        data->player.angle = 180;
+	/* if (config->map[py][px] == 'N')
 		data->player.angle = PI / 2;
 	if (config->map[py][px] == 'S')
 		data->player.angle = (3 * PI) / 2;
 	if (config->map[py][px] == 'E')
 		data->player.angle = 2 * PI;
 	if (config->map[py][px] == 'W')
-		data->player.angle = PI;
+		data->player.angle = PI; */
 }
 
 static	void	init_mini_struct(t_data *data, t_config *config)

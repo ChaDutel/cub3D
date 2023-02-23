@@ -161,7 +161,7 @@ int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 void	image_pixel_put(t_data *data, int width, int height, int color);
 void	draw_player_move(t_data *data, int px, int py);
-float 	deg_to_rad(int angle);
+// float 	deg_to_rad(int angle);
 
 //***************//
 //    DISPLAY    //
@@ -181,6 +181,7 @@ void	bresenham_line(t_data *data, t_raymath * rc);
 
 // RAYCAST
 void	raycaster(t_data *data);
+float 	degToRad(int a);
 
 //***************//
 //     MISCS     //
