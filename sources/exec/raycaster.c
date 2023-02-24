@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/23 17:47:05 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 09:43:38 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ static	void	vertical_raycast(t_data *data, t_raymath *rc, t_point *v)
 	{
 		rc->elem_x = (int)(rc->ray.x) >> 6;
 		rc->elem_y = (int)(rc->ray.y) >> 6;
-		if (rc->elem_x > (int)data->config->x - 1 || rc->elem_y > (int)data->config->y -1)
-			break ;
+		// if (rc->elem_x > (int)data->config->x - 1 || rc->elem_y > (int)data->config->y -1)
+		// {
+		// 	rc->ray.x = data->player.x;
+		// 	rc->ray.y = data->player.y;
+		// 	break ;
+		// }
 		rc->elem_pos = rc->elem_y * data->config->x + rc->elem_x;
-		if (rc->elem_pos > 0 && rc->elem_pos < (int)data->config->x * (int)data->config->y && data->config->map[rc->elem_y][rc->elem_x] == '1')
+		if ((rc->elem_x <= (int)data->config->x - 1 && rc->elem_y <= (int)data->config->y -1 && rc->elem_x >= 0 && rc->elem_y >= 0) && data->config->map[rc->elem_y][rc->elem_x] == '1')
 		{
 			rc->dof_counter = 8;
 			rc->distV = cos(degToRad(rc->ray.angle)) * (rc->ray.x - data->player.x) - sin(degToRad(rc->ray.angle)) * (rc->ray.y - data->player.y);
@@ -105,10 +109,14 @@ static	void	horizontal_raycast(t_data *data, t_raymath *rc, t_point *h)
 	{
 		rc->elem_x = (int)(rc->ray.x) >> 6;
 		rc->elem_y = (int)(rc->ray.y) >> 6;
-		if (rc->elem_x > (int)data->config->x - 1 || rc->elem_y > (int)data->config->y -1)
-			break ;
+		// if (rc->elem_x > (int)data->config->x - 1 || rc->elem_y > (int)data->config->y -1)
+		// {
+		// 	rc->ray.x = data->player.x;
+		// 	rc->ray.y = data->player.y;
+		// 	break ;
+		// }
 		rc->elem_pos = rc->elem_y * data->config->x + rc->elem_x;
-		if(rc->elem_pos > 0 && rc->elem_pos < (int)data->config->x * (int)data->config->y && data->config->map[rc->elem_y][rc->elem_x] == '1')
+		if((rc->elem_x <= (int)data->config->x - 1 && rc->elem_y <= (int)data->config->y -1 && rc->elem_x >= 0 && rc->elem_y >= 0) && data->config->map[rc->elem_y][rc->elem_x] == '1')
 		{
 			rc->dof_counter = 8;
 			rc->distH = cos(degToRad(rc->ray.angle)) * (rc->ray.x - data->player.x) - sin(degToRad(rc->ray.angle)) * (rc->ray.y - data->player.y);
@@ -133,8 +141,8 @@ void	raycaster(t_data *data)
 	rc.distH = 999999;
 	rc.distV = 999999;
 	rc.nb_ray = 0;
-	rc.ray.angle = FixAng(data->player.angle + 30);
-	while (rc.nb_ray < 60)
+	rc.ray.angle = FixAng(data->player.angle);
+	while (rc.nb_ray < 1)
 	{
 		vertical_raycast(data, &rc, &v);
 		horizontal_raycast(data, &rc, &h);
