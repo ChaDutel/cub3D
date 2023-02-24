@@ -46,6 +46,7 @@
 # define TEXTURE_SIZE 128
 # define MAX_DOF 100
 # define FOV 60
+# define ANGLE_INCREMENT ((float)FOV / (float)WINDOW_WIDTH)
 # define PLAYER_HEIGHT (TEXTURE_SIZE / 2)
 
 //miscs
@@ -187,8 +188,8 @@ void	bresenham_line(t_data *data, t_raymath * rc);
 
 // RAYCAST
 void	raycaster(t_data *data);
-float 	degToRad(int a);
-int 	FixAng(int a);
+float 	degToRad(float a);
+float 	FixAng(float a);
 
 //***************//
 //     MISCS     //
