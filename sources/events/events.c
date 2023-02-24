@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/24 10:48:04 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 17:01:39 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,25 @@ void draw_fov_circle(t_data *data)
 	int	y;
 	int	i;
     int length = 60;
-    float angle = 0;
-    // float angle = data->player.angle;
-    float angle_stepsize = 2 * PI / 180; //0.1;
+    // float angle = 0;
+    float angle = data->player.angle;
+	float	angle_left = angle - 30;
+	angle_left = FixAng(angle_left);
+	float	angle_right = angle + 30;
+	angle_right = FixAng(angle_right);
+    // float angle_stepsize = 2; //2 * PI / 180; //0.1;
 
     // go through all angles from 0 to 2 * PI radians
 	// x = data->player.x;
 	// y = data->player.y;
-    while (angle < 2 * PI)
+    while (angle != angle_right)
     {
 		i = 0;
         // calculate x, y from a vector with known length and angle
-		while (i != length)
+		while (i < length)
 		{
-			x = i * cos(angle) + data->player.x;
-			y = i * sin(angle) + data->player.y;
+			x = i * cos(degToRad(angle)) + data->player.x;
+			y = i * sin(degToRad(angle)) + data->player.y;
         	image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xFFFF00);
 			i++;
 		}
@@ -107,8 +111,64 @@ void draw_fov_circle(t_data *data)
 		// image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
         // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
         // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
-        angle += angle_stepsize;
+        // angle += angle_stepsize;
+		angle += 2;
+		angle = FixAng(angle);
     }
+	angle = data->player.angle;
+	while (angle > angle_right)
+    {
+		i = 0;
+        // calculate x, y from a vector with known length and angle
+		while (i != length)
+		{
+			x = i * cos(degToRad(angle)) + data->player.x;
+			y = i * sin(degToRad(angle)) + data->player.y;
+        	image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xFFFF00);
+			i++;
+		}
+		// x = length * cos(angle) + data->player.x;
+		// y = length * sin(angle) + data->player.y;
+		// image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
+        // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
+        // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
+        // angle += angle_stepsize;
+		angle -= 2;
+		angle = FixAng(angle);
+    }
+}
+
+// void draw_fov_circle(t_data *data)
+// {
+//     int x;
+// 	int	y;
+// 	int	i;
+//     int length = 60;
+//     float angle = 0;
+//     // float angle = data->player.angle;
+//     float angle_stepsize = 2 * PI / 180; //0.1;
+
+//     // go through all angles from 0 to 2 * PI radians
+// 	// x = data->player.x;
+// 	// y = data->player.y;
+//     while (angle < 2 * PI)
+//     {
+// 		i = 0;
+//         // calculate x, y from a vector with known length and angle
+// 		while (i != length)
+// 		{
+// 			x = i * cos(angle) + data->player.x;
+// 			y = i * sin(angle) + data->player.y;
+//         	image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xFFFF00);
+// 			i++;
+// 		}
+// 		// x = length * cos(angle) + data->player.x;
+// 		// y = length * sin(angle) + data->player.y;
+// 		// image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF0F000);
+//         // putpixel (screen, x + SCREEN_W / 2, y + SCREEN_H / 2, makecol (255, 255, 255));
+//         // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
+//         angle += angle_stepsize;
+//     }
 /* 	angle = 0;
 	 while (angle < 2 * PI / 3)
     {
@@ -128,7 +188,7 @@ void draw_fov_circle(t_data *data)
         // image_pixel_put(data, x + WINDOW_WIDTH / 2, y + WINDOW_HEIGHT / 2, 0xFFFF00);
         angle += angle_stepsize;
     } */
-}
+// }
 
 /* void draw_fov_circle(t_data *data)
 {
@@ -168,8 +228,8 @@ int	render(t_data *data)
 	draw_minimap(data);
 	raycaster(data);
 	draw_minimap_player(data);
-	draw_fov_circle(data);
-	draw_big_circle(data);
+	// draw_fov_circle(data);
+	// draw_big_circle(data);
 	mlx_put_image_to_window(data->mlx_ptr,
 		data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
@@ -181,14 +241,46 @@ int	close_window(t_data *data)
 	return (0);
 }
 
-static	int FixAng(int a)
+int    handle_keypress(int keysym, t_data *data)
+{
+    if (keysym == XK_Escape)
+        mlx_loop_end(data->mlx_ptr);
+    else if (keysym == XK_w)
+    	new_direction_up(data);
+    else if (keysym == XK_a)
+    	new_direction_left(data);
+	else if (keysym == XK_s)
+    	new_direction_down(data);
+    else if (keysym == XK_d)
+    	new_direction_right(data);
+    else if (keysym == XK_Left)
+    {
+        data->player.angle += 4; // 4 * PI / 180; //10.0f;
+		data->player.angle = FixAng(data->player.angle);
+    }
+    else if (keysym == XK_Right)
+	{
+		data->player.angle -= 4; // 4 * PI / 180; //10.0f;
+		data->player.angle = FixAng(data->player.angle);
+	}
+	draw_minimap_player(data);
+	// printf("d\n", data->player);
+    return (0);
+}
+
+/* if(key=='a'){ pa+=5; pa=FixAng(pa); pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa));} 	
+ if(key=='d'){ pa-=5; pa=FixAng(pa); pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa));} 
+ if(key=='w'){ px+=pdx*5; py+=pdy*5;}
+ if(key=='s'){ px-=pdx*5; py-=pdy*5;} */
+
+/* static	int FixAng(int a)
 {
 	if(a > 359)
 		a -= 360;
 	if(a < 0)
 		a += 360;
 	return (a);
-}
+} */
 
 /* float deg_to_rad(int angle)
 {
@@ -204,7 +296,7 @@ float FixAng(float angle)
 	return (angle);
 } */
 
-void	new_direction_right(t_data *data)
+/* void	new_direction_right(t_data *data)
 {
 	float	new_x;
 	float	new_y;
@@ -267,7 +359,7 @@ void	new_direction_up(t_data *data)
 		data->player.x = new_x;
 		data->player.y = new_y;
 	}
-}
+} */
 
 /* void	new_direction_rotation(t_data *data)
 {
@@ -291,24 +383,6 @@ void	new_direction_up(t_data *data)
 	// new_vector = (x * cos (angle) - y * sin(angle), x * sine (angle) + y * cos(angle));
 } */
 
-int rotation_key(int keysym, t_data *data)
-{
-    if (keysym == XK_Left)
-    {
-        data->player.angle -= 10.0f ; //4 * PI / 180; //10.0f;
-		data->player.angle = FixAng(data->player.angle);
-		//new_direction_rotation(data);
-        draw_minimap_player(data);
-    }
-    else if (keysym == XK_Right)
-	{
-		data->player.angle += 10.0f; //4 * PI / 180; //10.0f;
-		data->player.angle = FixAng(data->player.angle);
-		//new_direction_rotation(data);
-        draw_minimap_player(data);
-	}
-    return (0);
-}
 
 /* float FixAng(float angle)
 {
@@ -425,6 +499,25 @@ int rotation_key(int keysym, t_data *data)
     return (0);
 } */
 
+/*int rotation_key(int keysym, t_data *data)
+{
+    if (keysym == XK_Left)
+    {
+        data->player.angle -= 10.0f ; //4 * PI / 180; //10.0f;
+		data->player.angle = FixAng(data->player.angle);
+		//new_direction_rotation(data);
+        // draw_minimap_player(data);
+    }
+    else if (keysym == XK_Right)
+	{
+		data->player.angle += 10.0f; //4 * PI / 180; //10.0f;
+		data->player.angle = FixAng(data->player.angle);
+		//new_direction_rotation(data);
+        // draw_minimap_player(data);
+	}
+    return (0);
+}
+
 int    handle_keypress(int keysym, t_data *data)
 {
     if (keysym == XK_Escape)
@@ -432,26 +525,27 @@ int    handle_keypress(int keysym, t_data *data)
     else if (keysym == XK_w)
     {
 		new_direction_up(data);
-        draw_minimap_player(data);
+        // draw_minimap_player(data);
     }
     else if (keysym == XK_a)
     {
         new_direction_left(data);
-        draw_minimap_player(data);
+        // draw_minimap_player(data);
     }
     else if (keysym == XK_s)
     {
 		new_direction_down(data);
-        draw_minimap_player(data);
+        // draw_minimap_player(data);
     }
     else if (keysym == XK_d)
     {
         new_direction_right(data);
-        draw_minimap_player(data);
+        // draw_minimap_player(data);
     }
     rotation_key(keysym, data);
+	draw_minimap_player(data);
     return (0);
-}
+}*/
 
 /* int rotation_key(int keysym, t_data *data)
 {

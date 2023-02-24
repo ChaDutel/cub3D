@@ -163,6 +163,12 @@ void	image_pixel_put(t_data *data, int width, int height, int color);
 void	draw_player_move(t_data *data, int px, int py);
 // float 	deg_to_rad(int angle);
 
+// MOVEMENT
+void	new_direction_up(t_data *data);
+void	new_direction_left(t_data *data);
+void	new_direction_right(t_data *data);
+void	new_direction_down(t_data *data);
+
 //***************//
 //    DISPLAY    //
 //***************//
@@ -182,6 +188,7 @@ void	bresenham_line(t_data *data, t_raymath * rc);
 // RAYCAST
 void	raycaster(t_data *data);
 float 	degToRad(int a);
+int 	FixAng(int a);
 
 //***************//
 //     MISCS     //
