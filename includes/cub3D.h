@@ -29,8 +29,8 @@
 // MACRO
 
 //window
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 512
+# define WINDOW_WIDTH 2048
+# define WINDOW_HEIGHT 1024
 
 //coordinates
 # define NO 0
@@ -43,7 +43,7 @@
 
 //game
 # define PI 3.1415926535
-# define TEXTURE_SIZE 64
+# define TEXTURE_SIZE 128
 # define MAX_DOF 100
 # define FOV 60
 # define PLAYER_HEIGHT (TEXTURE_SIZE / 2)
@@ -195,7 +195,7 @@ void	free_config(t_config *config);
 int		free_mlx(t_data *data);
 
 // LIBC_FT
-int 	roundint(int value);
+float 	roundint(int value);
 char    *char_join(char *str, char c);
 
 #endif
