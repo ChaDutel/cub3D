@@ -54,7 +54,6 @@
 # define MAX_DOF 100
 # define FOV 60
 # define ANGLE_INCREMENT ((float)FOV / (float)WINDOW_WIDTH)
-# define PLAYER_HEIGHT (WINDOW_HEIGHT / 2)
 
 //miscs
 # define MAX_AREA 100000
@@ -114,6 +113,8 @@ typedef	struct s_raymath
 {
 	t_vector	ray;
 	int			nb_ray;
+	float		angle_increment;
+	int			player_height;
 } t_raymath;
 
 //mlx struct

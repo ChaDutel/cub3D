@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/25 18:09:08 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 22:42:58 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static	void	draw_projection(t_data *data, t_raymath *rc)
 			+ pow(data->player.y / TEXTURE_SIZE - rc->ray.y, 2));
 	distance = distance * cos(deg_to_rad(fix_ang(rc->ray.angle
 					- data->player.angle)));
-	wall_height = floor(PLAYER_HEIGHT / distance);
-	draw_ceilling(data, rc->nb_ray, 0, PLAYER_HEIGHT - wall_height);
-	draw_floor(data, rc->nb_ray, PLAYER_HEIGHT + wall_height, WINDOW_HEIGHT);
-	draw_wall(data, rc->nb_ray, PLAYER_HEIGHT - wall_height,
-		PLAYER_HEIGHT + wall_height);
+	wall_height = floor(rc->player_height / distance);
+	draw_ceilling(data, rc->nb_ray, 0, rc->player_height - wall_height);
+	draw_floor(data, rc->nb_ray, rc->player_height + wall_height, WINDOW_HEIGHT);
+	draw_wall(data, rc->nb_ray, rc->player_height - wall_height,
+		rc->player_height + wall_height);
 }
 
 void	raycaster(t_data *data)
@@ -78,7 +78,9 @@ void	raycaster(t_data *data)
 	char		map_elem;
 
 	rc.nb_ray = 0;
+	rc.player_height = WINDOW_HEIGHT / 2;
 	rc.ray.angle = fix_ang(data->player.angle + ((float)FOV / 2.0));
+	rc.angle_increment = (float)FOV / (float)WINDOW_WIDTH;
 	while (rc.nb_ray < WINDOW_WIDTH)
 	{
 		rc.ray.x = data->player.x / (float)TEXTURE_SIZE;
@@ -93,7 +95,7 @@ void	raycaster(t_data *data)
 			map_elem = data->config->map[(int)rc.ray.y][(int)rc.ray.x];
 		}
 		draw_projection(data, &rc);
-		rc.ray.angle = fix_ang(rc.ray.angle - ANGLE_INCREMENT);
+		rc.ray.angle = fix_ang(rc.ray.angle - rc.angle_increment);
 		rc.nb_ray++;
 	}
 }

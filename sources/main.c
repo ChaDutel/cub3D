@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/25 18:25:11 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 22:28:40 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ static	int	load_images(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, \
 		&data->img.line_len, &data->img.endian);
 		
-	data->tex_no.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,"./textures/nord.xpm" , data->tex_no.width, data->tex_no.height);
+	data->tex_no.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/nord.xpm", data->tex_no.width, data->tex_no.height);
 	if (!data->tex_no.mlx_img)
 		return (-1);
 	data->tex_no.addr = mlx_get_data_addr(data->tex_no.mlx_img, &data->tex_no.bpp, \
 		&data->tex_no.line_len, &data->tex_no.endian);
 		
-	data->tex_so.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,"./textures/sud.xpm" , data->tex_so.width, data->tex_so.height);
-	if (!data->tex_so.mlx_img)
-		return (-1);
-	data->tex_so.addr = mlx_get_data_addr(data->tex_so.mlx_img, &data->tex_so.bpp, \
-		&data->tex_so.line_len, &data->tex_so.endian);
+	// data->tex_so.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/sud.xpm", data->tex_so.width, data->tex_so.height);
+	// if (!data->tex_so.mlx_img)
+	// 	return (-1);
+	// data->tex_so.addr = mlx_get_data_addr(data->tex_so.mlx_img, &data->tex_so.bpp, 
+	// 	&data->tex_so.line_len, &data->tex_so.endian);
 		
-	data->tex_ea.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,"./textures/est.xpm" , data->tex_ea.width, data->tex_ea.height);
-	if (!data->tex_ea.mlx_img)
-		return (-1);
-	data->tex_ea.addr = mlx_get_data_addr(data->tex_ea.mlx_img, &data->tex_ea.bpp, \
-		&data->tex_ea.line_len, &data->tex_ea.endian);
+	// data->tex_ea.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/est.xpm", data->tex_ea.width, data->tex_ea.height);
+	// if (!data->tex_ea.mlx_img)
+	// 	return (-1);
+	// data->tex_ea.addr = mlx_get_data_addr(data->tex_ea.mlx_img, &data->tex_ea.bpp, 
+	// 	&data->tex_ea.line_len, &data->tex_ea.endian);
 		
-	data->tex_we.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/ouest.xpm", data->tex_we.width, data->tex_we.height);
-	if (!data->tex_we.mlx_img)
-		return (-1);
-	data->tex_we.addr = mlx_get_data_addr(data->tex_we.mlx_img, &data->tex_we.bpp, \
-		&data->tex_we.line_len, &data->tex_we.endian);
+	// data->tex_we.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/ouest.xpm", data->tex_we.width, data->tex_we.height);
+	// if (!data->tex_we.mlx_img)
+	// 	return (-1);
+	// data->tex_we.addr = mlx_get_data_addr(data->tex_we.mlx_img, &data->tex_we.bpp, 
+	// 	&data->tex_we.line_len, &data->tex_we.endian);
 	return (0);
 }
 
