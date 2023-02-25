@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:35:41 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/24 19:37:52 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 04:41:37 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	new_direction_right(t_data *data)
 	// new_y = data->player.x * sin(data->player.angle) + data->player.y * cos(data->player.angle);
 	// new_x = sin(degToRad_float(data->player.angle)) * 10.0f + data->player.x;
 	// new_y = cos(degToRad_float(data->player.angle)) * 10.0f + data->player.y;
-	new_x = sin(degToRad_float(data->player.angle)) * 4 + data->player.x;
-	new_y = -cos(degToRad_float(data->player.angle)) * 4 + data->player.y;
+	new_x = -sin(degToRad_float(data->player.angle)) * 4 + data->player.x;
+	new_y = cos(degToRad_float(data->player.angle)) * 4 + data->player.y;
 	if(data->config->map[(int)new_y / TEXTURE_SIZE][(int)new_x / TEXTURE_SIZE] != '1')
 	{
 		data->player.x = new_x;
@@ -44,8 +44,8 @@ void	new_direction_left(t_data *data)
 	// new_y = data->player.x * sin(data->player.angle) + data->player.y * cos(data->player.angle);
 	// new_x = -sin(degToRad_float(data->player.angle)) * 10.0f + data->player.x;
 	// new_y = -cos(degToRad_float(data->player.angle)) * 10.0f + data->player.y;
-	new_x = -sin(degToRad_float(data->player.angle)) * 4 + data->player.x;
-	new_y = cos(degToRad_float(data->player.angle)) * 4 + data->player.y;
+	new_x = sin(degToRad_float(data->player.angle)) * 4 + data->player.x;
+	new_y = -cos(degToRad_float(data->player.angle)) * 4 + data->player.y;
 	if(data->config->map[(int)new_y / TEXTURE_SIZE][(int)new_x / TEXTURE_SIZE] != '1')
 	{
 		data->player.x = new_x;

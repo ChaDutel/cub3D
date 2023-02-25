@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/24 19:25:21 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 04:36:34 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,33 @@ float FixAng(float a)
 float degToRad(float a)
 {
 	return (a * PI / 180.0);
+}
+
+static	void	draw_floor(t_data *data, int x, int start, int stop)
+{
+	while (start < stop)
+	{
+		image_pixel_put(data, x, start, 0x00FF00);
+		start++;
+	}
+}
+
+static	void	draw_ceilling(t_data *data, int x, int start, int stop)
+{
+	while (start < stop)
+	{
+		image_pixel_put(data, x, start, 0x0000FF);
+		start++;
+	}
+}
+
+static	void	draw_wall(t_data *data, int x, int start, int stop)
+{
+	while (start < stop)
+	{
+		image_pixel_put(data, x, start, 0xFF0000);
+		start++;
+	}
 }
 
 void	raycaster(t_data *data)
@@ -45,10 +72,18 @@ void	raycaster(t_data *data)
 			rc.ray.y += raysin;
 			wall = data->config->map[(int)rc.ray.y][(int)rc.ray.x];
 		}
-		//float distance = sqrt(pow(data->player.x - rc.ray.x, 2) + pow(data->player.y - rc.ray.y, 2));
-		rc.ray.x *= (float)TEXTURE_SIZE;
-		rc.ray.y *= (float)TEXTURE_SIZE;
-		bresenham_line(data, &rc);
+
+		float distance = sqrt(pow(data->player.x / TEXTURE_SIZE - rc.ray.x, 2) + pow(data->player.y / TEXTURE_SIZE - rc.ray.y, 2));
+		distance = distance * cos(degToRad(FixAng(rc.ray.angle - data->player.angle)));
+		float wallHeight = floor(PLAYER_HEIGHT / distance);
+
+		draw_ceilling(data, rc.nb_ray, 0, PLAYER_HEIGHT - wallHeight);
+        draw_floor(data, rc.nb_ray, PLAYER_HEIGHT + wallHeight, WINDOW_HEIGHT);
+        draw_wall(data, rc.nb_ray, PLAYER_HEIGHT - wallHeight, PLAYER_HEIGHT + wallHeight);
+		
+		//rc.ray.x *= (float)TEXTURE_SIZE;
+		//rc.ray.y *= (float)TEXTURE_SIZE;
+		//bresenham_line(data, &rc);
 		rc.ray.angle = FixAng(rc.ray.angle - ANGLE_INCREMENT);
 		rc.nb_ray++;
 	}

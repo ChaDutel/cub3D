@@ -43,11 +43,11 @@
 
 //game
 # define PI 3.1415926535
-# define TEXTURE_SIZE 128
+# define TEXTURE_SIZE 64
 # define MAX_DOF 100
 # define FOV 60
 # define ANGLE_INCREMENT ((float)FOV / (float)WINDOW_WIDTH)
-# define PLAYER_HEIGHT (TEXTURE_SIZE / 2)
+# define PLAYER_HEIGHT (WINDOW_HEIGHT / 2)
 
 //miscs
 # define MAX_AREA 100000
