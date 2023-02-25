@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/25 13:19:20 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 15:22:28 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,26 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		mlx_loop_end(data->mlx_ptr);
 	else if (keysym == XK_w)
-		new_direction_up(data);
+		dir_up(data);
 	else if (keysym == XK_a)
-		new_direction_left(data);
+		dir_left(data);
 	else if (keysym == XK_s)
-		new_direction_down(data);
+		dir_down(data);
 	else if (keysym == XK_d)
-		new_direction_right(data);
+		dir_right(data);
 	else if (keysym == XK_Left)
 	{
 		data->player.angle += 4;
 		data->player.angle = fix_ang(data->player.angle);
+		data->mini_player.angle -= 4;
+		data->mini_player.angle = fix_ang(data->mini_player.angle);
 	}
 	else if (keysym == XK_Right)
 	{
 		data->player.angle -= 4;
 		data->player.angle = fix_ang(data->player.angle);
+		data->mini_player.angle += 4;
+		data->mini_player.angle = fix_ang(data->mini_player.angle);
 	}
 	draw_minimap_player(data);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:46:24 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/25 12:34:14 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 15:27:10 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	draw_minimap_player(t_data *data)
 	float	x;
 	float	y;
 
-	end_x = data->player.x + (TEXTURE_SIZE / 16);
-	end_y = data->player.y + (TEXTURE_SIZE / 16);
+	end_x = data->mini_player.x + (TEXTURE_SIZE / 16);
+	end_y = data->mini_player.y + (TEXTURE_SIZE / 16);
 	if (data->win_ptr != NULL)
 	{
-		y = data->player.y - (TEXTURE_SIZE / 16);
+		y = data->mini_player.y - (TEXTURE_SIZE / 16);
 		while (y < end_y)
 		{
-			x = data->player.x - (TEXTURE_SIZE / 16);
+			x = data->mini_player.x - (TEXTURE_SIZE / 16);
 			while (x < end_x)
 			{
 				image_pixel_put(data, x, y, 0xFFFF00);

@@ -92,25 +92,26 @@ typedef	struct s_vector
 {
 	float	x;
 	float	y;
-	float	angle;
 	float	new_x;
 	float	new_y;
+	float	angle;
 } t_vector;
+
+//min_vector
+typedef	struct s_mini_vector
+{
+	float	x;
+	float	y;
+	float	new_x;
+	float	new_y;
+	float	angle;
+} t_mini_vector;
 
 //raycaster values
 typedef	struct s_raymath
 {
 	t_vector	ray;
 	int			nb_ray;
-	int			dof_counter;
-	float		aTan;
-	float		y_off;
-	float		x_off;
-	int			elem_x;
-	int			elem_y;
-	int			elem_pos;
-	float		distH;
-	float		distV;
 } t_raymath;
 
 //mlx struct
@@ -121,6 +122,7 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_vector	player;
+	t_mini_vector	mini_player;
 } t_data;
 
 
@@ -172,10 +174,16 @@ void	draw_player_move(t_data *data, int px, int py);
 // float 	deg_to_rad(int angle);
 
 // MOVEMENT
-void	new_direction_up(t_data *data);
-void	new_direction_left(t_data *data);
-void	new_direction_right(t_data *data);
-void	new_direction_down(t_data *data);
+void	dir_up(t_data *data);
+void	dir_left(t_data *data);
+void	dir_right(t_data *data);
+void	dir_down(t_data *data);
+
+// MINI_MOVEMENT
+void	mini_dir_up(t_data *data);
+void	mini_dir_down(t_data *data);
+void	mini_dir_left(t_data *data);
+void	mini_dir_right(t_data *data);
 
 //***************//
 //    DISPLAY    //

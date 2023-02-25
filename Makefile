@@ -33,7 +33,8 @@ LST_PARSING		:=		parsing.c				\
 						parse_map.c
 
 LST_EVENTS		:=		events.c				\
-						movement.c
+						movement.c				\
+						mini_movement.c
 
 LST_DISPLAY		:=		minimap_draw.c			\
 						bresenham_line.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/25 12:58:27 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 15:23:45 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	}
 	data->player.x = (float)px * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
 	data->player.y = (float)py * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
+	data->mini_player.x = data->player.x;
+	data->mini_player.y = data->player.y;
 	player_angle(data, config, px, py);
+	data->mini_player.angle = data->player.angle - 90;
 }
 
 static	int	run_mlx(t_config *config)
