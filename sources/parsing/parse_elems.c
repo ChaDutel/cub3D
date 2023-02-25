@@ -44,6 +44,12 @@ int	parse_elems(t_config *config)
 		if (fd == -1)
 			return (error_msg("Error : Wrong texture path\n"));
 		close(fd);
+		fd = open(&config->elems[i][j], __O_DIRECTORY);
+		if (fd != -1)
+		{
+			close(fd);
+			return (error_msg("Error : Texture path is a directory\n"));
+		}
 		i++;
 	}
 	if (check_colors(config) == -1)

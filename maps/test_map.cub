@@ -1,4 +1,4 @@
-NO ./textures/north
+NO ./textures/
 SO ./textures/south
 EA ./textures/east
 WE ./textures/west
