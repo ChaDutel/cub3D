@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libc_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:39:55 by charline          #+#    #+#             */
-/*   Updated: 2023/02/24 11:07:45 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 12:53:52 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-float roundint(int value)
+float	roundint(int value)
 {
 	int	upper;
 	int	lower;

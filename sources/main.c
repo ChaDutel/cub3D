@@ -3,99 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/25 04:40:00 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 12:54:50 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-// static	void	print_map(t_config *config)
-// {
-// 	int	i;
-// 	int j;
-
-// 	i = 0;
-// 	while (config->map[i])
-// 	{
-// 		j = 0;
-// 		while (config->map[i][j])
-// 		{
-// 			printf("%c", config->map[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
-// }
-
-// static	void	print_elems(t_config *config)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (config->elems[i])
-// 	{
-// 		ft_putstr(config->elems[i++]);
-// 		ft_putchar('\n');
-// 	}
-// }
-
-// static void	test_mlx(void)
-// {
-// 	void	*img;
-// 	// char	*relative_path = "./maps/grass_test.xpm";
-// 	// int		img_width;
-// 	// int		img_height;
-// 	void 	*mlx;
-// 	void	*win;
-// 	int pixel_bits;
-// 	int line_bytes;
-// 	int endian;
-// 	char *buffer;
-	
-// 	mlx = mlx_init();
-// 	win = mlx_new_window(mlx, 3840, 2160, "La promenade des amoureux"); //fait la fenetre
-// 	//img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-// 	img = mlx_new_image(mlx, 3840, 2160);
-// 	buffer = mlx_get_data_addr(img, &pixel_bits, &line_bytes, &endian);
-// 	buffer[12000] = 255;
-// 	int	y = 0, x;
-// 	while (y != 2160)
-// 	{
-// 		x = 0;
-// 		while (x != 3840)
-// 		{
-// 			buffer[y * line_bytes + x * 4 + 2] = 255;
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	mlx_put_image_to_window(mlx, win, img, 0, 0);
-// 	mlx_loop(mlx);
-// 	(void)win;
-// 	(void)img;
-// }
 static	void	find_player_direction(t_data *data, t_config *config, int px, int py)
 {
-    if (config->map[py][px] == 'N')
-        data->player.angle = 180;
-    if (config->map[py][px] == 'S')
-        data->player.angle = 0;
-    if (config->map[py][px] == 'E')
-        data->player.angle = 270;
-    if (config->map[py][px] == 'W')
-        data->player.angle = 90;
-	/* if (config->map[py][px] == 'N')
-		data->player.angle = PI / 2;
+	if (config->map[py][px] == 'N')
+		data->player.angle = 180;
 	if (config->map[py][px] == 'S')
-		data->player.angle = (3 * PI) / 2;
+		data->player.angle = 0;
 	if (config->map[py][px] == 'E')
-		data->player.angle = 2 * PI;
+		data->player.angle = 270;
 	if (config->map[py][px] == 'W')
-		data->player.angle = PI; */
+		data->player.angle = 90;
 }
 
 static	void	init_mini_struct(t_data *data, t_config *config)
@@ -121,10 +47,6 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	data->player.x = (float)px * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
 	data->player.y = (float)py * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
 	find_player_direction(data, config, px, py);
-	// data->player.fx = cos(data->player.angle);
-    // data->player.fy = sin(data->player.angle);
-	// data->player.fx = cos(deg_to_rad(data->player.angle));
-	// data->player.fy = -sin(deg_to_rad(data->player.angle)); 
 }
 
 static	int	run_mlx(t_config *config)
@@ -168,8 +90,6 @@ int	main(int argc, char **argv)
 		free_config(&config);
 		return (0);
 	}
-	// print_map(&config);
-	// print_elems(&config);
 	if (run_mlx(&config) == -1)
 		return (error_msg("Error : MLX function failed"));
 	free_config(&config);

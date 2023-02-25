@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:46:24 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/24 12:03:43 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 12:34:14 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,4 @@ void	draw_minimap_player(t_data *data)
 			y += 1;
 		}
 	}
-////////////////////////////////////////////////////////////////
-	// t_raymath	rc;
-	// rc.ray.x = data->player.x + 10;
-	// rc.ray.y = data->player.y + 10;
-	// image_pixel_put(data, rc.ray.x, rc.ray.y, 0xFFFF00);
-	// image_pixel_put(data, rc.ray.x + 1, rc.ray.y + 1, 0xFFFF00);
-	// image_pixel_put(data, rc.ray.x + 2, rc.ray.y + 2, 0xFFFF00);
-	// image_pixel_put(data, rc.ray.x + 3, rc.ray.y + 3, 0xFFFF00);
-	// image_pixel_put(data, rc.ray.x + 4, rc.ray.y + 4, 0xFFFF00);
-	// image_pixel_put(data, rc.ray.x + 5, rc.ray.y + 5, 0xFFFF00);
 }
