@@ -121,11 +121,13 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img;
+	t_img		tex_no;
+	t_img		tex_so;
+	t_img		tex_ea;
+	t_img		tex_we;
 	t_vector	player;
 	t_mini_vector	mini_player;
 } t_data;
-
-
 
 //***************//
 //    PARSING    //

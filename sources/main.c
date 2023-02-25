@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/25 15:23:45 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 17:44:04 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+static	int	load_images(t_data *data)
+{
+	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!data->img.mlx_img)
+		return (-1);
+	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, \
+		&data->img.line_len, &data->img.endian);
+		
+	data->tex_no.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!data->tex_no.mlx_img)
+		return (-1);
+	data->tex_no.addr = mlx_get_data_addr(data->tex_no.mlx_img, &data->tex_no.bpp, \
+		&data->tex_no.line_len, &data->tex_no.endian);
+		
+	data->tex_so.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!data->tex_so.mlx_img)
+		return (-1);
+	data->tex_so.addr = mlx_get_data_addr(data->tex_so.mlx_img, &data->tex_so.bpp, \
+		&data->tex_so.line_len, &data->tex_so.endian);
+		
+	data->tex_ea.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!data->tex_ea.mlx_img)
+		return (-1);
+	data->tex_ea.addr = mlx_get_data_addr(data->tex_ea.mlx_img, &data->tex_ea.bpp, \
+		&data->tex_ea.line_len, &data->tex_ea.endian);
+		
+	data->tex_we.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!data->tex_we.mlx_img)
+		return (-1);
+	data->tex_we.addr = mlx_get_data_addr(data->tex_we.mlx_img, &data->tex_we.bpp, \
+		&data->tex_we.line_len, &data->tex_we.endian);
+	return (0);
+}
 
 static	void	player_angle(t_data *data, t_config *config, int px, int py)
 {
@@ -24,6 +58,14 @@ static	void	player_angle(t_data *data, t_config *config, int px, int py)
 		data->player.angle = 90;
 }
 
+static	void	init_textures(t_data *data)
+{
+	data->tex_no.mlx_img = NULL;
+	data->tex_so.mlx_img = NULL;
+	data->tex_ea.mlx_img = NULL;
+	data->tex_we.mlx_img = NULL;
+}
+
 static	void	init_mini_struct(t_data *data, t_config *config)
 {
 	int	px;
@@ -35,6 +77,7 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->img.mlx_img = NULL;
+	init_textures(data);
 	while (config->map[py] && !ft_isalpha(config->map[py][px]))
 	{
 		px = 0;
@@ -64,11 +107,8 @@ static	int	run_mlx(t_config *config)
 			WINDOW_WIDTH, WINDOW_HEIGHT, "La promenade des amoureux");
 	if (!data.win_ptr)
 		return (free_mlx(&data));
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!data.img.mlx_img)
+	if (load_images(&data) == -1)
 		return (free_mlx(&data));
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, \
-		&data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, 17, (1L << 2), &close_window, &data);
 	mlx_hook(data.win_ptr, 2, (1L << 0), &handle_keypress, &data);

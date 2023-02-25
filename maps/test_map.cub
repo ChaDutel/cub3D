@@ -1,7 +1,7 @@
-NO ./textures/
-SO ./textures/south
-EA ./textures/east
-WE ./textures/west
+NO ./textures/nord.xpm
+SO ./textures/sud.xpm
+EA ./textures/est.xpm
+WE ./textures/ouest.xpm
 F 250, 100,0
 C 225,255,0
 

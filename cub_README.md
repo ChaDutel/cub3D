@@ -36,11 +36,24 @@
 - fction image_pixel_put segfault avec la methode du tuto "optionnelle", provisoirement remis celle de base
 
  # exec
- - mouvements du personnage
- - rotation du personnage
- - collision avec les murs
+ - mouvements du personnage    DONE
+ - rotation du personnage      DONE
+ - collision avec les murs    DONE
  - affichage de la map:
-    1. raycast
-    2. fix fisheye
-    3. afficher le background floor/ceiling
+    1. raycast                DONE
+    2. fix fisheye            DONE
+    3. afficher le background floor/ceiling     DONE
     3. afficheres les textures pour peindre la map
+
+
+
+
+
+
+
+
+
+
+1. change data struct
+2. update free_mlx fct
+3. update init to null texture img
