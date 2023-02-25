@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/25 17:45:57 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 18:09:08 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 		start++;
 	}
 }
+
+// static	int		find_texture_color(t_data *data)
+// {
+	
+// }
 
 static	void	draw_wall(t_data *data, int x, int start, int stop)
 {

@@ -85,6 +85,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		*width;
+	int		*height;
 }	t_img;
 
 //vector
