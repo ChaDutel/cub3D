@@ -41,6 +41,13 @@
 # define C 5
 # define NO_COORD -1
 
+//colors
+# define FLOOR 0
+# define CEIL 1
+# define R 0
+# define G 1
+# define B 2
+
 //game
 # define PI 3.1415926535
 # define TEXTURE_SIZE 64
@@ -180,7 +187,7 @@ void	draw_minimap(t_data *data);
 void	draw_minimap_player(t_data *data);
 
 // BRSENHAM_LINE
-void	bresenham_line(t_data *data, t_raymath * rc);
+//void	bresenham_line(t_data *data, t_raymath * rc);
 
 //***************//
 //      EXEC     //
@@ -188,8 +195,6 @@ void	bresenham_line(t_data *data, t_raymath * rc);
 
 // RAYCAST
 void	raycaster(t_data *data);
-float 	degToRad(float a);
-float 	FixAng(float a);
 
 //***************//
 //     MISCS     //
@@ -203,7 +208,8 @@ void	free_config(t_config *config);
 int		free_mlx(t_data *data);
 
 // LIBC_FT
-float 	roundint(int value);
+float 	deg_to_rad(float a);
+float 	fix_ang(float a);
 char    *char_join(char *str, char c);
 
 #endif

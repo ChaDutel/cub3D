@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/25 12:51:45 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 13:19:20 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	handle_keypress(int keysym, t_data *data)
 	else if (keysym == XK_Left)
 	{
 		data->player.angle += 4;
-		data->player.angle = FixAng(data->player.angle);
+		data->player.angle = fix_ang(data->player.angle);
 	}
 	else if (keysym == XK_Right)
 	{
 		data->player.angle -= 4;
-		data->player.angle = FixAng(data->player.angle);
+		data->player.angle = fix_ang(data->player.angle);
 	}
 	draw_minimap_player(data);
 	return (0);

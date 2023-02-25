@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/25 12:54:50 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 12:58:27 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static	void	find_player_direction(t_data *data, t_config *config, int px, int py)
+static	void	player_angle(t_data *data, t_config *config, int px, int py)
 {
 	if (config->map[py][px] == 'N')
 		data->player.angle = 180;
@@ -46,7 +46,7 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	}
 	data->player.x = (float)px * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
 	data->player.y = (float)py * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
-	find_player_direction(data, config, px, py);
+	player_angle(data, config, px, py);
 }
 
 static	int	run_mlx(t_config *config)
