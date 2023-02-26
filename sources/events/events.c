@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/26 14:31:40 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 17:54:29 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ int	close_window(t_data *data)
 	return (0);
 }
 
+void	rotate_left(t_data *data, float i)
+{
+	data->player.angle += i;
+	data->player.angle = fix_ang(data->player.angle);
+	data->mini_player.angle -= i;
+	data->mini_player.angle = fix_ang(data->mini_player.angle);
+}
+
+void	rotate_right(t_data *data, float i)
+{
+	data->player.angle -= i;
+	data->player.angle = fix_ang(data->player.angle);
+	data->mini_player.angle += i;
+	data->mini_player.angle = fix_ang(data->mini_player.angle);
+}
+
 int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
@@ -52,19 +68,9 @@ int	handle_keypress(int keysym, t_data *data)
 	else if (keysym == XK_d)
 		dir_right(data);
 	else if (keysym == XK_Left)
-	{
-		data->player.angle += 4;
-		data->player.angle = fix_ang(data->player.angle);
-		data->mini_player.angle -= 4;
-		data->mini_player.angle = fix_ang(data->mini_player.angle);
-	}
+		rotate_left(data, 4);
 	else if (keysym == XK_Right)
-	{
-		data->player.angle -= 4;
-		data->player.angle = fix_ang(data->player.angle);
-		data->mini_player.angle += 4;
-		data->mini_player.angle = fix_ang(data->mini_player.angle);
-	}
+		rotate_right(data, 4);
 	draw_minimap_player(data);
 	return (0);
 }

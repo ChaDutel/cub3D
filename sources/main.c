@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/26 12:57:50 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 17:54:05 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ static	int	run_mlx(t_config *config)
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, 17, (1L << 2), &close_window, &data);
 	mlx_hook(data.win_ptr, 2, (1L << 0), &handle_keypress, &data);
+		mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
+		// mlx_hook(data.win_ptr, 4, 0x4, event_mouse_press, &data);
+		// mlx_hook(data.win_ptr, 5, 0x8, event_mouse_release, &data);
+		mlx_hook(data.win_ptr, 6, 0x40, event_mouse_move, &data);
 	mlx_loop(data.mlx_ptr);
 	free_mlx(&data);
 	return (0);

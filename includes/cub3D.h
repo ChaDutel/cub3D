@@ -66,6 +66,12 @@ typedef	struct s_point
 	int	y;
 } t_point;
 
+typedef	struct s_mouse
+{
+	int	x;
+	int	y;
+} t_mouse;
+
 //config file
 typedef struct s_config
 {
@@ -129,6 +135,7 @@ typedef struct s_data
 	t_img		tex_ea;
 	t_img		tex_we;
 	t_vector	player;
+	t_mouse		mouse;
 	t_mini_vector	mini_player;
 } t_data;
 
@@ -176,7 +183,15 @@ int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 void	image_pixel_put(t_data *data, int width, int height, int color);
 void	draw_player_move(t_data *data, int px, int py);
+void	rotate_right(t_data *data, float i);
+void	rotate_left(t_data *data, float i);
 // float 	deg_to_rad(int angle);
+
+// MOUSE
+int		event_mouse_move(int x, int y, t_data *data);
+void	mouse_move_left(t_data *data, int diff, int x, int y);
+void	mouse_move_right(t_data *data, int diff, int x, int y);
+int		event_mouse_release(int button, int x, int y, t_data *data);
 
 // MOVEMENT
 void	dir_up(t_data *data);
