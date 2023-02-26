@@ -29,8 +29,8 @@
 // MACRO
 
 //window
-# define WINDOW_WIDTH 4096
-# define WINDOW_HEIGHT 2048
+# define WINDOW_WIDTH 2560
+# define WINDOW_HEIGHT 1440
 
 //coordinates
 # define NO 0

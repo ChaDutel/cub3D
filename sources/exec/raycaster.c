@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/26 12:55:18 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 17:53:04 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-static	int		get_texture_color(t_data *data, int width, int height)
+static	int		get_texture_color(t_data *data, int width, int height, int div)
 {
 	char	*pixel;
 	int		color;
 	
+	// protect for unusual texture sizes
 	pixel = data->tex_no.addr
-		+ ((height % data->tex_no.height) * data->tex_no.line_len + (width % data->tex_no.width) * (data->tex_no.bpp / 8));
+		+ ((height / div)) * data->tex_no.line_len + (((width / 64 + width % 64) / div)) * (data->tex_no.bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
@@ -54,10 +55,13 @@ static	int		get_texture_color(t_data *data, int width, int height)
 static	void	draw_wall(t_data *data, int x, int start, int stop)
 {
 	int	tex_color;
-
+	int	wall_height = stop - start;
+	int	div = wall_height / TEXTURE_SIZE;
+	int	begin = start;
+	
 	while (start < stop)
 	{
-		tex_color = get_texture_color(data, x, start);
+		tex_color = get_texture_color(data, x, start - begin, div);
 		image_pixel_put(data, x, start, tex_color);
 		start++;
 	}
@@ -67,7 +71,7 @@ static	void	draw_projection(t_data *data, t_raymath *rc)
 {
 	float	distance;
 	float	wall_height;
-
+	
 	distance = sqrt(pow(data->player.x / TEXTURE_SIZE - rc->ray.x, 2)
 			+ pow(data->player.y / TEXTURE_SIZE - rc->ray.y, 2));
 	distance = distance * cos(deg_to_rad(fix_ang(rc->ray.angle
