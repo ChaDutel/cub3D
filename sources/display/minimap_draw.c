@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:46:24 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/26 10:35:39 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 11:58:09 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,32 @@
 
 void draw_map_circle(t_data *data, float xx, float yy, int i)
 {
-    float    x;
-    float    y;
-    float    nx;
-    float    ny;
-    float    co;
-    float    si;
-    int length = 150;
-    float angle = 0;
-    // float angle_stepsize = 0.6 PI / 180; //0.1;
-    int    texture_si;
+    float	x;
+    float	y;
+    float	co;
+    float	si;
+    float	angle = 0;
+    int		player_size = TEXTURE_SIZE / 32;
 
-    // go through all angles from 0 to 2 * PI radians
-    // x = data->player.x;
-    // y = data->player.y;
-    texture_si = TEXTURE_SIZE / 32;
     while (angle < 2 * PI)
     {
         i = 0;
-        // calculate x, y from a vector with known length and angle
         co = cos(angle);
         si = sin(angle);
-        while (i != length)
+        while (i != 150)
         {
             x = i * co + data->mini_player.x;
             y = i * si + data->mini_player.y;
-            nx = i * co + xx;
-            ny = i * si + yy;
-            // x = i * cos(angle) + data->mini_player.x;
-            // y = i * sin(angle) + data->mini_player.y;
-            // nx = i * cos(angle) + xx;
-            // ny = i * sin(angle) + yy;
-            // if () // check don't go too far, si depasse pas la map
-            // {
+            if ((((int)x / TEXTURE_SIZE) >= 0 && ((int)x / TEXTURE_SIZE) < (int)data->config->x) && (((int)y / TEXTURE_SIZE) >= 0 && ((int)y / TEXTURE_SIZE) < (int)data->config->y)) // check don't go too far, si depasse pas la map
+            {
                 if (data->config->map[(int)y / TEXTURE_SIZE][(int)x / TEXTURE_SIZE] == '1')
-                    image_pixel_put(data, ny + texture_si, nx + texture_si, 0x8FDBB5);
+                    image_pixel_put(data, (yy + i * si) + player_size, (xx + i * co) + player_size, 0x8FDBB5);
                 else
-                    image_pixel_put(data, ny + texture_si, nx + texture_si, 0xD3D3D3);
-                // if (data->config->map[(int)y / TEXTURE_SIZE][(int)x / TEXTURE_SIZE] == '1')
-                //     image_pixel_put(data, ny + (TEXTURE_SIZE / 32), nx + (TEXTURE_SIZE / 32), 0x8FDBB5);
-                // else
-                //     image_pixel_put(data, ny + (TEXTURE_SIZE / 32), nx + (TEXTURE_SIZE / 32), 0xD3D3D3);
-            // }
-            //image_pixel_put(data, x + (TEXTURE_SIZE / 16), y + (TEXTURE_SIZE / 16), 0xF485FF00);
+                    image_pixel_put(data, (yy + i * si) + player_size, (xx + i * co) + player_size, 0xD3D3D3);
+            }
             i++;
         }
-        angle += 0.6 * PI / 180;
+        angle += 0.3 * PI / 180;
     }
 }
 
@@ -72,7 +52,7 @@ void    draw_minimap_player(t_data *data)
 
     end_x = 150 + (TEXTURE_SIZE / 16);
     end_y = 150 + (TEXTURE_SIZE / 16);
-    draw_map_circle(data, end_x - (TEXTURE_SIZE / 16), end_y - (TEXTURE_SIZE / 16), 0);
+    draw_map_circle(data, 150, 150, 0);
     if (data->win_ptr != NULL)
     {
         y = 150 - (TEXTURE_SIZE / 16);

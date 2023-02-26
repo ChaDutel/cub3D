@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/25 22:42:58 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 11:57:40 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-// static	int		find_texture_color(t_data *data)
+// static	int		get_texture_color(t_data *data)
 // {
 	
 // }
 
 static	void	draw_wall(t_data *data, int x, int start, int stop)
 {
+	//int	tex_color;
+
 	while (start < stop)
 	{
+		//tex_color = get_texture_color(data);
 		image_pixel_put(data, x, start, 0xFF0000);
 		start++;
 	}
