@@ -30,10 +30,10 @@
  - parse_map : check s'il y a exactement 1 player et si la map est bien entourée de murs ('1').
 
 
- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!PARSING: check si les paths ne sont pas des directory !
- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!AFFICHAGE:  check si ce qu'on veut afficher sort de l'ecran
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!PARSING: check si les paths ne sont pas des directory !              DONE
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!AFFICHAGE:  check si ce qu'on veut afficher sort de l'ecran		   DONE
 
-- fction image_pixel_put segfault avec la methode du tuto "optionnelle", provisoirement remis celle de base
+- fction image_pixel_put segfault avec la methode du tuto "optionnelle", provisoirement remis celle de base    DONE
 
  # exec
  - mouvements du personnage    DONE

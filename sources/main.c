@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/26 17:54:05 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 19:29:14 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,43 @@
 
 static	int	load_images(t_data *data)
 {
+	int	i = 2;
+	
 	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->img.mlx_img)
 		return (-1);
 	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, \
 		&data->img.line_len, &data->img.endian);
-		
-	data->tex_no.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[NO][3], &data->tex_no.width, &data->tex_no.height);
+	while (data->config->elems[NO][i] && data->config->elems[NO][i] == ' ')
+		i++;
+	data->tex_no.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[NO][i], &data->tex_no.width, &data->tex_no.height);
 	if (!data->tex_no.mlx_img)
 		return (-1);
 	data->tex_no.addr = mlx_get_data_addr(data->tex_no.mlx_img, &data->tex_no.bpp, 
 		&data->tex_no.line_len, &data->tex_no.endian);
-		
-	data->tex_so.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[SO][3], &data->tex_so.width, &data->tex_so.height);
+	
+	i = 2;
+	while (data->config->elems[SO][i] && data->config->elems[SO][i] == ' ')
+		i++;
+	data->tex_so.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[SO][i], &data->tex_so.width, &data->tex_so.height);
 	if (!data->tex_so.mlx_img)
 		return (-1);
 	data->tex_so.addr = mlx_get_data_addr(data->tex_so.mlx_img, &data->tex_so.bpp, 
 		&data->tex_so.line_len, &data->tex_so.endian);
-		
-	data->tex_ea.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[EA][3], &data->tex_ea.width, &data->tex_ea.height);
+
+	i = 2;
+	while (data->config->elems[EA][i] && data->config->elems[EA][i] == ' ')
+		i++;	
+	data->tex_ea.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[EA][i], &data->tex_ea.width, &data->tex_ea.height);
 	if (!data->tex_ea.mlx_img)
 		return (-1);
 	data->tex_ea.addr = mlx_get_data_addr(data->tex_ea.mlx_img, &data->tex_ea.bpp, 
 		&data->tex_ea.line_len, &data->tex_ea.endian);
-		
-	data->tex_we.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[WE][3], &data->tex_we.width, &data->tex_we.height);
+	
+	i = 2;
+	while (data->config->elems[WE][i] && data->config->elems[WE][i] == ' ')
+		i++;
+	data->tex_we.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[WE][i], &data->tex_we.width, &data->tex_we.height);
 	if (!data->tex_we.mlx_img)
 		return (-1);
 	data->tex_we.addr = mlx_get_data_addr(data->tex_we.mlx_img, &data->tex_we.bpp, 

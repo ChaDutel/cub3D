@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/26 17:53:04 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 20:11:38 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-static	int		get_texture_color(t_data *data, int width, int height, int div)
+static	int		get_texture_color(t_data *data, int width, int height, float div, float div2)
 {
 	char	*pixel;
 	int		color;
 	
 	// protect for unusual texture sizes
 	pixel = data->tex_no.addr
-		+ ((height / div)) * data->tex_no.line_len + (((width / 64 + width % 64) / div)) * (data->tex_no.bpp / 8);
+		+ ((int)(height * div)) * data->tex_no.line_len + ((int)((width * div2)) % 64) * (data->tex_no.bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
@@ -56,12 +56,13 @@ static	void	draw_wall(t_data *data, int x, int start, int stop)
 {
 	int	tex_color;
 	int	wall_height = stop - start;
-	int	div = wall_height / TEXTURE_SIZE;
+	float	div = (float)TEXTURE_SIZE / (wall_height);
+	float	div2 = (float)TEXTURE_SIZE / (TEXTURE_SIZE * data->config->x); 
 	int	begin = start;
 	
 	while (start < stop)
 	{
-		tex_color = get_texture_color(data, x, start - begin, div);
+		tex_color = get_texture_color(data, x, start - begin, div, div2);
 		image_pixel_put(data, x, start, tex_color);
 		start++;
 	}
