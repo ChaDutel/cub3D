@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/26 11:57:40 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 12:55:18 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,25 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-// static	int		get_texture_color(t_data *data)
-// {
+static	int		get_texture_color(t_data *data, int width, int height)
+{
+	char	*pixel;
+	int		color;
 	
-// }
+	pixel = data->tex_no.addr
+		+ ((height % data->tex_no.height) * data->tex_no.line_len + (width % data->tex_no.width) * (data->tex_no.bpp / 8));
+	color = *(int*)pixel;
+	return (color);
+}
 
 static	void	draw_wall(t_data *data, int x, int start, int stop)
 {
-	//int	tex_color;
+	int	tex_color;
 
 	while (start < stop)
 	{
-		//tex_color = get_texture_color(data);
-		image_pixel_put(data, x, start, 0xFF0000);
+		tex_color = get_texture_color(data, x, start);
+		image_pixel_put(data, x, start, tex_color);
 		start++;
 	}
 }
