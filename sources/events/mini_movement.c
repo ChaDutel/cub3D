@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_movement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:31:41 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/25 15:27:51 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 10:32:53 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -29,8 +29,8 @@
 // MACRO
 
 //window
-# define WINDOW_WIDTH 2048
-# define WINDOW_HEIGHT 1024
+# define WINDOW_WIDTH 4096
+# define WINDOW_HEIGHT 2048
 
 //coordinates
 # define NO 0
@@ -50,7 +50,7 @@
 
 //game
 # define PI 3.1415926535
-# define TEXTURE_SIZE 64
+# define TEXTURE_SIZE 128
 # define MAX_DOF 100
 # define FOV 60
 # define ANGLE_INCREMENT ((float)FOV / (float)WINDOW_WIDTH)
@@ -84,8 +84,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		*width;
-	int		*height;
+	int		width;
+	int		height;
 }	t_img;
 
 //vector
@@ -195,9 +195,10 @@ void	mini_dir_right(t_data *data);
 //***************//
 
 // MINIMAP_DRAW
-void	draw_minimap_background(t_data *data);
-void	draw_minimap(t_data *data);
+//void	draw_minimap_background(t_data *data);
+//void	draw_minimap(t_data *data);
 void	draw_minimap_player(t_data *data);
+void	draw_map_circle(t_data *data, float xx, float yy, int i);
 
 // BRSENHAM_LINE
 //void	bresenham_line(t_data *data, t_raymath * rc);
