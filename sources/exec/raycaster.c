@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/26 20:11:38 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:41:41 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ static	int		get_texture_color(t_data *data, int width, int height, float div, fl
 	int		color;
 	
 	// protect for unusual texture sizes
+	(void)width;
 	pixel = data->tex_no.addr
-		+ ((int)(height * div)) * data->tex_no.line_len + ((int)((width * div2)) % 64) * (data->tex_no.bpp / 8);
+		+ ((int)(height * div)) * data->tex_no.line_len + (int)div2 * (data->tex_no.bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
 
-static	void	draw_wall(t_data *data, int x, int start, int stop)
+static	void	draw_wall(t_data *data, int x, int start, int stop, t_raymath *rc)
 {
 	int	tex_color;
 	int	wall_height = stop - start;
 	float	div = (float)TEXTURE_SIZE / (wall_height);
-	float	div2 = (float)TEXTURE_SIZE / (TEXTURE_SIZE * data->config->x); 
+	float	div2 = (float)TEXTURE_SIZE * (rc->ray.x - floor(rc->ray.x)); 
 	int	begin = start;
 	
 	while (start < stop)
@@ -67,6 +68,30 @@ static	void	draw_wall(t_data *data, int x, int start, int stop)
 		start++;
 	}
 }
+
+// static	int	find_texture_type(t_data *data, t_raymath *rc, int *ref_x)
+// {
+// 	if (rc->ray.angle <= 45 && rc->ray.angle > 315)
+// 	{
+// 		*ref_x = rc;
+// 		return (SO);
+// 	}
+// 	else if (rc->ray.angle <= 135 && rc->ray.angle > 45)
+// 	{
+// 		*ref_x = ;
+// 		return (WE);
+// 	}
+// 	else if (rc->ray.angle <= 225 && rc->ray.angle > 135)
+// 	{
+// 		*ref_x = rc->nb_ray;
+// 		return (NO);
+// 	}
+// 	else
+// 	{
+// 		*ref_x = ;
+// 		return (EA);
+// 	}
+// }
 
 static	void	draw_projection(t_data *data, t_raymath *rc)
 {
@@ -80,8 +105,9 @@ static	void	draw_projection(t_data *data, t_raymath *rc)
 	wall_height = floor(rc->player_height / distance);
 	draw_ceilling(data, rc->nb_ray, 0, rc->player_height - wall_height);
 	draw_floor(data, rc->nb_ray, rc->player_height + wall_height, WINDOW_HEIGHT);
+
 	draw_wall(data, rc->nb_ray, rc->player_height - wall_height,
-		rc->player_height + wall_height);
+		rc->player_height + wall_height, rc);
 }
 
 void	raycaster(t_data *data)
