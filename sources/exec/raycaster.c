@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/27 17:55:12 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 21:49:47 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	int		get_texture_color(t_data *data, int width, int height, float div, fl
 
 	(void)width;
 	pixel = data->tex[texture_type].addr
-		+ ((int)(height * div)) * data->tex[texture_type].line_len + (int)div2 * (data->tex[texture_type].bpp / 8);
+		+ ((int)(height * div) % data->tex[texture_type].height) * data->tex[texture_type].line_len + ((int)div2 % data->tex[texture_type].width) * (data->tex[texture_type].bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
