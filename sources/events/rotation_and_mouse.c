@@ -6,47 +6,29 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:30:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/26 17:06:05 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 19:00:29 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-// int		mouse_manager(int button, int x, int y, void *param)
-// {
-// 	t_window	*mlx_infos;
+void	rotate_left(t_data *data, float i)
+{
+	data->player.angle += i;
+	data->player.angle = fix_ang(data->player.angle);
+	data->mini_player.angle -= i;
+	data->mini_player.angle = fix_ang(data->mini_player.angle);
+}
 
-// 	mlx_infos = (t_window *)param;
-// 	putstr_info_int("Button : ", button, 1);
-// 	putstr_info_int("X : ", x, 1);
-// 	putstr_info_int("Y : ", y, 1);
-// 	return (0);
-// }
+void	rotate_right(t_data *data, float i)
+{
+	data->player.angle -= i;
+	data->player.angle = fix_ang(data->player.angle);
+	data->mini_player.angle += i;
+	data->mini_player.angle = fix_ang(data->mini_player.angle);
+}
 
-// int		event_mouse_press(int button, int x, int y, t_data *data)
-// {
-// 	(void)x;
-// 	(void)y;
-// 	if (button == 1 && data->health > 0 && data->equiped & INV_GUN &&
-// 		data->weaponcd == 0 && data->ammo > 0)
-// 	{
-// 		data->firing = 1;
-// 		data->weaponcd = data->weaponbasecd;
-// 		data->ammo--;
-// 	}
-// 	return (0);
-// }
-
-// int		event_mouse_release(int button, int x, int y, t_data *data)
-// {
-// 	(void)x;
-// 	(void)y;
-// 	if (button == 1)
-// 		data->firing = 0;
-// 	return (0);
-// }
-
-void	mouse_move_right(t_data *data, int diff, int x, int y)
+static	void	mouse_move_right(t_data *data, int diff, int x, int y)
 {
 	data->mouse.x = x;
 	while (diff-- != 0)
@@ -59,7 +41,7 @@ void	mouse_move_right(t_data *data, int diff, int x, int y)
 	}
 }
 
-void	mouse_move_left(t_data *data, int diff, int x, int y)
+static	void	mouse_move_left(t_data *data, int diff, int x, int y)
 {
 	data->mouse.x = x;
 	while (diff-- != 0)

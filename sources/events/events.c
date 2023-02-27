@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/26 17:54:29 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 19:00:40 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,6 @@ int	close_window(t_data *data)
 {
 	mlx_loop_end(data->mlx_ptr);
 	return (0);
-}
-
-void	rotate_left(t_data *data, float i)
-{
-	data->player.angle += i;
-	data->player.angle = fix_ang(data->player.angle);
-	data->mini_player.angle -= i;
-	data->mini_player.angle = fix_ang(data->mini_player.angle);
-}
-
-void	rotate_right(t_data *data, float i)
-{
-	data->player.angle -= i;
-	data->player.angle = fix_ang(data->player.angle);
-	data->mini_player.angle += i;
-	data->mini_player.angle = fix_ang(data->mini_player.angle);
 }
 
 int	handle_keypress(int keysym, t_data *data)

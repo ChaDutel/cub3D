@@ -33,7 +33,7 @@ LST_PARSING		:=		parsing.c				\
 						parse_map.c
 
 LST_EVENTS		:=		events.c				\
-						mouse.c					\
+						rotation_and_mouse.c					\
 						movement.c				\
 						mini_movement.c
 

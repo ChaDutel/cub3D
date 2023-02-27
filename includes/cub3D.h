@@ -60,17 +60,12 @@
 
 // STRUCTURES
 
+//point and mouse
 typedef	struct s_point
 {
 	int	x;
 	int	y;
 } t_point;
-
-typedef	struct s_mouse
-{
-	int	x;
-	int	y;
-} t_mouse;
 
 //config file
 typedef struct s_config
@@ -99,20 +94,10 @@ typedef	struct s_vector
 {
 	float	x;
 	float	y;
-	float	new_x;
-	float	new_y;
+	float	co;
+	float	si;
 	float	angle;
 } t_vector;
-
-//min_vector
-typedef	struct s_mini_vector
-{
-	float	x;
-	float	y;
-	float	new_x;
-	float	new_y;
-	float	angle;
-} t_mini_vector;
 
 //raycaster values
 typedef	struct s_raymath
@@ -131,9 +116,9 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_img		tex[4];
+	t_point		mouse;
 	t_vector	player;
-	t_mouse		mouse;
-	t_mini_vector	mini_player;
+	t_vector	mini_player;
 } t_data;
 
 //***************//
@@ -180,15 +165,11 @@ int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 void	image_pixel_put(t_data *data, int width, int height, int color);
 void	draw_player_move(t_data *data, int px, int py);
+
+// ROTATION_AND_MOUSE
+int		event_mouse_move(int x, int y, t_data *data);
 void	rotate_right(t_data *data, float i);
 void	rotate_left(t_data *data, float i);
-// float 	deg_to_rad(int angle);
-
-// MOUSE
-int		event_mouse_move(int x, int y, t_data *data);
-void	mouse_move_left(t_data *data, int diff, int x, int y);
-void	mouse_move_right(t_data *data, int diff, int x, int y);
-int		event_mouse_release(int button, int x, int y, t_data *data);
 
 // MOVEMENT
 void	dir_up(t_data *data);
@@ -210,7 +191,6 @@ void	mini_dir_right(t_data *data);
 //void	draw_minimap_background(t_data *data);
 //void	draw_minimap(t_data *data);
 void	draw_minimap_player(t_data *data);
-void	draw_map_circle(t_data *data, float xx, float yy, int i);
 
 // BRSENHAM_LINE
 //void	bresenham_line(t_data *data, t_raymath * rc);
