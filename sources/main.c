@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/26 19:29:14 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:54:51 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,38 @@ static	int	load_images(t_data *data)
 		&data->img.line_len, &data->img.endian);
 	while (data->config->elems[NO][i] && data->config->elems[NO][i] == ' ')
 		i++;
-	data->tex_no.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[NO][i], &data->tex_no.width, &data->tex_no.height);
-	if (!data->tex_no.mlx_img)
+	data->tex[NO].mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[NO][i], &data->tex[NO].width, &data->tex[NO].height);
+	if (!data->tex[NO].mlx_img)
 		return (-1);
-	data->tex_no.addr = mlx_get_data_addr(data->tex_no.mlx_img, &data->tex_no.bpp, 
-		&data->tex_no.line_len, &data->tex_no.endian);
+	data->tex[NO].addr = mlx_get_data_addr(data->tex[NO].mlx_img, &data->tex[NO].bpp, 
+		&data->tex[NO].line_len, &data->tex[NO].endian);
 	
 	i = 2;
 	while (data->config->elems[SO][i] && data->config->elems[SO][i] == ' ')
 		i++;
-	data->tex_so.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[SO][i], &data->tex_so.width, &data->tex_so.height);
-	if (!data->tex_so.mlx_img)
+	data->tex[SO].mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[SO][i], &data->tex[SO].width, &data->tex[SO].height);
+	if (!data->tex[SO].mlx_img)
 		return (-1);
-	data->tex_so.addr = mlx_get_data_addr(data->tex_so.mlx_img, &data->tex_so.bpp, 
-		&data->tex_so.line_len, &data->tex_so.endian);
+	data->tex[SO].addr = mlx_get_data_addr(data->tex[SO].mlx_img, &data->tex[SO].bpp, 
+		&data->tex[SO].line_len, &data->tex[SO].endian);
 
 	i = 2;
 	while (data->config->elems[EA][i] && data->config->elems[EA][i] == ' ')
 		i++;	
-	data->tex_ea.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[EA][i], &data->tex_ea.width, &data->tex_ea.height);
-	if (!data->tex_ea.mlx_img)
+	data->tex[EA].mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[EA][i], &data->tex[EA].width, &data->tex[EA].height);
+	if (!data->tex[EA].mlx_img)
 		return (-1);
-	data->tex_ea.addr = mlx_get_data_addr(data->tex_ea.mlx_img, &data->tex_ea.bpp, 
-		&data->tex_ea.line_len, &data->tex_ea.endian);
+	data->tex[EA].addr = mlx_get_data_addr(data->tex[EA].mlx_img, &data->tex[EA].bpp, 
+		&data->tex[EA].line_len, &data->tex[EA].endian);
 	
 	i = 2;
 	while (data->config->elems[WE][i] && data->config->elems[WE][i] == ' ')
 		i++;
-	data->tex_we.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[WE][i], &data->tex_we.width, &data->tex_we.height);
-	if (!data->tex_we.mlx_img)
+	data->tex[WE].mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, &data->config->elems[WE][i], &data->tex[WE].width, &data->tex[WE].height);
+	if (!data->tex[WE].mlx_img)
 		return (-1);
-	data->tex_we.addr = mlx_get_data_addr(data->tex_we.mlx_img, &data->tex_we.bpp, 
-		&data->tex_we.line_len, &data->tex_we.endian);
+	data->tex[WE].addr = mlx_get_data_addr(data->tex[WE].mlx_img, &data->tex[WE].bpp, 
+		&data->tex[WE].line_len, &data->tex[WE].endian);
 	return (0);
 }
 
@@ -72,10 +72,10 @@ static	void	player_angle(t_data *data, t_config *config, int px, int py)
 
 static	void	init_textures(t_data *data)
 {
-	data->tex_no.mlx_img = NULL;
-	data->tex_so.mlx_img = NULL;
-	data->tex_ea.mlx_img = NULL;
-	data->tex_we.mlx_img = NULL;
+	data->tex[NO].mlx_img = NULL;
+	data->tex[SO].mlx_img = NULL;
+	data->tex[EA].mlx_img = NULL;
+	data->tex[WE].mlx_img = NULL;
 }
 
 static	void	init_mini_struct(t_data *data, t_config *config)

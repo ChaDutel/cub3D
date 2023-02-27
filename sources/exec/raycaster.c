@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/27 17:41:41 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:55:12 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,19 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-static	int		get_texture_color(t_data *data, int width, int height, float div, float div2)
+static	int		get_texture_color(t_data *data, int width, int height, float div, float div2, int texture_type)
 {
 	char	*pixel;
 	int		color;
-	
-	// protect for unusual texture sizes
+
 	(void)width;
-	pixel = data->tex_no.addr
-		+ ((int)(height * div)) * data->tex_no.line_len + (int)div2 * (data->tex_no.bpp / 8);
+	pixel = data->tex[texture_type].addr
+		+ ((int)(height * div)) * data->tex[texture_type].line_len + (int)div2 * (data->tex[texture_type].bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
 
-static	void	draw_wall(t_data *data, int x, int start, int stop, t_raymath *rc)
+static	void	draw_wall(t_data *data, int x, int start, int stop, t_raymath *rc, int texture_type)
 {
 	int	tex_color;
 	int	wall_height = stop - start;
@@ -63,35 +62,23 @@ static	void	draw_wall(t_data *data, int x, int start, int stop, t_raymath *rc)
 	
 	while (start < stop)
 	{
-		tex_color = get_texture_color(data, x, start - begin, div, div2);
+		tex_color = get_texture_color(data, x, start - begin, div, div2, texture_type);
 		image_pixel_put(data, x, start, tex_color);
 		start++;
 	}
 }
 
-// static	int	find_texture_type(t_data *data, t_raymath *rc, int *ref_x)
-// {
-// 	if (rc->ray.angle <= 45 && rc->ray.angle > 315)
-// 	{
-// 		*ref_x = rc;
-// 		return (SO);
-// 	}
-// 	else if (rc->ray.angle <= 135 && rc->ray.angle > 45)
-// 	{
-// 		*ref_x = ;
-// 		return (WE);
-// 	}
-// 	else if (rc->ray.angle <= 225 && rc->ray.angle > 135)
-// 	{
-// 		*ref_x = rc->nb_ray;
-// 		return (NO);
-// 	}
-// 	else
-// 	{
-// 		*ref_x = ;
-// 		return (EA);
-// 	}
-// }
+static	int	find_texture_type(t_raymath *rc)
+{
+	if (rc->ray.angle <= 45 && rc->ray.angle > 315)
+		return (SO);
+	else if (rc->ray.angle <= 135 && rc->ray.angle > 45)
+		return (WE);
+	else if (rc->ray.angle <= 225 && rc->ray.angle > 135)
+		return (NO);
+	else
+		return (EA);
+}
 
 static	void	draw_projection(t_data *data, t_raymath *rc)
 {
@@ -107,7 +94,7 @@ static	void	draw_projection(t_data *data, t_raymath *rc)
 	draw_floor(data, rc->nb_ray, rc->player_height + wall_height, WINDOW_HEIGHT);
 
 	draw_wall(data, rc->nb_ray, rc->player_height - wall_height,
-		rc->player_height + wall_height, rc);
+		rc->player_height + wall_height, rc, find_texture_type(rc));
 }
 
 void	raycaster(t_data *data)
