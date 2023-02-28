@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/28 19:29:09 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 20:56:52 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ static	void	draw_image(t_data *data, t_raycast *rc)
 {
 	int	wall_height;
 
-	wall_height = floor((WINDOW_HEIGHT / 2) / rc->wall_dist);
+	wall_height = floor((WINDOW_HEIGHT) / 2 / rc->wall_dist);
+	//printf("%d\n", wall_height);
 	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2 + wall_height, WINDOW_HEIGHT - 1);
 	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - wall_height);
 }
 
-static	void	choose_dist(t_raycast * rc)
+static	void	choose_dist(t_data *data, t_raycast * rc)
 {
+	(void)data;
 	if (rc->side == 1)
 	{
 		rc->wall_dist = rc->t_max_x - rc->t_delta_x;
@@ -61,6 +63,9 @@ static	void	choose_dist(t_raycast * rc)
 		rc->wall_dist = rc->t_max_y - rc->t_delta_y;
 		rc->wall_percent = rc->u.x + rc->v.x * rc->wall_dist;
 	}
+	//rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle )));
+	//distance = distance * cos(deg_to_rad(fix_ang(rc->ray.angle)));
+	//printf("wall_dist %f\n", rc->wall_dist);
 	//rc->wall_percent -= floor(rc->wall_percent);
 	
 }
@@ -88,14 +93,13 @@ void	raycaster(t_data *data)
 
 	rc.nb_ray = 0;
 	rc.ray_angle = fix_ang(data->player.angle + ((float)FOV / 2.0));
-	rc.angle_step = (float)FOV / (float)WINDOW_WIDTH;
-	rc.pos.x = data->player_pos.x;
-	rc.pos.y = data->player_pos.y;
-		
+	rc.angle_step = (float)FOV / (float)WINDOW_WIDTH;	
 	while (rc.nb_ray < WINDOW_WIDTH)
 	{
-		rc.u.x = floor(rc.pos.x);
-		rc.u.y = floor(rc.pos.y);
+		rc.pos.x = data->player_pos.x;
+		rc.pos.y = data->player_pos.y;
+		rc.u.x = (rc.pos.x);
+		rc.u.y = (rc.pos.y);
 		rc.v.x = cos(deg_to_rad(rc.ray_angle));
 		rc.v.y = sin(deg_to_rad(rc.ray_angle));
 
@@ -119,28 +123,28 @@ void	raycaster(t_data *data)
 		i = 0;
 		while (i < 100)
 		{
-			if (rc.t_max_x > rc.t_max_y)
+			if (rc.t_max_x < rc.t_max_y)
 			{
-				rc.side = 0;
+				rc.side = 1;
 				rc.t_max_x += rc.t_delta_x;
 				rc.pos.x += rc.step_x; 
 			}
 			else
 			{
-				rc.side = 1;
+				rc.side = 0;
 				rc.t_max_y += rc.t_delta_y;
 				rc.pos.y += rc.step_y;
 			}
 			rc.elem.x = (int)rc.pos.x;
 			rc.elem.y = (int)rc.pos.y;
-			printf("x: %f   y:  %f\n", rc.elem.x, rc.elem.y);
-			if (rc.elem.x > 0 && rc.elem.x < (int)data->config->x - 1
-			&& rc.elem.y > 0 && rc.elem.y < (int)data->config->y - 1
-			&& data->config->map[(int)rc.elem.x][(int)rc.elem.y] == '1')
+
+			if (rc.elem.x >= 0 && rc.elem.x < (int)data->config->x
+			&& rc.elem.y >= 0 && rc.elem.y < (int)data->config->y
+			&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1')
 				break ;
 			i++;
 		}
-		choose_dist(&rc);
+		choose_dist(data, &rc);
 		draw_image(data, &rc);
 		rc.nb_ray++;
 		rc.ray_angle += fix_ang(rc.angle_step);

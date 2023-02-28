@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/28 19:20:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 20:59:08 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ static	int	load_images(t_data *data)
 static	void	player_angle(t_data *data, t_config *config, int px, int py)
 {
 	if (config->map[py][px] == 'N')
-		data->player.angle = 180;
-	if (config->map[py][px] == 'S')
-		data->player.angle = 0;
-	if (config->map[py][px] == 'E')
-		data->player.angle = 270;
-	if (config->map[py][px] == 'W')
 		data->player.angle = 90;
+	if (config->map[py][px] == 'S')
+		data->player.angle = 270;
+	if (config->map[py][px] == 'E')
+		data->player.angle = 0;
+	if (config->map[py][px] == 'W')
+		data->player.angle = 180;
 }
 
 static	void	init_textures(t_data *data)

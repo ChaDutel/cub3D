@@ -137,7 +137,6 @@ typedef struct s_data
 	t_img		img;
 	t_img		tex[4];
 	t_point		mouse;
-	t_dir		cam_dir;
 	t_point		player_pos;
 	t_vector	player;
 	t_vector	mini_player;
