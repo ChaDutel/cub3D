@@ -63,8 +63,8 @@
 //point and mouse
 typedef	struct s_point
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 } t_point;
 
 //config file
@@ -99,14 +99,34 @@ typedef	struct s_vector
 	float	angle;
 } t_vector;
 
-//raycaster values
-typedef	struct s_raymath
+// direction vector
+typedef struct s_dir
 {
-	t_vector	ray;
-	int			nb_ray;
-	float		angle_increment;
-	int			player_height;
-} t_raymath;
+	float x;
+	float y;
+} t_dir;
+
+//raycaster values
+typedef struct s_raycast
+{
+	t_dir	u;
+	t_dir	v;
+	t_point	pos;
+	t_point	elem;
+	int		side;
+	float	step_x;
+	float	step_y;
+	float	t_max_x;
+	float	t_max_y;
+	float	t_delta_x;
+	float	t_delta_y;
+	int		nb_ray;
+	float	wall_dist;
+	float	ray_angle;
+	float	angle_step;
+	float	wall_percent;
+} t_raycast;
+
 
 //mlx struct
 typedef struct s_data
@@ -117,6 +137,8 @@ typedef struct s_data
 	t_img		img;
 	t_img		tex[4];
 	t_point		mouse;
+	t_dir		cam_dir;
+	t_point		player_pos;
 	t_vector	player;
 	t_vector	mini_player;
 } t_data;

@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/27 17:54:51 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 19:20:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 			break ;
 		py++;
 	}
-	data->player.x = (float)px * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
-	data->player.y = (float)py * TEXTURE_SIZE + (TEXTURE_SIZE / 2);
+	data->player.x = px;
+	data->player.y = py;
+	data->player_pos.x = px;
+	data->player_pos.y = py;
 	data->mini_player.x = data->player.x;
 	data->mini_player.y = data->player.y;
 	player_angle(data, config, px, py);

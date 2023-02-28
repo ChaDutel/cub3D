@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   rotation_and_mouse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:30:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/27 19:00:29 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 18:38:21 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	event_mouse_move(int x, int y, t_data *data)
 {
 	int	diff;
 
-	diff = abs(data->mouse.x - x);
+	diff = fabs(data->mouse.x - x);
 	if (diff > 6)
 		diff = 6;
 	if (y < (WINDOW_HEIGHT * 0.3) || y > (WINDOW_HEIGHT * 0.7))
