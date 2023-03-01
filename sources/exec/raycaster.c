@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/02/28 20:56:52 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 01:07:24 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 static	void	draw_image(t_data *data, t_raycast *rc)
 {
 	int	wall_height;
+	// float	distance;
+
+	// distance = sqrt(pow(data->player_pos.x - rc->t_max_x, 2)
+	// 		+ pow(data->player_pos.y - rc->t_max_y, 2));
 
 	wall_height = floor((WINDOW_HEIGHT) / 2 / rc->wall_dist);
-	//printf("%d\n", wall_height);
 	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2 + wall_height, WINDOW_HEIGHT - 1);
 	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - wall_height);
 }
@@ -63,7 +66,6 @@ static	void	choose_dist(t_data *data, t_raycast * rc)
 		rc->wall_dist = rc->t_max_y - rc->t_delta_y;
 		rc->wall_percent = rc->u.x + rc->v.x * rc->wall_dist;
 	}
-	//rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle )));
 	//distance = distance * cos(deg_to_rad(fix_ang(rc->ray.angle)));
 	//printf("wall_dist %f\n", rc->wall_dist);
 	//rc->wall_percent -= floor(rc->wall_percent);
@@ -98,8 +100,8 @@ void	raycaster(t_data *data)
 	{
 		rc.pos.x = data->player_pos.x;
 		rc.pos.y = data->player_pos.y;
-		rc.u.x = (rc.pos.x);
-		rc.u.y = (rc.pos.y);
+		rc.u.x = rc.pos.x;
+		rc.u.y = rc.pos.y;
 		rc.v.x = cos(deg_to_rad(rc.ray_angle));
 		rc.v.y = sin(deg_to_rad(rc.ray_angle));
 
@@ -121,7 +123,7 @@ void	raycaster(t_data *data)
 		rc.t_max_y = get_t_max_y(&rc);
 
 		i = 0;
-		while (i < 100)
+		while (i < MAX_DOF)
 		{
 			if (rc.t_max_x < rc.t_max_y)
 			{
@@ -137,10 +139,9 @@ void	raycaster(t_data *data)
 			}
 			rc.elem.x = (int)rc.pos.x;
 			rc.elem.y = (int)rc.pos.y;
-
 			if (rc.elem.x >= 0 && rc.elem.x < (int)data->config->x
-			&& rc.elem.y >= 0 && rc.elem.y < (int)data->config->y
-			&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1')
+				&& rc.elem.y >= 0 && rc.elem.y < (int)data->config->y
+				&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1')
 				break ;
 			i++;
 		}

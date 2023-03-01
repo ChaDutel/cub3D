@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:01:42 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/19 10:12:03 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 00:25:39 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	pre_parsing(char *config_file)
 
 	fd = open(config_file, O_RDONLY);
 	if (fd == -1)
-		return (error_msg("Error : can't open the config file\n"));
+		return (error_msg("Can't open the config file\n"));
 	if (check_elems(fd) == -1)
 	{
 		close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:23:48 by charline          #+#    #+#             */
-/*   Updated: 2023/02/19 10:09:36 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 00:26:00 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_map_elems(char *line)
 		if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S'
 			&& line[i] != 'W' && line[i] != '0' && line[i] != '1'
 			&& line[i] != ' ' && line[i] != '\n')
-			return (error_msg("Error : Wrong map elements\n"));
+			return (error_msg("Wrong map elements\n"));
 		i++;
 	}
 	return (0);
@@ -36,9 +36,9 @@ int	check_nb_coordinate(int *iter)
 	while (i < 6)
 	{
 		if (iter[i] > 1)
-			return (error_msg("Error : duplicate coordinate\n"));
+			return (error_msg("Duplicate coordinate\n"));
 		else if (iter[i] < 1)
-			return (error_msg("Error : coordinate missing\n"));
+			return (error_msg("Coordinate missing\n"));
 		i++;
 	}
 	return (0);
@@ -80,6 +80,6 @@ int	find_coordinate(char *line, int *iter)
 	else if (line[i] == 'C')
 		iter[5]++;
 	else
-		return (error_msg("Error : wrong coordinate name\n"));
+		return (error_msg("Wrong coordinate name\n"));
 	return (0);
 }

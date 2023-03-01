@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:32:24 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/07 11:58:03 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 00:26:15 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	int	check_extension(char *str)
 	i = 0;
 	u = 0;
 	if (str == NULL)
-		return (error_msg("Error : NULL parameter\n"));
+		return (error_msg("NULL parameter\n"));
 	while (str[i])
 		i++;
 	j = i;
@@ -32,10 +32,10 @@ static	int	check_extension(char *str)
 	}
 	u--;
 	if (u < 5)
-		return (error_msg("Error : bad config name\n"));
+		return (error_msg("Bad config name\n"));
 	if (str[i] != '\0' || str[i - 1] != 'b' || str[i - 2] != 'u' \
 		|| str[i - 3] != 'c' || str[i - 4] != '.')
-		return (error_msg("Error : bad config name\n"));
+		return (error_msg("Bad config name\n"));
 	else
 		return (0);
 }

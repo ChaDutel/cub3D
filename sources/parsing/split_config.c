@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/19 10:17:11 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 00:25:24 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,19 @@ int	split_config(char *config_file, t_config *config)
 
 	fd = open(config_file, O_RDONLY);
 	if (fd == -1)
-		return (error_msg("Error : cannot open the config file\n"));
+		return (error_msg("Cannot open the config file\n"));
 	if (fill_elems(fd, config) == -1)
 	{
 		close(fd);
-		return (error_msg("Error : malloc failed\n"));
+		return (error_msg("Malloc failed\n"));
 	}
 	if (map_mesurer(fd, config) == -1)
-		return (error_msg("Error : bad map size\n"));
+		return (error_msg("Bad map size\n"));
 	close(fd);
 	if (config->x < 3 || config->y < 3)
-		return (error_msg("Error : bad map size\n"));
+		return (error_msg("Bad map size\n"));
 	if (fill_map(fd, config_file, config) == -1)
-		return (error_msg("Error : malloc failed\n"));
+		return (error_msg("Malloc failed\n"));
 	trim_elems(config);
 	sort_elems(config);
 	return (0);

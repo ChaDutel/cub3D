@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:08:48 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/19 10:08:57 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 00:26:29 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	parse_map(t_config *config)
 {
 	if (check_nb_player(config))
 		return (
-			error_msg("Error : There should be exactly 1 player on the map\n"));
+			error_msg("There should be exactly 1 player on the map\n"));
 	if (check_map_walls(config))
-		return (error_msg("Error : The map is not closed\n"));
+		return (error_msg("The map is not closed\n"));
 	return (0);
 }
