@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 16:10:58 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 17:24:31 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,52 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-static	void	draw_wall(t_data *data, int x, int start, int stop)
+
+// static	void	draw_wall(t_data *data, int x, int start, int stop, t_raycast *rc, int texture_type)
+// {
+// 	int	tex_color;
+// 	int	wall_height = stop - start;
+// 	float	div = (float)TEXTURE_SIZE / (wall_height);
+// 	float	div2 = (float)TEXTURE_SIZE * (rc->ray.x - floor(rc->ray.x)); 
+// 	int	begin = start;
+	
+// 	while (start < stop)
+// 	{
+// 		tex_color = get_texture_color(data, x, start - begin, div, div2, texture_type);
+// 		image_pixel_put(data, x, start, tex_color);
+// 		start++;
+// 	}
+// }
+
+static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int texture_type)
 {
+	char	*pixel;
+	int		color;
+
+	pixel = data->tex[texture_type].addr + ((int)(height * TEXTURE_SIZE / (WINDOW_HEIGHT / 2 / rc->wall_dist)) % data->tex[texture_type].height) * data->tex[texture_type].line_len + ((int)(rc->wall_percent * TEXTURE_SIZE) % data->tex[texture_type].width) * (data->tex[texture_type].bpp / 8);
+	color = *(int*)pixel;
+	return (color);
+}
+
+static	int	find_texture_type(t_raycast *rc)
+{
+	(void)rc;
+	return (NO);
+}
+
+static	void	draw_texture(t_data *data, t_raycast *rc, int start, int stop)
+{
+	int	current;
+	int	texture_type;
 	int	color;
 
-	color = 0xFF0000;
-	while (start < stop)
+	current = start;
+	texture_type = find_texture_type(rc);
+	while (current < stop)
 	{
-		image_pixel_put(data, x, start, color);
-		start++;
+		color = get_texture_color(data, rc, start - current, texture_type);
+		image_pixel_put(data, rc->nb_ray, current, color);
+		current++;
 	}
 }
 
@@ -66,7 +103,7 @@ static	void	draw_image(t_data *data, t_raycast *rc)
 
 	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - wall_height);
 
-	draw_wall(data, rc->nb_ray, WINDOW_HEIGHT / 2 - wall_height, WINDOW_HEIGHT / 2
+	draw_texture(data, rc, WINDOW_HEIGHT / 2 - wall_height, WINDOW_HEIGHT / 2
 		+ wall_height);
 }
 
@@ -85,7 +122,7 @@ static	void	choose_dist(t_data *data, t_raycast * rc)
 	}
 	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle
 		- data->player.angle)));
-	//rc->wall_percent -= floor(rc->wall_percent);
+	rc->wall_percent -= floor(rc->wall_percent);
 	
 }
 
