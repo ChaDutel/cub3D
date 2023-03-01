@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 12:32:05 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 14:05:14 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static	void	draw_image(t_data *data, t_raycast *rc)
 		wall_height = WINDOW_HEIGHT / 2 / rc->wall_dist;
 
 	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2
-		+ wall_height, WINDOW_HEIGHT - 1);
+		+ wall_height, WINDOW_HEIGHT);
 
 	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - wall_height);
 

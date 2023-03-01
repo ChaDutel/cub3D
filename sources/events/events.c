@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/02/28 23:48:25 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 14:09:40 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	handle_keypress(int keysym, t_data *data)
 	else if (keysym == XK_d)
 		dir_right(data);
 	else if (keysym == XK_Left)
-		rotate_left(data, 1);
+		rotate_left(data, 4);
 	else if (keysym == XK_Right)
-		rotate_right(data, 1);
-	draw_minimap_player(data);
+		rotate_right(data, 4);
+	//draw_minimap_player(data);
 	return (0);
 }

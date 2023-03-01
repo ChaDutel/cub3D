@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:30:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/02/28 23:49:23 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 14:08:40 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 void	rotate_left(t_data *data, float i)
 {
-	//data->player.angle += i;
 	data->player.angle = fix_ang(data->player.angle + i);
-	data->mini_player.angle -= i;
-	data->mini_player.angle = fix_ang(data->mini_player.angle);
+	data->mini_player.angle = fix_ang(data->mini_player.angle - i);
 }
 
 void	rotate_right(t_data *data, float i)
 {
-	//data->player.angle -= i;
 	data->player.angle = fix_ang(data->player.angle - i);
-	data->mini_player.angle += i;
-	data->mini_player.angle = fix_ang(data->mini_player.angle);
+	data->mini_player.angle = fix_ang(data->mini_player.angle + i);
 }
 
 static	void	mouse_move_right(t_data *data, int diff, int x, int y)
