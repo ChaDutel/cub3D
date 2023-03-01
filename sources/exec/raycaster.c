@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 10:00:52 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 11:19:18 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	raycaster(t_data *data)
 	rc.angle_step = (float)FOV / (float)WINDOW_WIDTH;	
 	while (rc.nb_ray < WINDOW_WIDTH)
 	{
-		rc.pos.x = data->player_pos.x;
-		rc.pos.y = data->player_pos.y;
+		rc.pos.x = data->player.x;
+		rc.pos.y = data->player.y;
 		rc.u.x = rc.pos.x;
 		rc.u.y = rc.pos.y;
 		rc.v.x = cos(deg_to_rad(rc.ray_angle));

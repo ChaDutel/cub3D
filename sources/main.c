@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/01 10:01:42 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 11:20:04 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,8 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	}
 	data->player.x = px;
 	data->player.y = py;
-	data->player_pos.x = px;
-	data->player_pos.y = py;
-	data->mini_player.x = data->player_pos.x;
-	data->mini_player.y = data->player_pos.y;
+	data->mini_player.x = data->player.x;
+	data->mini_player.y = data->player.y;
 	player_angle(data, config, px, py);
 }
 

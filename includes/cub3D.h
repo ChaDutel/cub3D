@@ -65,6 +65,9 @@ typedef	struct s_point
 {
 	float	x;
 	float	y;
+	float	co;
+	float	si;
+	float	angle;
 } t_point;
 
 //config file
@@ -89,15 +92,12 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
-//vector
-typedef	struct s_vector
-{
-	float	x;
-	float	y;
-	float	co;
-	float	si;
-	float	angle;
-} t_vector;
+// //vector
+// typedef	struct s_vector
+// {
+// 	float	x;
+// 	float	y;
+// } t_vector;
 
 // direction vector
 typedef struct s_dir
@@ -136,10 +136,10 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_img		tex[4];
-	t_point		mouse;
-	t_point		player_pos;
-	t_vector	player;
-	t_vector	mini_player;
+	t_point		mouse; //float int
+	t_point		player;
+	// t_vector	player;
+	t_point		mini_player;
 } t_data;
 
 //***************//
