@@ -52,7 +52,7 @@
 # define PI 3.1415926535
 # define TEXTURE_SIZE 64
 # define MAX_DOF 100
-# define FOV 90
+# define FOV 60
 # define ANGLE_INCREMENT ((float)FOV / (float)WINDOW_WIDTH)
 
 //miscs
@@ -109,6 +109,8 @@ typedef struct s_dir
 //raycaster values
 typedef struct s_raycast
 {
+
+	// USE DOUBLE
 	t_dir	u;
 	t_dir	v;
 	t_point	pos;

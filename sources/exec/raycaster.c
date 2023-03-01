@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 14:56:32 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 16:10:58 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static	void	draw_image(t_data *data, t_raycast *rc)
 
 static	void	choose_dist(t_data *data, t_raycast * rc)
 {
+	(void)data;
 	if (rc->side == 1)
 	{
 		rc->wall_dist = rc->t_max_x - rc->t_delta_x;
@@ -99,9 +100,9 @@ static	float	get_t_max_x(t_raycast *rc)
 static	float	get_t_max_y(t_raycast *rc)
 {
 	if (rc->v.y < 0)
-		return (rc->pos.y - rc->u.y) * rc->t_delta_y;
+		return (rc->pos.y - floor(rc->u.y)) * rc->t_delta_y;
 	else
-		return (rc->u.y + 1.0f - rc->pos.y) * rc->t_delta_y;
+		return (floor(rc->u.y) + 1.0f - rc->pos.y) * rc->t_delta_y;
 }
 
 void	raycaster(t_data *data)
@@ -112,7 +113,7 @@ void	raycaster(t_data *data)
 	rc.nb_ray = 0;
 	rc.ray_angle = fix_ang(data->player.angle + ((float)FOV / 2.0));
 	rc.angle_step = (float)FOV / (float)WINDOW_WIDTH;
-	printf("x: %f   y: %f\n", data->player.x, data->player.y);
+	//printf("x: %f   y: %f\n", data->player.x, data->player.y);
 	while (rc.nb_ray < WINDOW_WIDTH)
 	{
 		rc.pos.x = data->player.x;
