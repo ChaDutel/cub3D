@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 01:07:24 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 10:00:52 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static	void	draw_image(t_data *data, t_raycast *rc)
 
 static	void	choose_dist(t_data *data, t_raycast * rc)
 {
-	(void)data;
 	if (rc->side == 1)
 	{
 		rc->wall_dist = rc->t_max_x - rc->t_delta_x;
@@ -66,7 +65,7 @@ static	void	choose_dist(t_data *data, t_raycast * rc)
 		rc->wall_dist = rc->t_max_y - rc->t_delta_y;
 		rc->wall_percent = rc->u.x + rc->v.x * rc->wall_dist;
 	}
-	//distance = distance * cos(deg_to_rad(fix_ang(rc->ray.angle)));
+	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle - data->player.angle)));
 	//printf("wall_dist %f\n", rc->wall_dist);
 	//rc->wall_percent -= floor(rc->wall_percent);
 	
@@ -148,6 +147,6 @@ void	raycaster(t_data *data)
 		choose_dist(data, &rc);
 		draw_image(data, &rc);
 		rc.nb_ray++;
-		rc.ray_angle += fix_ang(rc.angle_step);
+		rc.ray_angle -= fix_ang(rc.angle_step);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/01 00:24:54 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 10:01:42 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static	void	player_angle(t_data *data, t_config *config, int px, int py)
 		data->player.angle = 0;
 	if (config->map[py][px] == 'W')
 		data->player.angle = 180;
+	data->mini_player.angle = data->player.angle;
 }
 static	void	init_textures(t_data *data)
 {
@@ -85,10 +86,9 @@ static	void	init_mini_struct(t_data *data, t_config *config)
 	data->player.y = py;
 	data->player_pos.x = px;
 	data->player_pos.y = py;
-	data->mini_player.x = data->player.x;
-	data->mini_player.y = data->player.y;
+	data->mini_player.x = data->player_pos.x;
+	data->mini_player.y = data->player_pos.y;
 	player_angle(data, config, px, py);
-	data->mini_player.angle = data->player.angle - 90;
 }
 
 static	int	run_mlx(t_config *config)
