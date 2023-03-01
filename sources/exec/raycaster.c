@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 11:19:18 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 12:32:05 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,34 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
+static	void	draw_wall(t_data *data, int x, int start, int stop)
+{
+	int	color;
+
+	color = 0xFF0000;
+	while (start < stop)
+	{
+		image_pixel_put(data, x, start, color);
+		start++;
+	}
+}
+
 static	void	draw_image(t_data *data, t_raycast *rc)
 {
 	int	wall_height;
-	// float	distance;
 
-	// distance = sqrt(pow(data->player_pos.x - rc->t_max_x, 2)
-	// 		+ pow(data->player_pos.y - rc->t_max_y, 2));
+	if (rc->wall_dist == 0)
+		wall_height = WINDOW_HEIGHT / 2;
+	else
+		wall_height = WINDOW_HEIGHT / 2 / rc->wall_dist;
 
-	wall_height = floor((WINDOW_HEIGHT) / 2 / rc->wall_dist);
-	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2 + wall_height, WINDOW_HEIGHT - 1);
+	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2
+		+ wall_height, WINDOW_HEIGHT - 1);
+
 	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - wall_height);
+
+	draw_wall(data, rc->nb_ray, WINDOW_HEIGHT / 2 - wall_height, WINDOW_HEIGHT / 2
+		+ wall_height);
 }
 
 static	void	choose_dist(t_data *data, t_raycast * rc)
@@ -65,8 +82,8 @@ static	void	choose_dist(t_data *data, t_raycast * rc)
 		rc->wall_dist = rc->t_max_y - rc->t_delta_y;
 		rc->wall_percent = rc->u.x + rc->v.x * rc->wall_dist;
 	}
-	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle - data->player.angle)));
-	//printf("wall_dist %f\n", rc->wall_dist);
+	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle
+		- data->player.angle)));
 	//rc->wall_percent -= floor(rc->wall_percent);
 	
 }
@@ -136,8 +153,8 @@ void	raycaster(t_data *data)
 				rc.t_max_y += rc.t_delta_y;
 				rc.pos.y += rc.step_y;
 			}
-			rc.elem.x = (int)rc.pos.x;
-			rc.elem.y = (int)rc.pos.y;
+			rc.elem.x = floor(rc.pos.x);
+			rc.elem.y = floor(rc.pos.y);
 			if (rc.elem.x >= 0 && rc.elem.x < (int)data->config->x
 				&& rc.elem.y >= 0 && rc.elem.y < (int)data->config->y
 				&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1')
@@ -147,6 +164,6 @@ void	raycaster(t_data *data)
 		choose_dist(data, &rc);
 		draw_image(data, &rc);
 		rc.nb_ray++;
-		rc.ray_angle -= fix_ang(rc.angle_step);
+		rc.ray_angle = fix_ang(rc.ray_angle - rc.angle_step);
 	}
 }
