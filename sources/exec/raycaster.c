@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 14:05:14 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 14:56:32 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void	raycaster(t_data *data)
 
 	rc.nb_ray = 0;
 	rc.ray_angle = fix_ang(data->player.angle + ((float)FOV / 2.0));
-	rc.angle_step = (float)FOV / (float)WINDOW_WIDTH;	
+	rc.angle_step = (float)FOV / (float)WINDOW_WIDTH;
+	printf("x: %f   y: %f\n", data->player.x, data->player.y);
 	while (rc.nb_ray < WINDOW_WIDTH)
 	{
 		rc.pos.x = data->player.x;
@@ -119,7 +120,7 @@ void	raycaster(t_data *data)
 		rc.u.x = rc.pos.x;
 		rc.u.y = rc.pos.y;
 		rc.v.x = cos(deg_to_rad(rc.ray_angle));
-		rc.v.y = sin(deg_to_rad(rc.ray_angle));
+		rc.v.y = -sin(deg_to_rad(rc.ray_angle));
 
 		if (rc.v.x > 0)
 			rc.step_x = 1;
@@ -157,8 +158,8 @@ void	raycaster(t_data *data)
 			rc.elem.y = floor(rc.pos.y);
 			if (rc.elem.x >= 0 && rc.elem.x < (int)data->config->x
 				&& rc.elem.y >= 0 && rc.elem.y < (int)data->config->y
-				&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1')
-				break ;
+				&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1') 
+				break ;  // SEFAULT WITH MOVE
 			i++;
 		}
 		choose_dist(data, &rc);

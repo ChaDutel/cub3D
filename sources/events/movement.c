@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:35:41 by maxperei          #+#    #+#             */
-/*   Updated: 2023/03/01 10:05:19 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 14:52:54 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	dir_right(t_data *data)
 	mini_dir_right(data);
 	new_x = -sin(deg_to_rad(data->player.angle)) * 4 + data->player.x;
 	new_y = cos(deg_to_rad(data->player.angle)) * 4 + data->player.y;
-	if (data->config->map[(int)new_y / TEXTURE_SIZE][(int)new_x \
-		/ TEXTURE_SIZE] != '1')
+	if (new_x >= data->config->x || new_x < 0 || new_y >= data->config->y || new_y < 0)
+        return ;
+	if (data->config->map[(int)new_y][(int)new_x] != '1')
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
@@ -36,8 +37,9 @@ void	dir_left(t_data *data)
 	mini_dir_left(data);
 	new_x = sin(deg_to_rad(data->player.angle)) * 4 + data->player.x;
 	new_y = -cos(deg_to_rad(data->player.angle)) * 4 + data->player.y;
-	if (data->config->map[(int)new_y / TEXTURE_SIZE][(int)new_x \
-		/ TEXTURE_SIZE] != '1')
+	if (new_x >= data->config->x || new_x < 0 || new_y >= data->config->y || new_y < 0)
+        return ;
+	if (data->config->map[(int)new_y][(int)new_x] != '1')
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
@@ -52,8 +54,9 @@ void	dir_down(t_data *data)
 	mini_dir_down(data);
 	new_x = cos(deg_to_rad(data->player.angle)) * 4 + data->player.x;
 	new_y = sin(deg_to_rad(data->player.angle)) * 4 + data->player.y;
-	if (data->config->map[(int)new_y / TEXTURE_SIZE][(int)new_x \
-		/ TEXTURE_SIZE] != '1')
+	if (new_x >= data->config->x || new_x < 0 || new_y >= data->config->y || new_y < 0)
+        return ;
+	if (data->config->map[(int)new_y][(int)new_x] != '1')
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
@@ -68,8 +71,9 @@ void	dir_up(t_data *data)
 	mini_dir_up(data);
 	new_x = -cos(deg_to_rad(data->player.angle)) * 4 + data->player.x;
 	new_y = -sin(deg_to_rad(data->player.angle)) * 4 + data->player.y;
-	if (data->config->map[(int)new_y / TEXTURE_SIZE][(int)new_x \
-		/ TEXTURE_SIZE] != '1')
+	if (new_x >= data->config->x || new_x < 0 || new_y >= data->config->y || new_y < 0)
+        return ;
+	if (data->config->map[(int)new_y][(int)new_x] != '1')
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
