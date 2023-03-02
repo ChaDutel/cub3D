@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:54 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/01 00:25:24 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:17:20 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,22 @@ static	int	map_mesurer(int fd, t_config *config)
 
 static	void	line_copy(char *line, t_config *config, int *i)
 {
-	config->map[*i] = line;
-	if (line[ft_strlen(line) - 1] == '\n')
-		line[ft_strlen(line) - 1] = '\0';
+	int	j;
+
+	j = 0;
+	while (line[j] && line[j] != '\n')
+	{
+		config->map[*i][j] = line[j];
+		j++;
+	}
+	while (j < (int)config->x)
+	{
+		config->map[*i][j] = ' ';
+		j++;
+	}
+	config->map[*i][j] = '\0';
 	*i += 1;
+	free(line);
 }
 
 static	int	fill_map(int fd, char *config_file, t_config *config)

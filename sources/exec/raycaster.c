@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/01 17:24:31 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 14:19:59 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int textu
 	char	*pixel;
 	int		color;
 
-	pixel = data->tex[texture_type].addr + ((int)(height * TEXTURE_SIZE / (WINDOW_HEIGHT / 2 / rc->wall_dist)) % data->tex[texture_type].height) * data->tex[texture_type].line_len + ((int)(rc->wall_percent * TEXTURE_SIZE) % data->tex[texture_type].width) * (data->tex[texture_type].bpp / 8);
+	pixel = data->tex[texture_type].addr
+		+ ((int)(height * data->tex[texture_type].height / (WINDOW_HEIGHT / 2 / rc->wall_dist)) % data->tex[texture_type].height) * data->tex[texture_type].line_len
+		+ ((int)(rc->wall_percent * data->tex[texture_type].width) % data->tex[texture_type].width) * (data->tex[texture_type].bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
@@ -123,6 +125,7 @@ static	void	choose_dist(t_data *data, t_raycast * rc)
 	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle
 		- data->player.angle)));
 	rc->wall_percent -= floor(rc->wall_percent);
+	//printf("%f\n", rc->wall_percent);
 	
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:44:33 by charline          #+#    #+#             */
-/*   Updated: 2023/02/07 15:17:52 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:20:23 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ int	prepare_map(int fd, t_config *config)
 	while (i < config->y + 1)
 	{
 		config->map[i] = NULL;
+		i++;
+	}
+	i = 0;;
+	while (i < config->y)
+	{
+		config->map[i] = malloc(sizeof(char) * (config->x + 1));
+		if (!config->map[i])
+		{
+			close(fd);
+			return (-1);
+		}
 		i++;
 	}
 	return (0);
