@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/02 17:05:14 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 17:37:33 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,23 @@ static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int textu
 {
 	char	*pixel;
 	int		color;
-	float		wall_height;
+	int		tex_y;
+	int		tex_x;
 
 	if (rc->wall_dist == 0)
-		wall_height = WINDOW_HEIGHT;
+		rc->wall_height = WINDOW_HEIGHT;
 	else
-		wall_height = WINDOW_HEIGHT / rc->wall_dist;
+		rc->wall_height = WINDOW_HEIGHT / rc->wall_dist;
 
-	//printf("height %d ::: wall_height %d ::: wall_dist %f\n", height, wall_height, rc->wall_dist);
+	tex_y = (int)(height * data->tex[texture_type].height / rc->wall_height)
+		% data->tex[texture_type].height * data->tex[texture_type].line_len;
+	if (texture_type == SO || texture_type == WE)
+		tex_x = ((int)((1.0f - rc->wall_percent) * data->tex[texture_type].width));
+	else
+		tex_x = ((int)(rc->wall_percent * data->tex[texture_type].width));
+	tex_x *= (data->tex[texture_type].bpp / 8);
 
-	pixel = data->tex[texture_type].addr
-		+ ((int)(height * data->tex[texture_type].height /  wall_height) % data->tex[texture_type].height) * data->tex[texture_type].line_len
-		+ ((int)(rc->wall_percent * data->tex[texture_type].width)) * (data->tex[texture_type].bpp / 8);
+	pixel = data->tex[texture_type].addr + tex_y + tex_x;
 	color = *(int*)pixel;
 	return (color);
 }
@@ -112,20 +117,18 @@ static	void	draw_texture(t_data *data, t_raycast *rc, int start, int stop)
 
 static	void	draw_image(t_data *data, t_raycast *rc)
 {
-	int	wall_height;
-
 	if (rc->wall_dist == 0)
-		wall_height = WINDOW_HEIGHT / 2;
+		rc->wall_height = WINDOW_HEIGHT / 2;
 	else
-		wall_height = WINDOW_HEIGHT / 2 / rc->wall_dist;
+		rc->wall_height = WINDOW_HEIGHT / 2 / rc->wall_dist;
 
 	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2
-		+ wall_height, WINDOW_HEIGHT);
+		+ rc->wall_height, WINDOW_HEIGHT);
 
-	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - wall_height);
+	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - rc->wall_height);
 
-	draw_texture(data, rc, WINDOW_HEIGHT / 2 - wall_height, WINDOW_HEIGHT / 2
-		+ wall_height);
+	draw_texture(data, rc, WINDOW_HEIGHT / 2 - rc->wall_height, WINDOW_HEIGHT / 2
+		+ rc->wall_height);
 }
 
 static	void	choose_dist(t_data *data, t_raycast * rc)

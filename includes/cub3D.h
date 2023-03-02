@@ -109,8 +109,6 @@ typedef struct s_dir
 //raycaster values
 typedef struct s_raycast
 {
-
-	// USE DOUBLE
 	t_dir	u;
 	t_dir	v;
 	t_point	pos;
@@ -127,6 +125,7 @@ typedef struct s_raycast
 	float	ray_angle;
 	float	angle_step;
 	float	wall_percent;
+	float	wall_height;
 } t_raycast;
 
 
