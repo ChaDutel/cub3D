@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/02 15:28:06 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 18:46:43 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,24 +106,14 @@ static	int	run_mlx(t_config *config)
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, 17, (1L << 2), &close_window, &data);
 	mlx_hook(data.win_ptr, 2, (1L << 0), &handle_keypress, &data);
-		//mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
+	//mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
 		// mlx_hook(data.win_ptr, 4, 0x4, event_mouse_press, &data);
 		// mlx_hook(data.win_ptr, 5, 0x8, event_mouse_release, &data);
-		//mlx_hook(data.win_ptr, 6, 0x40, event_mouse_move, &data);
+	//mlx_hook(data.win_ptr, 6, 0x40, event_mouse_move, &data);
 	mlx_loop(data.mlx_ptr);
 	free_mlx(&data);
 	return (0);
 }
-
-// static	void	print_map(t_config config)
-// {
-// 	for (int i = 0; config.map[i]; i++)
-// 	{
-// 		for (int j = 0; config.map[i][j]; j++)
-// 			printf("%c", config.map[i][j]);
-// 		printf("e\n");
-// 	}
-// }
 
 int	main(int argc, char **argv)
 {
@@ -141,7 +131,6 @@ int	main(int argc, char **argv)
 		free_config(&config);
 		return (0);
 	}
-	//print_map(config);
 	if (run_mlx(&config) == -1)
 	{
 		free_config(&config);
