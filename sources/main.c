@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/01 16:11:22 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:28:06 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static	int	run_mlx(t_config *config)
 // 	{
 // 		for (int j = 0; config.map[i][j]; j++)
 // 			printf("%c", config.map[i][j]);
-// 		printf("\n");
+// 		printf("e\n");
 // 	}
 // }
 
@@ -141,6 +141,7 @@ int	main(int argc, char **argv)
 		free_config(&config);
 		return (0);
 	}
+	//print_map(config);
 	if (run_mlx(&config) == -1)
 	{
 		free_config(&config);

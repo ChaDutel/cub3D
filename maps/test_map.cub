@@ -1,13 +1,13 @@
-NO ./textures/nord.xpm
-SO ./textures/sud.xpm
-EA ./textures/est.xpm
-WE ./textures/ouest.xpm
+NO ./textures/grass_n.xpm
+SO ./textures/grass_s.xpm
+EA ./textures/grass_e.xpm
+WE ./textures/grass_w.xpm
 F 4, 39,16
 C 126,215,204
 
 
-
 111111111
+1000001111
 10N0000001
 100011111
 11111

@@ -6,7 +6,7 @@
 /*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/02 14:19:59 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 17:05:14 by tulip            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,37 @@ static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int textu
 {
 	char	*pixel;
 	int		color;
+	float		wall_height;
+
+	if (rc->wall_dist == 0)
+		wall_height = WINDOW_HEIGHT;
+	else
+		wall_height = WINDOW_HEIGHT / rc->wall_dist;
+
+	//printf("height %d ::: wall_height %d ::: wall_dist %f\n", height, wall_height, rc->wall_dist);
 
 	pixel = data->tex[texture_type].addr
-		+ ((int)(height * data->tex[texture_type].height / (WINDOW_HEIGHT / 2 / rc->wall_dist)) % data->tex[texture_type].height) * data->tex[texture_type].line_len
-		+ ((int)(rc->wall_percent * data->tex[texture_type].width) % data->tex[texture_type].width) * (data->tex[texture_type].bpp / 8);
+		+ ((int)(height * data->tex[texture_type].height /  wall_height) % data->tex[texture_type].height) * data->tex[texture_type].line_len
+		+ ((int)(rc->wall_percent * data->tex[texture_type].width)) * (data->tex[texture_type].bpp / 8);
 	color = *(int*)pixel;
 	return (color);
 }
 
 static	int	find_texture_type(t_raycast *rc)
 {
-	(void)rc;
-	return (NO);
+	if (rc->side == 0)
+	{
+		if (rc->v.y > 0)
+			return (SO);
+		return (NO);
+	}
+	else
+	{
+		if (rc->v.x > 0)
+			return (EA);
+		else
+			return (WE);
+	}
 }
 
 static	void	draw_texture(t_data *data, t_raycast *rc, int start, int stop)
@@ -85,7 +104,7 @@ static	void	draw_texture(t_data *data, t_raycast *rc, int start, int stop)
 	texture_type = find_texture_type(rc);
 	while (current < stop)
 	{
-		color = get_texture_color(data, rc, start - current, texture_type);
+		color = get_texture_color(data, rc, current - start, texture_type);
 		image_pixel_put(data, rc->nb_ray, current, color);
 		current++;
 	}
