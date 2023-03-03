@@ -212,7 +212,8 @@ void	draw_minimap_player(t_data *data);
 // RAYCASTER
 void	raycaster(t_data *data);
 int		find_texture_type(t_raycast *rc);
-int		get_texture_color(t_data *data, t_raycast *rc, int height, int texture_type);
+int		get_texture_color(t_data *data, t_raycast *rc, int height,	\
+			int texture_type);
 
 // RAYCEASTER_UTILS
 float	get_t_max_x(t_raycast *rc);

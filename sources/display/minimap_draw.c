@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:46:24 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/03 11:07:01 by cdutel-l         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 14:53:06 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	draw_map_circle_norm(t_data *data, float xx, float yy, float *i)
 	if ((((int)x) >= 0 && ((int)x) < (int)data->config->x) \
 		&& (((int)y) >= 0 && ((int)y) < (int)data->config->y))
 	{
-		if (data->config->map[(int)y][(int)x] == '1')
+		if (data->config->map[(int)y][(int)x] == '1'
+			|| data->config->map[(int)y][(int)x] == ' ')
 			image_pixel_put(data, (yy + *i * data->player.co) \
 			+ player_size, (xx + *i * data->player.si) \
 			+ player_size, 0x8FDBB5);
