@@ -121,7 +121,6 @@ typedef struct s_raycast
 	float	wall_height;
 } t_raycast;
 
-
 //mlx struct
 typedef struct s_data
 {
@@ -133,6 +132,7 @@ typedef struct s_data
 	t_point		mouse;
 	t_point		player;
 } t_data;
+
 
 //***************//
 //    PARSING    //
