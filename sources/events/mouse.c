@@ -3,32 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   rotation_and_mouse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:30:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/01 14:08:40 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:28:17 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	rotate_left(t_data *data, float i)
-{
-	data->player.angle = fix_ang(data->player.angle + i);
-	data->mini_player.angle = fix_ang(data->mini_player.angle - i);
-}
-
-void	rotate_right(t_data *data, float i)
-{
-	data->player.angle = fix_ang(data->player.angle - i);
-	data->mini_player.angle = fix_ang(data->mini_player.angle + i);
-}
-
 static	void	mouse_move_right(t_data *data, int diff, int x, int y)
 {
 	data->mouse.x = x;
 	while (diff-- != 0)
-		rotate_right(data, 0.5);
+		data->player.angle = fix_ang(data->player.angle - 0.5);
 	if (x > WINDOW_WIDTH * 0.7)
 	{
 		mlx_mouse_move(data->mlx_ptr, data->win_ptr,
@@ -41,7 +29,7 @@ static	void	mouse_move_left(t_data *data, int diff, int x, int y)
 {
 	data->mouse.x = x;
 	while (diff-- != 0)
-		rotate_left(data, 0.5);
+		data->player.angle = fix_ang(data->player.angle + 0.5);
 	if (x < (WINDOW_WIDTH * 0.3))
 	{
 		mlx_mouse_move(data->mlx_ptr, data->win_ptr,

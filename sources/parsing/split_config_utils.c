@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_config_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:44:33 by charline          #+#    #+#             */
-/*   Updated: 2023/03/02 15:20:23 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:47:45 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	add_coordinate(char *line, int *elem_index, t_config *config)
 
 int	prepare_map(int fd, t_config *config)
 {
-	size_t	i;
+	static size_t	i = 0;
 
 	config->map = malloc(sizeof(char *) * (config->y + 1));
 	if (!config->map)
@@ -43,13 +43,12 @@ int	prepare_map(int fd, t_config *config)
 		close(fd);
 		return (-1);
 	}
-	i = 0;
 	while (i < config->y + 1)
 	{
 		config->map[i] = NULL;
 		i++;
 	}
-	i = 0;;
+	i = 0;
 	while (i < config->y)
 	{
 		config->map[i] = malloc(sizeof(char) * (config->x + 1));

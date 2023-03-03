@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:48:43 by maxperei          #+#    #+#             */
-/*   Updated: 2023/03/02 18:47:34 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 11:05:55 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-void	image_pixel_put(t_data *data, int width, int height, int color)
-{
-	char	*pixel;
-
-	if (width < 0 || height < 0 || width >= WINDOW_WIDTH \
-		|| height >= WINDOW_HEIGHT)
-		return ;
-	pixel = data->img.addr
-		+ (height * data->img.line_len + width * (data->img.bpp / 8));
-	*(int *)pixel = color;
-}
 
 int	render(t_data *data)
 {
@@ -52,9 +40,8 @@ int	handle_keypress(int keysym, t_data *data)
 	else if (keysym == XK_d)
 		dir_right(data);
 	else if (keysym == XK_Left)
-		rotate_left(data, 4);
+		data->player.angle = fix_ang(data->player.angle + 4);
 	else if (keysym == XK_Right)
-		rotate_right(data, 4);
-	//draw_minimap_player(data);
+		data->player.angle = fix_ang(data->player.angle - 4);
 	return (0);
 }

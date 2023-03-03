@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:29:37 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/02 17:37:33 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 11:02:16 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,23 @@ static	void	draw_ceilling(t_data *data, int x, int start, int stop)
 	}
 }
 
-
-// static	void	draw_wall(t_data *data, int x, int start, int stop, t_raycast *rc, int texture_type)
-// {
-// 	int	tex_color;
-// 	int	wall_height = stop - start;
-// 	float	div = (float)TEXTURE_SIZE / (wall_height);
-// 	float	div2 = (float)TEXTURE_SIZE * (rc->ray.x - floor(rc->ray.x)); 
-// 	int	begin = start;
+/* static	void	draw_wall(t_data *data, int x, int start, int stop, t_raycast *rc, int texture_type)
+{
+	int	tex_color;
+	int	wall_height = stop - start;
+	float	div = (float)TEXTURE_SIZE / (wall_height);
+	float	div2 = (float)TEXTURE_SIZE * (rc->ray.x - floor(rc->ray.x)); 
+	int	begin = start;
 	
-// 	while (start < stop)
-// 	{
-// 		tex_color = get_texture_color(data, x, start - begin, div, div2, texture_type);
-// 		image_pixel_put(data, x, start, tex_color);
-// 		start++;
-// 	}
-// }
+	while (start < stop)
+	{
+		tex_color = get_texture_color(data, x, start - begin, div, div2, texture_type);
+		image_pixel_put(data, x, start, tex_color);
+		start++;
+	}
+} */
 
-static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int texture_type)
+static int	get_texture_color(t_data *data, t_raycast *rc, int height, int texture_type)
 {
 	char	*pixel;
 	int		color;
@@ -68,7 +67,6 @@ static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int textu
 		rc->wall_height = WINDOW_HEIGHT;
 	else
 		rc->wall_height = WINDOW_HEIGHT / rc->wall_dist;
-
 	tex_y = (int)(height * data->tex[texture_type].height / rc->wall_height)
 		% data->tex[texture_type].height * data->tex[texture_type].line_len;
 	if (texture_type == SO || texture_type == WE)
@@ -76,9 +74,8 @@ static	int		get_texture_color(t_data *data, t_raycast *rc, int height, int textu
 	else
 		tex_x = ((int)(rc->wall_percent * data->tex[texture_type].width));
 	tex_x *= (data->tex[texture_type].bpp / 8);
-
 	pixel = data->tex[texture_type].addr + tex_y + tex_x;
-	color = *(int*)pixel;
+	color = *(int *)pixel;
 	return (color);
 }
 
@@ -121,17 +118,15 @@ static	void	draw_image(t_data *data, t_raycast *rc)
 		rc->wall_height = WINDOW_HEIGHT / 2;
 	else
 		rc->wall_height = WINDOW_HEIGHT / 2 / rc->wall_dist;
-
 	draw_floor(data, rc->nb_ray, WINDOW_HEIGHT / 2
 		+ rc->wall_height, WINDOW_HEIGHT);
-
-	draw_ceilling(data, rc->nb_ray, 0, WINDOW_HEIGHT / 2 - rc->wall_height);
-
-	draw_texture(data, rc, WINDOW_HEIGHT / 2 - rc->wall_height, WINDOW_HEIGHT / 2
-		+ rc->wall_height);
+	draw_ceilling(data, rc->nb_ray, 0,
+		WINDOW_HEIGHT / 2 - rc->wall_height);
+	draw_texture(data, rc, WINDOW_HEIGHT / 2 - rc->wall_height,
+		WINDOW_HEIGHT / 2 + rc->wall_height);
 }
 
-static	void	choose_dist(t_data *data, t_raycast * rc)
+static	void	choose_dist(t_data *data, t_raycast *rc)
 {
 	(void)data;
 	if (rc->side == 1)
@@ -144,27 +139,26 @@ static	void	choose_dist(t_data *data, t_raycast * rc)
 		rc->wall_dist = rc->t_max_y - rc->t_delta_y;
 		rc->wall_percent = rc->u.x + rc->v.x * rc->wall_dist;
 	}
-	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle
-		- data->player.angle)));
+	rc->wall_dist *= cos(deg_to_rad(fix_ang(rc->ray_angle \
+			- data->player.angle)));
 	rc->wall_percent -= floor(rc->wall_percent);
 	//printf("%f\n", rc->wall_percent);
-	
 }
 
 static	float	get_t_max_x(t_raycast *rc)
 {
 	if (rc->v.x < 0)
-		return (rc->pos.x - floor(rc->u.x)) * rc->t_delta_x;
+		return ((rc->pos.x - floor(rc->u.x)) * rc->t_delta_x);
 	else
-		return (floor(rc->u.x) + 1.0f - rc->pos.x) * rc->t_delta_x;
+		return ((floor(rc->u.x) + 1.0f - rc->pos.x) * rc->t_delta_x);
 }
 
 static	float	get_t_max_y(t_raycast *rc)
 {
 	if (rc->v.y < 0)
-		return (rc->pos.y - floor(rc->u.y)) * rc->t_delta_y;
+		return ((rc->pos.y - floor(rc->u.y)) * rc->t_delta_y);
 	else
-		return (floor(rc->u.y) + 1.0f - rc->pos.y) * rc->t_delta_y;
+		return ((floor(rc->u.y) + 1.0f - rc->pos.y) * rc->t_delta_y);
 }
 
 void	raycaster(t_data *data)
@@ -184,24 +178,18 @@ void	raycaster(t_data *data)
 		rc.u.y = rc.pos.y;
 		rc.v.x = cos(deg_to_rad(rc.ray_angle));
 		rc.v.y = -sin(deg_to_rad(rc.ray_angle));
-
 		if (rc.v.x > 0)
 			rc.step_x = 1;
 		else
 			rc.step_x = -1;
-
 		if (rc.v.y > 0)
 			rc.step_y = 1;
 		else
 			rc.step_y = -1;
-		
-
 		rc.t_delta_x = 1 / fabs(rc.v.x);
 		rc.t_delta_y = 1 / fabs(rc.v.y);
-
 		rc.t_max_x = get_t_max_x(&rc);
 		rc.t_max_y = get_t_max_y(&rc);
-
 		i = 0;
 		while (i < MAX_DOF)
 		{
@@ -209,7 +197,7 @@ void	raycaster(t_data *data)
 			{
 				rc.side = 1;
 				rc.t_max_x += rc.t_delta_x;
-				rc.pos.x += rc.step_x; 
+				rc.pos.x += rc.step_x;
 			}
 			else
 			{
@@ -221,8 +209,8 @@ void	raycaster(t_data *data)
 			rc.elem.y = floor(rc.pos.y);
 			if (rc.elem.x >= 0 && rc.elem.x < (int)data->config->x
 				&& rc.elem.y >= 0 && rc.elem.y < (int)data->config->y
-				&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1') 
-				break ;  // SEFAULT WITH MOVE
+				&& data->config->map[(int)rc.elem.y][(int)rc.elem.x] == '1')
+				break ;/*SEFAULT WITH MOVE*/
 			i++;
 		}
 		choose_dist(data, &rc);

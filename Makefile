@@ -33,11 +33,11 @@ LST_PARSING		:=		parsing.c				\
 						parse_map.c
 
 LST_EVENTS		:=		events.c				\
-						rotation_and_mouse.c					\
-						movement.c				\
-						mini_movement.c
+						mouse.c					\
+						movement.c
 
 LST_DISPLAY		:=		minimap_draw.c			\
+						draw.c					\
 						bresenham_line.c
 
 LST_EXEC		:=		raycaster.c
@@ -46,7 +46,8 @@ LST_MISCS		:=		error_handling.c	\
 						free_memory.c		\
 						libc_ft.c
 
-LST_MAIN		:=		main.c
+LST_MAIN		:=		main.c				\
+						init.c
 
 
 LST_INCS		:=		cub3D.h

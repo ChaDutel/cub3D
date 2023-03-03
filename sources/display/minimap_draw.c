@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:46:24 by tulip             #+#    #+#             */
-/*   Updated: 2023/03/02 19:32:15 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 11:07:01 by cdutel-l         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	draw_map_circle(t_data *data, float xx, float yy, float i)
 		data->player.si = sin(angle);
 		while (i != 150)
 			draw_map_circle_norm(data, xx, yy, &i);
-		//return ;
 		angle += 0.3 * PI / 180;
 	}
 }

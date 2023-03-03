@@ -92,13 +92,6 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
-// //vector
-// typedef	struct s_vector
-// {
-// 	float	x;
-// 	float	y;
-// } t_vector;
-
 // direction vector
 typedef struct s_dir
 {
@@ -137,10 +130,8 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_img		tex[4];
-	t_point		mouse; //float int
+	t_point		mouse;
 	t_point		player;
-	// t_vector	player;
-	t_point		mini_player;
 } t_data;
 
 //***************//
@@ -178,6 +169,13 @@ int		check_colors_values(t_config *config, int i, int j);
 int		parse_map(t_config *config);
 
 //***************//
+//     INIT      //
+//***************//
+
+void	init_mini_struct(t_data *data, t_config *config);
+int		load_textures(t_data *data);
+
+//***************//
 //    EVENTS     //
 //***************//
 
@@ -185,13 +183,9 @@ int		parse_map(t_config *config);
 int		render(t_data*data);
 int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
-void	image_pixel_put(t_data *data, int width, int height, int color);
-void	draw_player_move(t_data *data, int px, int py);
 
-// ROTATION_AND_MOUSE
+// MOUSE
 int		event_mouse_move(int x, int y, t_data *data);
-void	rotate_right(t_data *data, float i);
-void	rotate_left(t_data *data, float i);
 
 // MOVEMENT
 void	dir_up(t_data *data);
@@ -199,19 +193,14 @@ void	dir_left(t_data *data);
 void	dir_right(t_data *data);
 void	dir_down(t_data *data);
 
-// MINI_MOVEMENT
-void	mini_dir_up(t_data *data);
-void	mini_dir_down(t_data *data);
-void	mini_dir_left(t_data *data);
-void	mini_dir_right(t_data *data);
-
 //***************//
 //    DISPLAY    //
 //***************//
 
+// DRAW
+void	image_pixel_put(t_data *data, int width, int height, int color);
+
 // MINIMAP_DRAW
-//void	draw_minimap_background(t_data *data);
-//void	draw_minimap(t_data *data);
 void	draw_minimap_player(t_data *data);
 
 // BRSENHAM_LINE
