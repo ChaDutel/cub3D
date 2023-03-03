@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:32:24 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/01 00:26:15 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 16:27:12 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,32 @@ static	int	check_extension(char *str)
 	}
 	u--;
 	if (u < 5)
-		return (error_msg("Bad config name\n"));
+		return (error_msg("Bad config\n"));
 	if (str[i] != '\0' || str[i - 1] != 'b' || str[i - 2] != 'u' \
 		|| str[i - 3] != 'c' || str[i - 4] != '.')
-		return (error_msg("Bad config name\n"));
+		return (error_msg("Bad config\n"));
 	else
 		return (0);
 }
 
+static	int	is_folder(char *config_file)
+{
+	int	fd;
+
+	fd = open(config_file, __O_DIRECTORY);
+	if (fd == -1)
+		return (0);
+	else
+	{
+		close(fd);
+		return (error_msg("The map is a repertory\n"));
+	}
+}
+
 int	parsing(char *config_file, t_config *config)
 {
-	(void)config;
+	if (is_folder(config_file) == -1)
+		return (-1);
 	if (check_extension(config_file) == -1)
 		return (-1);
 	if (pre_parsing(config_file) == -1)
