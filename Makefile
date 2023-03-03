@@ -37,10 +37,10 @@ LST_EVENTS		:=		events.c				\
 						movement.c
 
 LST_DISPLAY		:=		minimap_draw.c			\
-						draw.c					\
-						bresenham_line.c
+						draw.c
 
-LST_EXEC		:=		raycaster.c
+LST_EXEC		:=		raycaster.c			\
+						raycaster_utils.c
 
 LST_MISCS		:=		error_handling.c	\
 						free_memory.c		\

@@ -53,7 +53,6 @@
 # define TEXTURE_SIZE 64
 # define MAX_DOF 100
 # define FOV 60
-# define ANGLE_INCREMENT ((float)FOV / (float)WINDOW_WIDTH)
 
 //miscs
 # define MAX_AREA 100000
@@ -61,14 +60,14 @@
 // STRUCTURES
 
 //point and mouse
-typedef	struct s_point
+typedef struct s_point
 {
 	float	x;
 	float	y;
 	float	co;
 	float	si;
 	float	angle;
-} t_point;
+}	t_point;
 
 //config file
 typedef struct s_config
@@ -78,7 +77,7 @@ typedef struct s_config
 	int		colors[2][3];
 	size_t	x;
 	size_t	y;
-} t_config;
+}	t_config;
 
 //image specs
 typedef struct s_img
@@ -95,9 +94,9 @@ typedef struct s_img
 // direction vector
 typedef struct s_dir
 {
-	float x;
-	float y;
-} t_dir;
+	float	x;
+	float	y;
+}	t_dir;
 
 //raycaster values
 typedef struct s_raycast
@@ -119,7 +118,7 @@ typedef struct s_raycast
 	float	angle_step;
 	float	wall_percent;
 	float	wall_height;
-} t_raycast;
+}	t_raycast;
 
 //mlx struct
 typedef struct s_data
@@ -131,8 +130,7 @@ typedef struct s_data
 	t_img		tex[4];
 	t_point		mouse;
 	t_point		player;
-} t_data;
-
+}	t_data;
 
 //***************//
 //    PARSING    //
@@ -199,19 +197,27 @@ void	dir_down(t_data *data);
 
 // DRAW
 void	image_pixel_put(t_data *data, int width, int height, int color);
+void	draw_floor(t_data *data, int x, int start, int stop);
+void	draw_ceilling(t_data *data, int x, int start, int stop);
+void	draw_texture(t_data *data, t_raycast *rc, int start, int stop);
+void	draw_image(t_data *data, t_raycast *rc);
 
 // MINIMAP_DRAW
 void	draw_minimap_player(t_data *data);
-
-// BRSENHAM_LINE
-//void	bresenham_line(t_data *data, t_raymath * rc);
 
 //***************//
 //      EXEC     //
 //***************//
 
-// RAYCAST
+// RAYCASTER
 void	raycaster(t_data *data);
+int		find_texture_type(t_raycast *rc);
+int		get_texture_color(t_data *data, t_raycast *rc, int height, int texture_type);
+
+// RAYCEASTER_UTILS
+float	get_t_max_x(t_raycast *rc);
+float	get_t_max_y(t_raycast *rc);
+void	choose_dist(t_data *data, t_raycast *rc);
 
 //***************//
 //     MISCS     //
@@ -225,8 +231,8 @@ void	free_config(t_config *config);
 int		free_mlx(t_data *data);
 
 // LIBC_FT
-float 	deg_to_rad(float a);
-float 	fix_ang(float a);
-char    *char_join(char *str, char c);
+float	deg_to_rad(float a);
+float	fix_ang(float a);
+char	*char_join(char *str, char c);
 
 #endif
