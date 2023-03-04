@@ -33,7 +33,6 @@ LST_PARSING		:=		parsing.c				\
 						parse_map.c
 
 LST_EVENTS		:=		events.c				\
-						mouse.c					\
 						movement.c
 
 LST_DISPLAY		:=		minimap_draw.c			\
@@ -87,6 +86,7 @@ OBJS	=	$(subst $(D_SRCS),$(D_OBJS),$(LST_OBJS))
 
 all		:	make_libft make_mlx $(NAME)
 
+
 $(NAME)	:	$(OBJS) $(AR_LIBFT) $(INCS) Makefile
 			$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) -o $@
 
@@ -112,7 +112,9 @@ make_mlx	:
 
 clean	:
 		$(RM) $(OBJS)
+		$(RM) $(O_BONUS)
 		$(RM) $(D_OBJS)
+		$(RM) $(D_OBONUS)
 
 fclean	:
 		$(MAKE) clean
@@ -124,4 +126,4 @@ re	:
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY:	all clean fclean re makelibft
+.PHONY:	all clean fclean re makelibft bonus

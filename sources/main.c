@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:02:27 by cdutel-l          #+#    #+#             */
-/*   Updated: 2023/03/03 14:36:39 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 12:01:42 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ static	int	run_mlx(t_config *config)
 	if (load_textures(&data) == -1)
 		return (free_mlx(&data));
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_hook(data.win_ptr, 17, (1L << 2), &close_window, &data);
-	mlx_hook(data.win_ptr, 2, (1L << 0), &handle_keypress, &data);
-	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
-	mlx_hook(data.win_ptr, 6, 0x40, event_mouse_move, &data);
+	mlx_hook(data.win_ptr, 17, 2, &close_window, &data);
+	mlx_hook(data.win_ptr, 2, 1, &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
 	free_mlx(&data);
 	return (0);

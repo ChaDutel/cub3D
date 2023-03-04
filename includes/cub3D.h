@@ -182,9 +182,6 @@ int		render(t_data*data);
 int		close_window(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 
-// MOUSE
-int		event_mouse_move(int x, int y, t_data *data);
-
 // MOVEMENT
 void	dir_up(t_data *data);
 void	dir_left(t_data *data);
