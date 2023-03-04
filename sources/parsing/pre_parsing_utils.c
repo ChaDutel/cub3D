@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulip <tulip@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:23:48 by charline          #+#    #+#             */
-/*   Updated: 2023/03/01 00:26:00 by tulip            ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 12:05:59 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int	find_coordinate(char *line, int *iter)
 	else if (line[i] == 'C')
 		iter[5]++;
 	else
-		return (error_msg("Wrong coordinate name\n"));
+		return (error_msg("Wrong coordinate\n"));
 	return (0);
 }
